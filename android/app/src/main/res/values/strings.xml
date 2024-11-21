@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">stylezen</string>
+    <string name="title_activity_main">stylezen</string>
+    <string name="package_name">ionic.stylezen</string>
+    <string name="custom_url_scheme">ionic.stylezen</string>
+</resources>
