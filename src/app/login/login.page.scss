@@ -1,0 +1,46 @@
+ion-content {
+    --background: url('/assets/bg.avif') no-repeat center center / cover;
+    position: relative;
+    .background-blur {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      backdrop-filter: blur(10px);
+      z-index: 1;
+    }
+    .login-card {
+      position: relative;
+      z-index: 2;
+      background: white;
+      border-radius: 20px;
+      padding: 20px;
+      margin: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease-in-out;
+      &:hover {
+        transform: translateY(-10px);
+      }
+      .logo {
+        display: block;
+        margin: 0 auto 20px;
+        width: 100px;
+      }
+      .tabs {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 20px;
+        
+        button {
+          background: none;
+          border: none;
+          font-size: 18px;
+          &.active {
+            font-weight: bold;
+            color: black;
+          }
+        }
+      }
+    }
+  }

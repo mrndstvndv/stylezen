@@ -1,13 +1,37 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">login</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <div class="background-blur"></div>
+  <div class="login-card">
+    <img src="/assets/Logo.svg" alt="StyleZen Logo" class="logo" />
+    <h2>Find your inner style.</h2>
+    <div class="tabs">
+      <ion-button expand="full" color="primary">Sign In</ion-button>
+      <ion-button expand="full" color="primary">Sign Up</ion-button>
+    </div>
+    <form class="sign-in">
+      <ion-item>
+        <ion-label position="floating">Email or Mobile Phone</ion-label>
+        <ion-input type="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input type="password"></ion-input>
+      </ion-item>
+      <ion-button expand="full" color="primary">Sign In</ion-button>
+    </form>
+    <form class="sign-up">
+      <ion-item>
+        <ion-label position="floating">Email or Mobile Phone</ion-label>
+        <ion-input type="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input type="password"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Confirm Password</ion-label>
+        <ion-input type="password"></ion-input>
+      </ion-item>
+      <ion-button expand="full" color="primary">Sign Up</ion-button>
+    </form>
+  </div>
 </ion-content>
