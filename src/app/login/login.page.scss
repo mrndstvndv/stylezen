@@ -1,4 +1,43 @@
 ion-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .login-btn {
+    --color-hover: white;
+    color: white;
+    --background: #ed1d24;
+    display: block;
+    margin: 20px auto; /* Center the button horizontally */
+    width: 50%; /* Optional: Set a width for the button */
+    &:hover {
+      --background: black; /* Change background color on hover */
+      color: #ffffff; /* Change text color on hover */
+    }
+  }
+  p {
+    color: #222;
+    margin-top: 20px;
+    text-align: center;
+  }
+  .social-icons {
+    display: flex;
+    justify-content: center; /* Center the icons horizontally */
+    align-items: center; /* Center the icons vertically */
+    gap: 10px; /* Add some space between the icons */
+  }
+  
+  .social-icon {
+    width: 30px; /* Set the desired width */
+    height: 30px; /* Set the desired height */
+    margin: 0 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
   position: relative;
 
   #background-video {
@@ -18,14 +57,13 @@ ion-content {
     right: 0;
     bottom: 0;
     backdrop-filter: blur(10px);
-    z-index: -1;
-    transition: z-index 0.3s ease-in-out;
+    z-index: 0;
   }
 
   .sub-text {
     text-align: center;
     margin-top: 10px;
-    color: #007bff;
+    color: #222;
   }
 
   .login-card {
@@ -34,13 +72,11 @@ ion-content {
     background: white;
     border-radius: 10% 10% 0 0;
     padding: 20px;
+    height: 80vh;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
     top: 70vh;
 
-    &:hover {
-      transform: translateY(-40vh);
-    }
 
     .logo {
       display: block;
@@ -48,54 +84,85 @@ ion-content {
       width: 100px;
     }
 
-    .tabs {
-      display: flex;
-      justify-content: space-around;
-      margin-bottom: 20px;
+    // .tabs {
+    //   display: flex;
+    //   justify-content: space-around;
+    //   margin-bottom: 20px;
 
-      ion-button {
-        color: white;
-        /* Set text color to white */
-        padding: 10px 20px;
-        /* Add padding */
-        font-size: 18px;
-        border-radius: 5px;
-        /* Optional: Add border radius for rounded corners */
-        cursor: pointer;
-        /* Change cursor to pointer on hover */
+    //   ion-button {
+    //     color: white;
+    //     /* Set text color to white */
+    //     padding: 10px 20px;
+    //     /* Add padding */
+    //     font-size: 18px;
+    //     border-radius: 5px;
+    //     /* Optional: Add border radius for rounded corners */
+    //     cursor: pointer;
+    //     /* Change cursor to pointer on hover */
 
-        &.active {
-          font-weight: bold;
-          color: white;
-          /* Ensure active button text color is white */
-          background: #0056b3;
-          /* Darker background for active button */
-          border-color: #0056b3;
-          /* Darker border for active button */
-        }
-      }
+    //     &.active {
+    //       font-weight: bold;
+    //       color: white;
+    //       /* Ensure active button text color is white */
+    //       background: #0056b3;
+    //       /* Darker background for active button */
+    //       border-color: #0056b3;
+    //       /* Darker border for active button */
+    //     }
+    //   }
+    // }
+.tabs {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+
+  .tabs-btn {
+    width: 20vh;
+    color: black;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    --background: white; /* Default background color */
+
+    &.active {
+      font-weight: bold;
+      color: white;
+      --background: black; /* Darker background for active button */
     }
 
+    &:hover {
+      color: white;
+      --background: black; /* Lighter background color on hover */
+    }
+  }
+}
     form {
       ion-item {
-        margin-bottom: 15px;
+        margin-bottom: 10px;
+        --background: transparent; /* Clear background for ion-item */
+        color: #222;
       }
 
       ion-button {
         margin-top: 20px;
+        --color-hover: black;
       }
 
       .forgot-password {
         text-align: center;
         margin-top: 10px;
+        color: #222;
+        border-color: #222;
 
         a {
-          color: #007bff;
+          color: #000022;
           text-decoration: none;
-
-          &:hover {
-            text-decoration: underline;
-          }
+        }
+        .social-icons {
+          display: flex;
+          justify-content: center;
+          margin-top: 20px;
         }
       }
     }

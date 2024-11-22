@@ -10,52 +10,77 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
   styleUrls: ['./login.page.scss'],
   standalone: true,
   imports: [IonButton, IonLabel, IonItem, IonInput, IonIcon, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule],
-  animations: [
-    trigger('cardPosition', [
-      state('down', style({
-        transform: 'translateY(0)'
-      })),
-      state('up', style({
-        transform: 'translateY(-40vh)'
-      })),
-      transition('down => up', [
-        animate('0.3s ease-out')
-      ]),
-      transition('up => down', [
-        animate('0.3s ease-in')
-      ])
-    ])
-  ]
 })
 export class LoginPage implements OnInit {
-  @ViewChild('backgroundVideo') backgroundVideo!: ElementRef;
+  @ViewChild('background-video') backgroundVideo!: ElementRef;
 
   isSignIn: boolean = true;
   isSignUp: boolean = false;
-  cardState: string = 'down';
+  ishidden: boolean = true;
 
   constructor() { }
 
   ngOnInit() {
-    // Ensure video loops
+    //video loop
     if (this.backgroundVideo?.nativeElement) {
-      this.backgroundVideo.nativeElement.play();
+      this.backgroundVideo.nativeElement.addEventListener('canplay', () => {
+        this.backgroundVideo.nativeElement.play();
+      });
     }
   }
-
+//Modify login card Y level
+  private modifyLoginCardYLevel(yLevel: number) {
+    const loginCardElement = document.querySelector('.login-card') as HTMLElement;
+    if (loginCardElement) {
+      loginCardElement.style.transition = 'transform 0.1s ease-in-out';
+      loginCardElement.style.transform = `translateY(${yLevel}vh)`;
+    }
+  }
+//Show sign in
   showSignIn() {
     this.isSignIn = true;
     this.isSignUp = false;
-    this.cardState = 'up';
-  }
+    this.setBackgroundBlurZIndex(1); // Set z-index when showing sign in
+    this.modifyLoginCardYLevel(-40); // Adjust Y level for sign in
 
+
+    const loginCardElement = document.querySelector('.login-card') as HTMLElement;
+    if (loginCardElement) {
+      loginCardElement.style.transition = 'opacity 0.4s ease-in-out, transform 0.4s ease-in-out';
+      loginCardElement.style.opacity = '1';
+    }
+  }
+//Show sign up
   showSignUp() {
     this.isSignUp = true;
     this.isSignIn = false;
-    this.cardState = 'up';
-  }
+    this.setBackgroundBlurZIndex(1); // Reset z-index when showing sign up
+    this.modifyLoginCardYLevel(-45); // Adjust Y level for sign up
 
-  resetCardPosition() {
-    this.cardState = 'down';
+
+    const loginCardElement = document.querySelector('.login-card') as HTMLElement;
+    if (loginCardElement) {
+      loginCardElement.style.transition = 'opacity 0.5s ease-in-out, transform 0.5s ease-in-out';
+      loginCardElement.style.opacity = '1';
+    }
+  }
+  //Show background blur
+  private setBackgroundBlurZIndex(zIndex: number) {
+    const backgroundBlurElement = document.querySelector('.background-blur') as HTMLElement;
+    if (backgroundBlurElement) {
+      backgroundBlurElement.style.zIndex = zIndex.toString();
+    }
+  }
+  //Reset login form
+  resetLoginForm() {
+    this.setBackgroundBlurZIndex(0); // Reset z-index
+    this.modifyLoginCardYLevel(0); // Reset Y level to default
+
+    // Back to default opacity
+    const loginCardElement = document.querySelector('.login-card') as HTMLElement;
+    if (loginCardElement) {
+      loginCardElement.style.transition = 'opacity 0.4s ease-in-out, transform 0.5s ease-in-out';
+      loginCardElement.style.opacity = '1';
+    }
   }
 }
