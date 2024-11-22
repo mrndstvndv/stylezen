@@ -14,9 +14,10 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 export class LoginPage implements OnInit {
   @ViewChild('background-video') backgroundVideo!: ElementRef;
 
-  isSignIn: boolean = true;
+  isSignIn: boolean = false;
   isSignUp: boolean = false;
   ishidden: boolean = true;
+  
 
   constructor() { }
 

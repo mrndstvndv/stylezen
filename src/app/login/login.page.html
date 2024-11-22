@@ -41,10 +41,10 @@
       <ion-button class="login-btn" shape="round">Sign Up</ion-button>
       <p>Or Sign Up with</p>
     </form>
-    <div class="social-icons">
-        <img src="/assets/icon/google.png" alt="Google" class="social-icon"/>
-        <img src="/assets/icon/twitter.png" alt="Twitter" class="social-icon"/>
-        <img src="/assets/icon/facebook.png" alt="Facebook" class="social-icon"/>
+    <div class="social-icons" *ngIf="isSignIn || isSignUp">
+      <img src="/assets/icon/google.png" alt="Google" class="social-icon"/>
+      <img src="/assets/icon/twitter.png" alt="Twitter" class="social-icon"/>
+      <img src="/assets/icon/facebook.png" alt="Facebook" class="social-icon"/>
     </div>
   </div>
 </ion-content>
