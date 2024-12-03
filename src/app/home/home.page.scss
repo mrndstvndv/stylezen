@@ -1,27 +1,19 @@
-#container {
+.welcome-container {
   text-align: center;
+  margin-top: 50px;
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
+  .logo {
+    width: 150px;
+    margin-bottom: 20px;
+  }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
+  h1 {
+    font-size: 2.5rem;
+    color: #222;
+  }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
+  p {
+    font-size: 1.2rem;
+    color: #666;
+  }
 }
