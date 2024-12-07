@@ -1,19 +1,58 @@
-.welcome-container {
+.hero {
+  position: relative;
   text-align: center;
-  margin-top: 50px;
+  margin-bottom: 20px;
 
-  .logo {
-    width: 150px;
-    margin-bottom: 20px;
+  .hero-image {
+    width: 100%;
+    border-radius: 10px;
   }
 
-  h1 {
-    font-size: 2.5rem;
-    color: #222;
+  .hero-text {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: #fff;
+
+    h1 {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    p {
+      margin: 10px 0;
+    }
+
+    ion-button {
+      --background: #ffcc00;
+      --color: #000;
+    }
+  }
+}
+
+.categories {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+
+.product-card {
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 10px;
+
+  img {
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    margin: 10px 0;
   }
 
   p {
-    font-size: 1.2rem;
-    color: #666;
+    color: #f00;
   }
 }

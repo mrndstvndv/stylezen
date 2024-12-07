@@ -5,12 +5,36 @@
 </ion-header>
 
 <ion-content>
-  <div class="welcome-container">
-    <img src="assets/logo.svg" alt="Logo" class="logo">
-    <h1>Welcome to Our App!</h1>
-    <p>Discover and explore our features.</p>
-    <ion-button expand="block" routerLink="/about">Learn More</ion-button>
+  <!-- Hero Section -->
+  <div class="hero">
+    <img src="assets/banner.jpg" alt="Hero Banner" class="hero-image">
+    <div class="hero-text">
+      <h1>Your Style, Your Way</h1>
+      <p>Discover your next favorite outfit.</p>
+      <ion-button color="light">Shop Now</ion-button>
+    </div>
   </div>
+
+  <!-- Categories Section -->
+  <div class="categories">
+    <ion-chip color="primary">Popular</ion-chip>
+    <ion-chip>Men</ion-chip>
+    <ion-chip>Women</ion-chip>
+    <ion-chip>Accessories</ion-chip>
+  </div>
+
+  <!-- Products Section -->
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let product of products">
+        <div class="product-card">
+          <img [src]="product.image" alt="Product Image">
+          <h3>{{ product.name }}</h3>
+          <p>PHP {{ product.price }}</p>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
 
 <ion-footer>
