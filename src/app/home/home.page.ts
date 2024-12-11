@@ -1,29 +1,45 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Import this
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonButton, IonFooter, IonChip, IonGrid, IonRow, IonCol } from '@ionic/angular/standalone';
+import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [IonCol, IonRow, IonGrid, IonChip, 
-    CommonModule, // Add this to support NgFor
-    IonFooter,
-    IonButton,
-    IonCardTitle,
-    IonCardHeader,
-    IonCard,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonContent,
-  ],
+  imports: [CommonModule, IonicModule],
 })
 export class HomePage {
+  // Featured product data
+  featuredProduct = {
+    name: 'AIRism Cotton Crew Neck Long Sleeve T-Shirt',
+    description: 'Your personal style, perfected',
+    price: 250,
+    image: 'https://example.com/featured-product.jpg',
+  };
+
+  // List of products
   products = [
-    { name: 'Product 1', price: 100, image: 'assets/product1.jpg' },
-    { name: 'Product 2', price: 200, image: 'assets/product2.jpg' },
-    { name: 'Product 3', price: 300, image: 'assets/product3.jpg' },
+    {
+      name: 'U Crew Neck Short Sleeve T-Shirt',
+      category: 'UNISEX',
+      size: 'S-XL',
+      price: 590,
+      rating: 5.0,
+      image: 'https://example.com/tshirt.jpg',
+    },
+    {
+      name: 'Linen Cotton Tapered Pants',
+      category: 'WOMEN',
+      size: 'S-XL',
+      price: 890,
+      rating: 4.5,
+      image: 'https://example.com/pants.jpg',
+    },
   ];
+
+  // Helper function to generate the stars for the rating
+  getStars(rating: number): number[] {
+    return Array(Math.round(rating)).fill(0); // Creates an array of stars
+  }
 }
