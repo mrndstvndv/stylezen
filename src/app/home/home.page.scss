@@ -157,6 +157,12 @@ ion-content {
           color: #ff3b30;
         }
       }
+
+      .star-icon {
+        width: 24px;
+        height: 24px;
+        margin-right: 2px; /* Adjust spacing between stars */
+      }      
     }
     
     .product-details {
@@ -241,13 +247,15 @@ ion-footer {
     align-items: center;
     gap: 4px;
     color: #666;
+    size: 20px;
 
     &.active {
       color: #ff3b30;
+      size: 40px;
     }
 
     ion-icon {
-      font-size: 24px;
+      font-size: 30px;
     }
 
     span {

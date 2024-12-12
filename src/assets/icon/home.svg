@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="59.087" height="63.619" viewBox="0 0 59.087 63.619">
+  <defs>
+    <filter id="home_29dp_E8EAED_FILL0_wght300_GRAD0_opsz24" x="0" y="0" width="59.087" height="63.619" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feFlood flood-color="#ed1d24" flood-opacity="0.451"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#home_29dp_E8EAED_FILL0_wght300_GRAD0_opsz24)">
+    <path id="home_29dp_E8EAED_FILL0_wght300_GRAD0_opsz24-2" data-name="home_29dp_E8EAED_FILL0_wght300_GRAD0_opsz24" d="M182.909-785.136H189.4v-11.825h10.292v11.825h6.489v-17.91l-11.635-8.993-11.635,8.993ZM180-782.151v-22.387l14.543-11.232,14.543,11.232v22.387H196.781v-11.825h-4.474v11.825ZM194.543-798.587Z" transform="translate(-165 827.77)" fill="#ed1d24"/>
+  </g>
+</svg>

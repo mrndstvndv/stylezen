@@ -17,11 +17,14 @@ export class HomePage {
       'heart-outline': 'heart-outline',  // Register heart-outline icon
       'heart': 'heart',                  // Register heart icon
       'star': 'star',                     // Register star icon
-      'search-outline' : 'search-outline',
-      'home' : 'home',
-      'notifications-outline' : 'notifications-outline',
-      'cart-outline' : 'cart-outline',
-      'person-outline' : 'person-outline'
+      'search-outline' : 'assets/icon/search.svg',
+      'home' : 'assets/icon/home.svg',
+      'notifications-outline' : 'assets/icon/notifications.svg',
+      'cart-outline' : 'assets/icon/cart.svg',
+      'person-outline' : 'assets/icon/person.svg',
+      'add-to-fave' : 'assets/icon/add-to-fave-outline.svg',
+      'star-filled': 'assets/icon/star-rating-filled.svg',
+      'star-outline': 'assets/icon/star-rating-outline.svg'
     });
   }
 
@@ -42,7 +45,7 @@ export class HomePage {
       category: 'UNISEX',
       size: 'S-XL',
       price: 790,
-      rating: 4.5,
+      rating: 5.0,
       image: 'assets/images/cotton-baggy-pants.png',
       isFavorite: false
     },
@@ -52,7 +55,7 @@ export class HomePage {
       category: 'UNISEX',
       size: 'S-XL',
       price: 990,
-      rating: 4.5,
+      rating: 5.0,
       image: 'assets/images/airism-cotton-tshirt.png',
       isFavorite: false
     },
@@ -62,7 +65,7 @@ export class HomePage {
       category: 'MEN',
       size: 'S-XL',
       price: 690,
-      rating: 4.5,
+      rating: 3.0,
       image: 'assets/images/cotton-tshirt.png',
       isFavorite: false
     },
@@ -72,7 +75,7 @@ export class HomePage {
       category: 'WOMEN',
       size: 'S-XL',
       price: 990,
-      rating: 4.5,
+      rating: 4.0,
       image: 'assets/images/womens-smart-ankle-pants.png',
       isFavorite: false
     },
@@ -82,7 +85,7 @@ export class HomePage {
       category: 'WOMEN',
       size: 'S-XL',
       price: 780,
-      rating: 4.5,
+      rating: 5.0,
       image: 'assets/images/WOMENSUCREWNECKSHORTSLEEVET-SHIRT.png',
       isFavorite: false
     },
@@ -92,7 +95,7 @@ export class HomePage {
       category: 'WOMEN',
       size: 'S-L',
       price: 990,
-      rating: 4.5,
+      rating: 5.0,
       image: 'assets/images/RayonSkipperCollarSleeveBlouse.png',
       isFavorite: false
     }
