@@ -75,6 +75,26 @@ export class HomePage {
       rating: 4.5,
       image: 'assets/images/womens-smart-ankle-pants.png',
       isFavorite: false
+    },
+    {
+      id: 5,
+      title: "WOMEN'S U CREW NECK SHORT SLEEVE T-SHIRT",
+      category: 'WOMEN',
+      size: 'S-XL',
+      price: 780,
+      rating: 4.5,
+      image: 'assets/images/WOMENSUCREWNECKSHORTSLEEVET-SHIRT.png',
+      isFavorite: false
+    },
+    {
+      id: 6,
+      title: "Rayon Skipper Collar 3/4 Sleeve Blouse",
+      category: 'WOMEN',
+      size: 'S-L',
+      price: 990,
+      rating: 4.5,
+      image: 'assets/images/RayonSkipperCollarSleeveBlouse.png',
+      isFavorite: false
     }
   ];
 

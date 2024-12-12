@@ -91,7 +91,7 @@ ion-content {
       background: rgba(0,0,0,0.6);
       padding: 6px 16px;
       border-radius: 20px;
-      font-size: 16px;
+      font-size: 21px;
     }
   }
 }
@@ -127,7 +127,8 @@ ion-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
-  
+  font-weight: 500;
+
   .product-card {
     background: white;
     border-radius: 12px;
@@ -160,6 +161,7 @@ ion-content {
     
     .product-details {
       padding: 12px;
+      color: #000;
       
       .category-size {
         display: flex;
@@ -181,15 +183,17 @@ ion-content {
       }
       
       .price {
-        font-size: 16px;
+        font-size: 18px;
         font-weight: 600;
         margin-bottom: 4px;
+        color: #707070;
       }
       
       .rating {
         display: flex;
         align-items: center;
-        font-size: 12px;
+        font-size: 31px;
+        color: #707070;
         
         ion-icon {
           color: #ffd700;
