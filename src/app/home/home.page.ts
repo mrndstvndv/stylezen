@@ -1,45 +1,88 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
+import { addIcons } from 'ionicons';  // Import addIcons from ionicons
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule],
+  imports: [IonicModule, CommonModule],
 })
 export class HomePage {
-  // Featured product data
+  constructor() {
+    // Register icons manually in the constructor with an object
+    addIcons({
+      'heart-outline': 'heart-outline',  // Register heart-outline icon
+      'heart': 'heart',                  // Register heart icon
+      'star': 'star',                     // Register star icon
+      'search-outline' : 'search-outline',
+      'home' : 'home',
+      'notifications-outline' : 'notifications-outline',
+      'cart-outline' : 'cart-outline',
+      'person-outline' : 'person-outline'
+    });
+  }
+
+  // Component properties and methods
+  selectedCategory = 'Popular';
+
   featuredProduct = {
-    name: 'AIRism Cotton Crew Neck Long Sleeve T-Shirt',
-    description: 'Your personal style, perfected',
+    title: 'AIRism Cotton Crew Neck Long Sleeve T-Shirt',
+    subtitle: 'Your personal style, perfected',
     price: 250,
-    image: 'https://example.com/featured-product.jpg',
+    image: 'assets/images/featured-product.png'
   };
 
-  // List of products
   products = [
     {
-      name: 'U Crew Neck Short Sleeve T-Shirt',
+      id: 1,
+      title: 'Cotton Baggy Pants',
       category: 'UNISEX',
       size: 'S-XL',
-      price: 590,
-      rating: 5.0,
-      image: 'https://example.com/tshirt.jpg',
+      price: 790,
+      rating: 4.5,
+      image: 'assets/images/cotton-baggy-pants.png',
+      isFavorite: false
     },
     {
-      name: 'Linen Cotton Tapered Pants',
+      id: 2,
+      title: 'AIRism Cotton Crew Neck Long Sleeve T-Shirt',
+      category: 'UNISEX',
+      size: 'S-XL',
+      price: 990,
+      rating: 4.5,
+      image: 'assets/images/airism-cotton-tshirt.png',
+      isFavorite: false
+    },
+    {
+      id: 3,
+      title: 'Cotton T-Shirt',
+      category: 'MEN',
+      size: 'S-XL',
+      price: 690,
+      rating: 4.5,
+      image: 'assets/images/cotton-tshirt.png',
+      isFavorite: false
+    },
+    {
+      id: 4,
+      title: "WOMEN'S SMART ANKLE PANTS 2WAY STRETCH",
       category: 'WOMEN',
       size: 'S-XL',
-      price: 890,
+      price: 990,
       rating: 4.5,
-      image: 'https://example.com/pants.jpg',
-    },
+      image: 'assets/images/womens-smart-ankle-pants.png',
+      isFavorite: false
+    }
   ];
 
-  // Helper function to generate the stars for the rating
-  getStars(rating: number): number[] {
-    return Array(Math.round(rating)).fill(0); // Creates an array of stars
+  toggleFavorite(product: any) {
+    product.isFavorite = !product.isFavorite;
+  }
+
+  setCategory(category: string) {
+    this.selectedCategory = category;
   }
 }
