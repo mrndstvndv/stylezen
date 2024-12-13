@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonIcon, IonInput, IonItem, IonLabel, IonButton } from '@ionic/angular/standalone';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 
@@ -12,6 +13,10 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
   imports: [IonButton, IonLabel, IonItem, IonInput, IonIcon, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule],
 })
 export class LoginPage implements OnInit {
+  constructor(private router: Router) {}
+  navigateToHome() {
+    this.router.navigate(['/home']);
+  }
   @ViewChild('background-video') backgroundVideo!: ElementRef;
 
   isSignIn: boolean = false;
@@ -19,7 +24,6 @@ export class LoginPage implements OnInit {
   ishidden: boolean = true;
   
 
-  constructor() { }
 
   ngOnInit() {
     //video loop

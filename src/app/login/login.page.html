@@ -1,10 +1,14 @@
 <ion-content [scrollY]="false">
-  <video playsinline #backgroundVideo autoplay muted loop id="background-video">
-    <source src="../../assets/background.mov" type="video/mp4">
-  </video>
+  <div class="video-background">
+    <video playsinline #backgroundVideo autoplay muted loop id="background-video">
+      <source src="../../assets/background.mov" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="video-overlay"></div>
+  </div>
   <div [ngClass]="{'background-blur': true, 'active': isSignIn || isSignUp}" (click)="resetLoginForm()"></div>
   <div class="login-card">
-    <img src="/assets/Logo.svg" width="100%" alt="StyleZen Logo" class="logo" />
+    <img src="/assets/Logo.png" width="100%" alt="StyleZen Logo" class="logo" />
     <h2 class="sub-text">Find your inner style.</h2>
     <div class="tabs">
       <ion-button size="large"  class="tabs-btn" expand="full" shape="round" (click)="showSignIn()">Sign In</ion-button>
@@ -22,8 +26,8 @@
       <div class="forgot-password">
         <a href="#">Forgot Password?</a>
       </div>
-      <ion-button class="login-btn" shape="round">Sign In</ion-button>
-      <p>Or Sign Up with</p>
+      <ion-button class="login-btn" shape="round" (click)="navigateToHome()">Sign In</ion-button>
+      <p>Or Sign In with</p>
     </form>
     <form class="sign-up" *ngIf="isSignUp">
       <ion-item>
@@ -38,7 +42,7 @@
         <ion-label position="floating">Confirm Password</ion-label>
         <ion-input type="text" type="password"></ion-input>
       </ion-item>
-      <ion-button class="login-btn" shape="round">Sign Up</ion-button>
+      <ion-button class="login-btn" shape="round" (click)="navigateToHome()">Sign Up</ion-button>
       <p>Or Sign Up with</p>
     </form>
     <div class="social-icons" *ngIf="isSignIn || isSignUp">

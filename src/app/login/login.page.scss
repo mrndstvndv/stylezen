@@ -2,6 +2,8 @@ ion-content {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  overflow: hidden;
 
   .login-btn {
     --color-hover: white;
@@ -15,39 +17,56 @@ ion-content {
       color: #ffffff; /* Change text color on hover */
     }
   }
+
   p {
     color: #222;
     margin-top: 20px;
     text-align: center;
   }
+
   .social-icons {
     display: flex;
     justify-content: center; /* Center the icons horizontally */
     align-items: center; /* Center the icons vertically */
     gap: 10px; /* Add some space between the icons */
   }
-  
+
   .social-icon {
     width: 30px; /* Set the desired width */
     height: 30px; /* Set the desired height */
     margin: 0 10px;
     cursor: pointer;
     transition: transform 0.3s ease;
-  
+
     &:hover {
       transform: scale(1.1);
     }
   }
-  position: relative;
 
-  #background-video {
+  .video-background {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
     z-index: 1;
+    overflow: hidden;
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .video-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3); /* Adjust the opacity as needed */
+      z-index: 1;
+    }
   }
 
   .background-blur {
@@ -77,66 +96,39 @@ ion-content {
     transition: transform 0.3s ease-in-out;
     top: 70vh;
 
-
     .logo {
       display: block;
       margin: 0 auto 20px;
       width: 100px;
     }
 
-    // .tabs {
-    //   display: flex;
-    //   justify-content: space-around;
-    //   margin-bottom: 20px;
+    .tabs {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 20px;
 
-    //   ion-button {
-    //     color: white;
-    //     /* Set text color to white */
-    //     padding: 10px 20px;
-    //     /* Add padding */
-    //     font-size: 18px;
-    //     border-radius: 5px;
-    //     /* Optional: Add border radius for rounded corners */
-    //     cursor: pointer;
-    //     /* Change cursor to pointer on hover */
+      .tabs-btn {
+        width: 20vh;
+        color: black;
+        padding: 10px 20px;
+        font-size: 18px;
+        border-radius: 5px;
+        cursor: pointer;
+        --background: white; /* Default background color */
 
-    //     &.active {
-    //       font-weight: bold;
-    //       color: white;
-    //       /* Ensure active button text color is white */
-    //       background: #0056b3;
-    //       /* Darker background for active button */
-    //       border-color: #0056b3;
-    //       /* Darker border for active button */
-    //     }
-    //   }
-    // }
-.tabs {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 20px;
+        &.active {
+          font-weight: bold;
+          color: white;
+          --background: black; /* Darker background for active button */
+        }
 
-  .tabs-btn {
-    width: 20vh;
-    color: black;
-    padding: 10px 20px;
-    font-size: 18px;
-    border-radius: 5px;
-    cursor: pointer;
-    --background: white; /* Default background color */
-
-    &.active {
-      font-weight: bold;
-      color: white;
-      --background: black; /* Darker background for active button */
+        &:hover {
+          color: white;
+          --background: black; /* Lighter background color on hover */
+        }
+      }
     }
 
-    &:hover {
-      color: white;
-      --background: black; /* Lighter background color on hover */
-    }
-  }
-}
     form {
       ion-item {
         margin-bottom: 10px;
@@ -159,11 +151,12 @@ ion-content {
           color: #000022;
           text-decoration: none;
         }
-        .social-icons {
-          display: flex;
-          justify-content: center;
-          margin-top: 20px;
-        }
+      }
+
+      .social-icons {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
       }
     }
   }

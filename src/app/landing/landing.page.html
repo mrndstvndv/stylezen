@@ -1,13 +1,21 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>landing</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">landing</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" scroll-y="false">
+  <div class="video-background">
+    <video playsinline #backgroundVideo autoplay muted loop id="background-video">
+      <source src="assets/landing.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="video-overlay"></div>
+  </div>
+  <div class="landing-container">
+    <div class="header">
+      <img src="assets/Logo.png" alt="logo">
+    </div>
+    <div class="content-center">
+      <h1>You will find yourself<br>among us</h1>
+      <p>Welcome to Stylezen, where creativity<br>and elegance come together.</p>
+    </div>
+    <div class="button-container">
+      <ion-button expand="full" shape="round" (click)="navigateToLogin()">Let's Get Started</ion-button>
+    </div>
+  </div>
 </ion-content>
