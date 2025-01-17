@@ -12,6 +12,10 @@ import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton } from '@ionic/a
 export class LandingPage {
   constructor(private router: Router) {}
 
+  /**
+   * Navigates the user to the login page.
+   * Utilizes the Angular Router to change the current route to '/login'.
+   */
   navigateToLogin() {
     this.router.navigate(['/login']);
   }

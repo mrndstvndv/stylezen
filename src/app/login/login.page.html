@@ -1,15 +1,40 @@
 <ion-content [scrollY]="false">
+
+  <!--background video  -->
   <div class="video-background">
     <video playsinline #backgroundVideo autoplay muted loop id="background-video">
       <source src="../../assets/background.mov" type="video/mp4">
       Your browser does not support the video tag.
     </video>
+
+    <!--background dark overlay  -->
     <div class="video-overlay"></div>
   </div>
+
+  <!--login card  -->
+  <!-- 
+    This div element has dynamic classes and a click event handler:
+    - The 'background-blur' class is always applied.
+    - The 'active' class is conditionally applied based on the values of isSignIn or isSignUp.
+    - The blur effect shows when the Sign In or Sign Up button is clicked.
+    - The resetLoginForm() method is called when the div is clicked.
+  -->
   <div [ngClass]="{'background-blur': true, 'active': isSignIn || isSignUp}" (click)="resetLoginForm()"></div>
   <div class="login-card">
     <img src="/assets/Logo.png" width="100%" alt="StyleZen Logo" class="logo" />
     <h2 class="sub-text">Find your inner style.</h2>
+
+    <!-- 
+          This section of the HTML file represents the login and sign-up forms for the application.
+
+          - The "tabs" div contains two buttons for toggling between the Sign In and Sign Up forms.
+
+          - The "sign-in" form is displayed when the "isSignIn" variable is true. It includes fields 
+          for email/phone and password, a "Forgot Password?" link, and a Sign In button.
+
+          - The "sign-up" form is displayed when the "isSignUp" variable is true. It includes fields 
+          for email/phone, password, and confirm password, and a Sign Up button.
+        -->
     <div class="tabs">
       <ion-button size="large"  class="tabs-btn" expand="full" shape="round" (click)="showSignIn()">Sign In</ion-button>
       <ion-button size="large"  class="tabs-btn" expand="full" shape="round" (click)="showSignUp()">Sign Up</ion-button>
@@ -42,6 +67,11 @@
         <ion-label position="floating">Confirm Password</ion-label>
         <ion-input type="text" type="password"></ion-input>
       </ion-item>
+
+      <!-- 
+        When clicked, it triggers the "navigateToHome()" function.
+        The button's label is "Sign Up".
+      -->
       <ion-button class="login-btn" shape="round" (click)="navigateToHome()">Sign Up</ion-button>
       <p>Or Sign Up with</p>
     </form>

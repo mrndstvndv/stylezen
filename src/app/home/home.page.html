@@ -11,7 +11,7 @@
 
 <ion-content [fullscreen]="true">
   <div class="scrollable-content">
-    <!-- Featured Product -->
+    <!-- Featured Product Section: Displays a highlighted product with an image, title, subtitle, and price -->
     <div class="featured-product ion-margin-horizontal">
       <img [src]="featuredProduct.image" [alt]="featuredProduct.title">
       <div class="featured-content">
@@ -23,58 +23,59 @@
       </div>
     </div>
 
-    <!-- Category Buttons -->
+    <!-- Category Buttons Section: Allows users to filter products by category -->
     <div class="category-buttons ion-padding-horizontal">
       <ion-button 
-        [class.active]="selectedCategory === 'Popular'"
-        (click)="setCategory('Popular')"
-        fill="clear">
-        Popular
+      [class.active]="selectedCategory === 'Popular'"
+      (click)="setCategory('Popular')"
+      fill="clear">
+      Popular
       </ion-button>
       <ion-button 
-        [class.active]="selectedCategory === 'Womens'"
-        (click)="setCategory('Womens')"
-        fill="clear">
-        Womens
+      [class.active]="selectedCategory === 'Womens'"
+      (click)="setCategory('Womens')"
+      fill="clear">
+      Womens
       </ion-button>
       <ion-button 
-        [class.active]="selectedCategory === 'Mens'"
-        (click)="setCategory('Mens')"
-        fill="clear">
-        Mens
+      [class.active]="selectedCategory === 'Mens'"
+      (click)="setCategory('Mens')"
+      fill="clear">
+      Mens
       </ion-button>
     </div>
 
-    <!-- Product Grid -->
+    <!-- Product Grid Section: Displays a grid of products with image, title, category, size, price, and rating -->
     <div class="product-grid ion-padding">
       <div class="product-card" *ngFor="let product of products">
-        <div class="product-image-container">
-          <img [src]="product.image" [alt]="product.title">
-          <ion-button fill="clear" class="favorite-button" (click)="toggleFavorite(product)">
-            <ion-icon [name]="product.isFavorite ? 'heart' : 'add-to-fave'"></ion-icon>
-          </ion-button>
+      <div class="product-image-container">
+        <img [src]="product.image" [alt]="product.title">
+        <ion-button fill="clear" class="favorite-button" (click)="toggleFavorite(product)">
+        <ion-icon [name]="product.isFavorite ? 'heart' : 'add-to-fave'"></ion-icon>
+        </ion-button>
+      </div>
+      <div class="product-details">
+        <div class="category-size">
+        <span class="category">{{ product.category }}</span>
+        <span class="size">{{ product.size }}</span>
         </div>
-        <div class="product-details">
-          <div class="category-size">
-            <span class="category">{{ product.category }}</span>
-            <span class="size">{{ product.size }}</span>
-          </div>
-          <h3>{{ product.title }}</h3>
-          <div class="price">PHP {{ product.price }}</div>
-          <div class="rating">
-            <ion-icon 
-            *ngFor="let star of [1, 2, 3, 4, 5]" 
-            [name]="star <= product.rating ? 'star-filled' : 'star-outline'">
-            </ion-icon>
-            <span>{{ product.rating }}</span>
-          </div>
+        <h3>{{ product.title }}</h3>
+        <div class="price">PHP {{ product.price }}</div>
+        <div class="rating">
+        <ion-icon 
+        *ngFor="let star of [1, 2, 3, 4, 5]" 
+        [name]="star <= product.rating ? 'star-filled' : 'star-outline'">
+        </ion-icon>
+        <span>{{ product.rating }}</span>
         </div>
+      </div>
       </div>
     </div>
 
   </div>
 </ion-content>
 
+<!-- Footer Section: Provides navigation buttons for Home, Cart, Notification, and Profile -->
 <ion-footer class="ion-no-border">
   <ion-toolbar>
     <div class="tab-bar">
@@ -90,7 +91,7 @@
         <ion-icon name="notifications-outline"></ion-icon>
         <span>Notification</span>
       </div>
-      <div class="tab-button">
+      <div class="tab-button" (click)="navigateToAccount()">
         <ion-icon name="person-outline"></ion-icon>
         <span>Profile</span>
       </div>

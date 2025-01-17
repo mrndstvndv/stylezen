@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
-import { addIcons } from 'ionicons';  // Import addIcons from ionicons
+import { addIcons } from 'ionicons'; 
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,12 +12,13 @@ import { addIcons } from 'ionicons';  // Import addIcons from ionicons
   imports: [IonicModule, CommonModule],
 })
 export class HomePage {
-  constructor() {
+  constructor(private router: Router) {
     // Register icons manually in the constructor with an object
+    // This allows the use of custom icons in the application
     addIcons({
-      'heart-outline': 'heart-outline',  // Register heart-outline icon
-      'heart': 'heart',                  // Register heart icon
-      'star': 'star',                     // Register star icon
+      'heart-outline': 'heart-outline',  
+      'heart': 'heart',                  
+      'star': 'star',                     
       'search-outline' : 'assets/icon/search.svg',
       'home' : 'assets/icon/home.svg',
       'notifications-outline' : 'assets/icon/notifications.svg',
@@ -29,8 +31,17 @@ export class HomePage {
   }
 
   // Component properties and methods
+
+  /**
+   * The currently selected category of products.
+   * Default is set to 'Popular'.
+   */
   selectedCategory = 'Popular';
 
+  /**
+   * The featured product to be highlighted on the home page.
+   * Contains title, subtitle, price, and image properties.
+   */
   featuredProduct = {
     title: 'AIRism Cotton Crew Neck Long Sleeve T-Shirt',
     subtitle: 'Your personal style, perfected',
@@ -38,6 +49,19 @@ export class HomePage {
     image: 'assets/images/featured-product.png'
   };
 
+  /**
+   * An array of product objects, each representing a product available in the store.
+   * 
+   * Each product object contains the following properties:
+   * - `id` (number): The unique identifier for the product.
+   * - `title` (string): The name of the product.
+   * - `category` (string): The category to which the product belongs (e.g., 'UNISEX', 'MEN', 'WOMEN').
+   * - `size` (string): The available sizes for the product.
+   * - `price` (number): The price of the product in the store's currency.
+   * - `rating` (number): The customer rating of the product, on a scale from 1 to 5.
+   * - `image` (string): The file path to the product's image.
+   * - `isFavorite` (boolean): A flag indicating whether the product is marked as a favorite by the user.
+   */
   products = [
     {
       id: 1,
@@ -101,11 +125,28 @@ export class HomePage {
     }
   ];
 
+  /**
+   * Toggles the favorite status of a given product.
+   *
+   * @param product - The product object whose favorite status is to be toggled.
+   */
   toggleFavorite(product: any) {
     product.isFavorite = !product.isFavorite;
   }
 
+  /**
+   * Sets the selected category.
+   *
+   * @param category - The category to be set as selected.
+   */
   setCategory(category: string) {
     this.selectedCategory = category;
+  }
+
+  /**
+   * Navigates to the account page.
+   */
+  navigateToAccount() {
+    this.router.navigate(['/account']);
   }
 }

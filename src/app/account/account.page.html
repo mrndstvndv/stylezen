@@ -1,0 +1,102 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" text="" class="custom-back-button"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Account</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" src="assets/icon/edit.svg"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="profile-card">
+    <div class="profile-header">
+      <ion-avatar>
+        <img [src]="profileImage" alt="Profile photo"/>
+      </ion-avatar>
+      <div class="profile-info">
+        <h2>John Elden Ring</h2>
+        <p>Member</p>
+      </div>
+    </div>
+
+    <div class="contact-info">
+      <ion-item lines="none">
+        <ion-icon src="assets/icon/phone.svg" slot="start"></ion-icon>
+        <ion-label>(555) 123-4567</ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-icon src="assets/icon/mail.svg" slot="start"></ion-icon>
+        <ion-label>John_EldenRing69&#64;gmail.com</ion-label>
+      </ion-item>
+    </div>
+  </ion-card>
+
+  <ion-card class="stats-card">
+    <div class="stats-container">
+      <div class="stat">
+        <h3>PHP 12,022</h3>
+        <p>Wallet</p>
+      </div>
+      <div class="divider"></div>
+      <div class="stat">
+        <h3>12</h3>
+        <p>Orders</p>
+      </div>
+    </div>
+  </ion-card>
+
+  <ion-list>
+    <ion-item button detail="true">
+      <ion-icon src="assets/icon/favorite.svg" slot="start"></ion-icon>
+      <ion-label>
+        <h3>Your Favorites</h3>
+        <p>Quick access to your go-to items</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item button detail="true">
+      <ion-icon src="assets/icon/payment.svg" slot="start"></ion-icon>
+      <ion-label>
+        <h3>Payments</h3>
+        <p>Manage payments</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item button detail="true">
+      <ion-icon src="assets/icon/coupon.svg" slot="start"></ion-icon>
+      <ion-label>
+        <h3>Vouchers</h3>
+        <p>Apply discounts easily</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item button detail="true">
+      <ion-icon src="assets/icon/share.svg" slot="start"></ion-icon>
+      <ion-label>
+        <h3>Share</h3>
+        <p>Seamlessly connect and spread the word</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item button detail="true">
+      <ion-icon src="assets/icon/settings.svg" slot="start"></ion-icon>
+      <ion-label>
+        <h3>Settings</h3>
+        <p>Customize and control your experience</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item button class="logout-item" (click)="onLogout()">
+      <ion-icon src="assets/icon/logout.svg" slot="start"></ion-icon>
+      <ion-label>
+        <h3>Logout</h3>
+        <p>End your session securely</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
