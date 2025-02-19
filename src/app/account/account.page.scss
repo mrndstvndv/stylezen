@@ -120,7 +120,7 @@ ion-header {
         font-size: 14px;
       }
     }
-    
+
     .divider {
       width: 1px;
       background: var(--ion-color-light);
@@ -129,7 +129,7 @@ ion-header {
   }
 }
 
-ion-list.ios.list-ios {
+ion-list {
   margin: 16px;
   border-radius: 16px;
   background: white; /* Set the background to white */
@@ -137,6 +137,7 @@ ion-list.ios.list-ios {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
 
   ion-item {
+    margin-top: 12px;
     --padding-start: 16px;
     --inner-padding-end: 16px;
     --background: white; /* Set the background to white */
@@ -167,7 +168,7 @@ ion-list.ios.list-ios {
 
     ion-label {
       color: #ff3b30; /* Set the text color to red */
-      
+
       h3 {
         font-size: 16px;
         font-weight: 500;
