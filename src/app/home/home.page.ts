@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
-import { addIcons } from 'ionicons'; 
+import { addIcons } from 'ionicons';
 import { Router } from '@angular/router';
 
 @Component({
@@ -16,15 +16,15 @@ export class HomePage {
     // Register icons manually in the constructor with an object
     // This allows the use of custom icons in the application
     addIcons({
-      'heart-outline': 'heart-outline',  
-      'heart': 'heart',                  
-      'star': 'star',                     
-      'search-outline' : 'assets/icon/search.svg',
-      'home' : 'assets/icon/home.svg',
-      'notifications-outline' : 'assets/icon/notifications.svg',
-      'cart-outline' : 'assets/icon/cart.svg',
-      'person-outline' : 'assets/icon/person.svg',
-      'add-to-fave' : 'assets/icon/add-to-fave-outline.svg',
+      'heart-outline': 'heart-outline',
+      'heart': 'heart',
+      'star': 'star',
+      'search-outline': 'assets/icon/search.svg',
+      'home': 'assets/icon/home.svg',
+      'notifications-outline': 'assets/icon/notifications.svg',
+      'cart-outline': 'assets/icon/cart.svg',
+      'person-outline': 'assets/icon/person.svg',
+      'add-to-fave': 'assets/icon/add-to-fave-outline.svg',
       'star-filled': 'assets/icon/star-rating-filled.svg',
       'star-outline': 'assets/icon/star-rating-outline.svg'
     });
@@ -36,7 +36,7 @@ export class HomePage {
    * The currently selected category of products.
    * Default is set to 'Popular'.
    */
-  selectedCategory = 'Popular';
+  selectedCategory = signal('Popular');
 
   /**
    * The featured product to be highlighted on the home page.
@@ -51,7 +51,7 @@ export class HomePage {
 
   /**
    * An array of product objects, each representing a product available in the store.
-   * 
+   *
    * Each product object contains the following properties:
    * - `id` (number): The unique identifier for the product.
    * - `title` (string): The name of the product.
@@ -86,7 +86,7 @@ export class HomePage {
     {
       id: 3,
       title: 'Cotton T-Shirt',
-      category: 'MEN',
+      category: 'MENS',
       size: 'S-XL',
       price: 690,
       rating: 3.0,
@@ -96,7 +96,7 @@ export class HomePage {
     {
       id: 4,
       title: "WOMEN'S SMART ANKLE PANTS 2WAY STRETCH",
-      category: 'WOMEN',
+      category: 'WOMENS',
       size: 'S-XL',
       price: 990,
       rating: 4.0,
@@ -106,7 +106,7 @@ export class HomePage {
     {
       id: 5,
       title: "WOMEN'S U CREW NECK SHORT SLEEVE T-SHIRT",
-      category: 'WOMEN',
+      category: 'WOMENS',
       size: 'S-XL',
       price: 780,
       rating: 5.0,
@@ -116,7 +116,7 @@ export class HomePage {
     {
       id: 6,
       title: "Rayon Skipper Collar 3/4 Sleeve Blouse",
-      category: 'WOMEN',
+      category: 'WOMENS',
       size: 'S-L',
       price: 990,
       rating: 5.0,
@@ -124,6 +124,14 @@ export class HomePage {
       isFavorite: false
     }
   ];
+
+  filteredProducts = computed(() => {
+    if (this.selectedCategory() == "Popular") {
+      return this.products
+    }
+
+    return this.products.filter(product => product.category == this.selectedCategory().toUpperCase())
+  });
 
   /**
    * Toggles the favorite status of a given product.
@@ -140,7 +148,7 @@ export class HomePage {
    * @param category - The category to be set as selected.
    */
   setCategory(category: string) {
-    this.selectedCategory = category;
+    this.selectedCategory.set(category);
   }
 
   /**

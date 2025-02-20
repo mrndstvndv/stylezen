@@ -25,20 +25,20 @@
 
     <!-- Category Buttons Section: Allows users to filter products by category -->
     <div class="category-buttons ion-padding-horizontal">
-      <ion-button 
-      [class.active]="selectedCategory === 'Popular'"
+      <ion-button
+      [class.active]="selectedCategory() === 'Popular'"
       (click)="setCategory('Popular')"
       fill="clear">
       Popular
       </ion-button>
-      <ion-button 
-      [class.active]="selectedCategory === 'Womens'"
+      <ion-button
+      [class.active]="selectedCategory() === 'Womens'"
       (click)="setCategory('Womens')"
       fill="clear">
       Womens
       </ion-button>
-      <ion-button 
-      [class.active]="selectedCategory === 'Mens'"
+      <ion-button
+      [class.active]="selectedCategory() === 'Mens'"
       (click)="setCategory('Mens')"
       fill="clear">
       Mens
@@ -47,7 +47,7 @@
 
     <!-- Product Grid Section: Displays a grid of products with image, title, category, size, price, and rating -->
     <div class="product-grid ion-padding">
-      <div class="product-card" *ngFor="let product of products">
+      <div class="product-card" *ngFor="let product of filteredProducts()">
       <div class="product-image-container">
         <img [src]="product.image" [alt]="product.title">
         <ion-button fill="clear" class="favorite-button" (click)="toggleFavorite(product)">
@@ -62,8 +62,8 @@
         <h3>{{ product.title }}</h3>
         <div class="price">PHP {{ product.price }}</div>
         <div class="rating">
-        <ion-icon 
-        *ngFor="let star of [1, 2, 3, 4, 5]" 
+        <ion-icon
+        *ngFor="let star of [1, 2, 3, 4, 5]"
         [name]="star <= product.rating ? 'star-filled' : 'star-outline'">
         </ion-icon>
         <span>{{ product.rating }}</span>
