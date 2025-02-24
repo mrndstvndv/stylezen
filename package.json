@@ -6,7 +6,7 @@
   "scripts": {
     "ng": "ng",
     "open": "ng serve --host 0.0.0.0 --disable-host-check",
-    "deploy": "ng build --base-href='https://Ziggs25.github.io/stylezen/'",
+    "deploy": "ng build --base-href='https://ziggs25.github.io/stylezen/'",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
