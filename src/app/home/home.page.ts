@@ -2,6 +2,7 @@ import { Component, computed, signal } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { addIcons } from 'ionicons';
+import { cartOutline, heart, heartOutline, home, notificationsOutline, personOutline, searchOutline, star } from 'ionicons/icons';
 import { Router } from '@angular/router';
 
 @Component({
@@ -16,14 +17,14 @@ export class HomePage {
     // Register icons manually in the constructor with an object
     // This allows the use of custom icons in the application
     addIcons({
-      'heart-outline': 'heart-outline',
-      'heart': 'heart',
-      'star': 'star',
-      'search-outline': 'assets/icon/search.svg',
-      'home': 'assets/icon/home.svg',
-      'notifications-outline': 'assets/icon/notifications.svg',
-      'cart-outline': 'assets/icon/cart.svg',
-      'person-outline': 'assets/icon/person.svg',
+      heartOutline,
+      heart,
+      star,
+      searchOutline,
+      home,
+      notificationsOutline,
+      cartOutline,
+      personOutline,
       'add-to-fave': 'assets/icon/add-to-fave-outline.svg',
       'star-filled': 'assets/icon/star-rating-filled.svg',
       'star-outline': 'assets/icon/star-rating-outline.svg'
