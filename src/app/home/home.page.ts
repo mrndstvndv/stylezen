@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { addIcons } from 'ionicons';
 import { cartOutline, heart, heartOutline, home, notificationsOutline, personOutline, searchOutline, star } from 'ionicons/icons';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
