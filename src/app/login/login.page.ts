@@ -23,6 +23,7 @@ export class LoginPage implements OnInit {
   isSignUp: boolean = false;
   ishidden: boolean = true;
 
+  // TODO: implement google login
 
 
   ngOnInit() {
