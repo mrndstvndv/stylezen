@@ -13,7 +13,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
   imports: [IonButton, IonLabel, IonItem, IonInput, IonIcon, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule],
 })
 export class LoginPage implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
   navigateToHome() {
     this.router.navigate(['/home']);
   }
@@ -22,7 +22,7 @@ export class LoginPage implements OnInit {
   isSignIn: boolean = false;
   isSignUp: boolean = false;
   ishidden: boolean = true;
-  
+
 
 
   ngOnInit() {
@@ -33,33 +33,33 @@ export class LoginPage implements OnInit {
       });
     }
   }
-// Modify the Y position of the login card element
-// This function adjusts the vertical position of the login card by applying a CSS transform
-private modifyLoginCardYLevel(yLevel: number) {
-  const loginCardElement = document.querySelector('.login-card') as HTMLElement;
-  if (loginCardElement) {
-    loginCardElement.style.transition = 'transform 0.1s ease-in-out';
-    loginCardElement.style.transform = `translateY(${yLevel}vh)`;
+  // Modify the Y position of the login card element
+  // This function adjusts the vertical position of the login card by applying a CSS transform
+  private modifyLoginCardYLevel(yLevel: number) {
+    const loginCardElement = document.querySelector('.login-card') as HTMLElement;
+    if (loginCardElement) {
+      loginCardElement.style.transition = 'transform 0.1s ease-in-out';
+      loginCardElement.style.transform = `translateY(${yLevel}vh)`;
+    }
   }
-}
-// Show sign in form
-// This function displays the sign in form by adjusting the state variables and modifying the login card's appearance
-showSignIn() {
-  this.isSignIn = true;
-  this.isSignUp = false;
-  this.setBackgroundBlurZIndex(1); // Set z-index when showing sign in
-  this.modifyLoginCardYLevel(-40); // Adjust Y level for sign in
+  // Show sign in form
+  // This function displays the sign in form by adjusting the state variables and modifying the login card's appearance
+  showSignIn() {
+    this.isSignIn = true;
+    this.isSignUp = false;
+    this.setBackgroundBlurZIndex(1); // Set z-index when showing sign in
+    this.modifyLoginCardYLevel(-31); // Adjust Y level for sign in
 
-  const loginCardElement = document.querySelector('.login-card') as HTMLElement;
-  if (loginCardElement) {
-    loginCardElement.style.transition = 'opacity 0.4s ease-in-out, transform 0.4s ease-in-out';
-    loginCardElement.style.opacity = '1';
+    const loginCardElement = document.querySelector('.login-card') as HTMLElement;
+    if (loginCardElement) {
+      loginCardElement.style.transition = 'opacity 0.4s ease-in-out, transform 0.4s ease-in-out';
+      loginCardElement.style.opacity = '1';
+    }
   }
-}
-//Show sign up
+  //Show sign up
   /**
    * Displays the sign-up form by updating the component's state and adjusting the UI.
-   * 
+   *
    * This method sets `isSignUp` to `true` and `isSignIn` to `false` to reflect the current form state.
    * It also resets the z-index of the background blur and adjusts the Y level of the login card for the sign-up view.
    * Additionally, it applies a transition effect to the login card element for a smooth visual change.
@@ -68,7 +68,7 @@ showSignIn() {
     this.isSignUp = true;
     this.isSignIn = false;
     this.setBackgroundBlurZIndex(1); // Reset z-index when showing sign up
-    this.modifyLoginCardYLevel(-45); // Adjust Y level for sign up
+    this.modifyLoginCardYLevel(-40); // Adjust Y level for sign up
 
 
     const loginCardElement = document.querySelector('.login-card') as HTMLElement;

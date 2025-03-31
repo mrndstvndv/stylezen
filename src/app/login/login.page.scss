@@ -129,35 +129,5 @@ ion-content {
       }
     }
 
-    form {
-      ion-item {
-        margin-bottom: 10px;
-        --background: transparent; /* Clear background for ion-item */
-        color: #222;
-      }
-
-      ion-button {
-        margin-top: 20px;
-        --color-hover: black;
-      }
-
-      .forgot-password {
-        text-align: center;
-        margin-top: 10px;
-        color: #222;
-        border-color: #222;
-
-        a {
-          color: #000022;
-          text-decoration: none;
-        }
-      }
-
-      .social-icons {
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-      }
-    }
   }
 }
