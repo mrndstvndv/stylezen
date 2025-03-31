@@ -39,7 +39,7 @@ export class LoginPage implements OnInit {
     const loginCardElement = document.querySelector('.login-card') as HTMLElement;
     if (loginCardElement) {
       loginCardElement.style.transition = 'transform 0.1s ease-in-out';
-      loginCardElement.style.transform = `translateY(${yLevel}vh)`;
+      loginCardElement.style.transform = `translateY(${yLevel}px)`;
     }
   }
   // Show sign in form
@@ -48,7 +48,7 @@ export class LoginPage implements OnInit {
     this.isSignIn = true;
     this.isSignUp = false;
     this.setBackgroundBlurZIndex(1); // Set z-index when showing sign in
-    this.modifyLoginCardYLevel(-31); // Adjust Y level for sign in
+    this.modifyLoginCardYLevel(-320); // Adjust Y level for sign in
 
     const loginCardElement = document.querySelector('.login-card') as HTMLElement;
     if (loginCardElement) {
@@ -68,7 +68,7 @@ export class LoginPage implements OnInit {
     this.isSignUp = true;
     this.isSignIn = false;
     this.setBackgroundBlurZIndex(1); // Reset z-index when showing sign up
-    this.modifyLoginCardYLevel(-40); // Adjust Y level for sign up
+    this.modifyLoginCardYLevel(-420); // Adjust Y level for sign up
 
 
     const loginCardElement = document.querySelector('.login-card') as HTMLElement;
