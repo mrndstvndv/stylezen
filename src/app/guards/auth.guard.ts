@@ -3,23 +3,21 @@ import { Auth, user } from '@angular/fire/auth';
 import { CanActivateFn, Router } from '@angular/router';
 import { map } from 'rxjs';
 
-// WARN: this does not work, I mean it works but injection is not working
 export const authGuard: CanActivateFn = (route, state) => {
   const auth: Auth = inject(Auth);
   const router: Router = inject(Router);
   const user$ = user(auth);
 
   const currentRouteIsLogin = state.url.includes('/login');
-  console.log('State URL:', state.url);
-  console.log('Route:', route.url[0]?.path);
 
   return user$.pipe(
     map((user) => {
       if (user) {
+        if (currentRouteIsLogin) {
+          router.navigate(['/home'])
+          return false
+        }
         return true;
-      } else if (user && currentRouteIsLogin) {
-        router.navigate(['/home'])
-        return false
       } else {
         router.navigate(['/login'])
         return false;
