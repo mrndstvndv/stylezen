@@ -63,9 +63,7 @@
 
         <!-- TODO: add primary-bg stuff -->
         <button
-          class="w-full bg-[#ff3b30] hover:bg-primary-dark text-white font-medium py-3 rounded-lg transition transform hover:scale-[1.02] active:scale-[0.98] shadow-sm"
-          (click)="navigateToHome()"
-        >
+          class="w-full bg-[#ff3b30] hover:bg-primary-dark text-white font-medium py-3 rounded-lg transition transform hover:scale-[1.02] active:scale-[0.98] shadow-sm">
           SIGN IN
         </button>
 
@@ -81,7 +79,8 @@
         <div class="flex justify-center space-x-4 mt-4">
           <!-- Google -->
           <button
-            class="flex items-center justify-center w-12 h-12 rounded-full border border-gray-300 hover:bg-neutral-light transition">
+            class="flex items-center justify-center w-12 h-12 rounded-full border border-gray-300 hover:bg-neutral-light transition"
+            (click)="signInWithGoogle()">
             <svg class="w-5 h-5" viewBox="0 0 24 24">
               <path
                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -117,7 +116,7 @@
           </button>
         </div>
       </div>
-      <ion-button class="login-btn" shape="round" (click)="signInWithGoogle()">Sign In</ion-button>
+      <ion-button class="login-btn" shape="round">Sign In</ion-button>
       <p>Or Sign In with</p>
     </form>
     <form class="sign-up" *ngIf="isSignUp">
@@ -148,8 +147,8 @@
           <input type="checkbox" id="terms"
             class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
           <label for="terms" class=" ml-2 block text-sm text-gray-600">
-            I agree to the <a href="#" class="text-[#ff3b30] hover:text-primary-dark">Terms of Service</a> and <a href="#"
-              class="text-[#ff3b30] hover:text-primary-dark">Privacy Policy</a>
+            I agree to the <a href="#" class="text-[#ff3b30] hover:text-primary-dark">Terms of Service</a> and <a
+              href="#" class="text-[#ff3b30] hover:text-primary-dark">Privacy Policy</a>
           </label>
         </div>
 
