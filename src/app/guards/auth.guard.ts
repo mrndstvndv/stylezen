@@ -9,9 +9,9 @@ export const authGuard: CanActivateFn = (route, state) => {
   const router: Router = inject(Router);
   const user$ = user(auth);
 
-  const currentRouteIsLogin = route.url[0].path == "/login";
-  console.log(state.url)
-  console.log(route.url[0].path)
+  const currentRouteIsLogin = state.url.includes('/login');
+  console.log('State URL:', state.url);
+  console.log('Route:', route.url[0]?.path);
 
   return user$.pipe(
     map((user) => {

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonIcon, IonInput, IonItem, IonLabel, IonButton } from '@ionic/angular/standalone';
 import { trigger, state, style, animate, transition } from '@angular/animations';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,9 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
   imports: [IonButton, IonLabel, IonItem, IonInput, IonIcon, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule],
 })
 export class LoginPage implements OnInit {
-  constructor(private router: Router) { }
+
+  constructor(private router: Router, private authService: AuthService) { }
+
   navigateToHome() {
     this.router.navigate(['/home']);
   }
@@ -24,6 +27,9 @@ export class LoginPage implements OnInit {
   ishidden: boolean = true;
 
   // TODO: implement google login
+  signInWithGoogle() {
+    this.authService.loginWithGoogle()
+  }
 
 
   ngOnInit() {
