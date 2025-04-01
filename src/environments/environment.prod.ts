@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  // WARN: add your creds
+  firebaseConfig: {}
 };
