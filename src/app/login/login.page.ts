@@ -1,20 +1,27 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonIcon, IonInput, IonItem, IonLabel, IonButton } from '@ionic/angular/standalone';
 import { AuthService } from '../services/auth.service';
 
+// TODO: this whole thing needs a rewrite
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonButton, IonLabel, IonItem, IonInput, IonIcon, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule],
+  imports: [IonButton, IonLabel, IonItem, IonInput, IonIcon, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, ReactiveFormsModule],
 })
 export class LoginPage implements OnInit {
+  loginForm: FormGroup
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService, private formBuilder: FormBuilder) {
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    });
+  }
 
   navigateToHome() {
     this.router.navigate(['/home']);
@@ -25,9 +32,26 @@ export class LoginPage implements OnInit {
   isSignUp: boolean = false;
   ishidden: boolean = true;
 
-  // TODO: implement google login
   signInWithGoogle() {
     this.authService.loginWithGoogle()
+  }
+
+  signInWithTwitter() {
+    this.authService.loginWithTwitter()
+  }
+
+  signInWithEmail() {
+    // Mark all fields as touched to trigger validation messages
+    Object.keys(this.loginForm.controls).forEach(field => {
+      const control = this.loginForm.get(field);
+      control?.markAsTouched({ onlySelf: true });
+    });
+
+    if (this.loginForm.valid) {
+      const email = this.loginForm.get('email')?.value;
+      const password = this.loginForm.get('password')?.value;
+      this.authService.loginWithEmailAndPassword(email, password);
+    }
   }
 
 
