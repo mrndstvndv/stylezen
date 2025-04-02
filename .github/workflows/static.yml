@@ -50,7 +50,6 @@ jobs:
           FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
           FIREBASE_MEASUREMENT_ID: ${{ secrets.FIREBASE_MEASUREMENT_ID }}
         run: |
-          echo $FIREBASE_API_KEY
           npm install
           npm run generate-env
           npm run deploy
