@@ -1,178 +1,179 @@
-<ion-content [scrollY]="false">
-
-  <!--background video  -->
-  <div class="video-background">
-    <video playsinline #backgroundVideo autoplay muted loop id="background-video">
+<body class="bg-gray-100 h-screen flex items-end justify-center p-4">
+  <!-- Background Video -->
+  <div class="fixed inset-0 w-full h-full overflow-hidden">
+    <video autoplay muted loop playsinline class="video-background"
+      [ngClass]="isSignIn || isSignUp ? 'video-blur' : ''">
       <source src="assets/background.mov" type="video/mp4">
       Your browser does not support the video tag.
     </video>
-
-    <!--background dark overlay  -->
-    <div class="video-overlay"></div>
+    <!-- Overlay to ensure text readability -->
+    <div class="absolute inset-0 bg-black bg-opacity-40"></div>
   </div>
 
-  <!--login card  -->
-  <!--
-    This div element has dynamic classes and a click event handler:
-    - The 'background-blur' class is always applied.
-    - The 'active' class is conditionally applied based on the values of isSignIn or isSignUp.
-    - The blur effect shows when the Sign In or Sign Up button is clicked.
-    - The resetLoginForm() method is called when the div is clicked.
-  -->
-  <div [ngClass]="{'background-blur': true, 'active': isSignIn || isSignUp}" (click)="resetLoginForm()"></div>
-  <div class="login-card">
-    <img src="assets/Logo.png" width="100%" alt="StyleZen Logo" class="logo" />
-    <h2 class="sub-text">Find your inner style.</h2>
+  <!-- Bottom Sheet Container -->
+  <div
+    class="fixed inset-x-0 bottom-0 w-full max-w-md mx-auto bg-white rounded-t-2xl shadow-bottom-sheet animate-slide-up">
+    <!-- Handle for dragging -->
+    <!-- <div class="flex justify-center pt-3 pb-1"> -->
+    <!--   <div class="w-12 h-1.5 bg-gray-300 rounded-full"></div> -->
+    <!-- </div> -->
 
-    <!--
-          This section of the HTML file represents the login and sign-up forms for the application.
-
-          - The "tabs" div contains two buttons for toggling between the Sign In and Sign Up forms.
-
-          - The "sign-in" form is displayed when the "isSignIn" variable is true. It includes fields
-          for email/phone and password, a "Forgot Password?" link, and a Sign In button.
-
-          - The "sign-up" form is displayed when the "isSignUp" variable is true. It includes fields
-          for email/phone, password, and confirm password, and a Sign Up button.
-        -->
-    <div class="tabs">
-      <ion-button size="large" class="tabs-btn" expand="full" shape="round" (click)="showSignIn()">Sign In</ion-button>
-      <ion-button size="large" class="tabs-btn" expand="full" shape="round" (click)="showSignUp()">Sign Up</ion-button>
+    <!-- Logo and Tagline -->
+    <div class="flex flex-col items-center mt-4 mb-6">
+      <div class="w-16 h-16 bg-white p-2 rounded-lg shadow-sm">
+        <img src="assets/Logo.png" width="100%" alt="StyleZen Logo" class="logo" />
+      </div>
+      <p class="text-gray-600 mt-2 text-sm">Find your inner style.</p>
     </div>
-    <form [formGroup]="loginForm" (ngSubmit)="signInWithEmail()" class="sign-in space-y-4" *ngIf="isSignIn">
 
-      <!-- TODO: fix this, the errors makes the login logos unuseable -->
-      <div>
-        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-        <input formControlName="email" type="email" id="email"
-          class="w-full px-4 text-black py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition"
-          placeholder="Enter your email">
-        <div
-          *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)"
-          class="text-red-500 text-sm mt-1">
-          <div *ngIf="loginForm.get('email')?.errors?.['required']">Email is required</div>
-          <div *ngIf="loginForm.get('email')?.errors?.['email']">Please enter a valid email</div>
-        </div>
+    <!-- Tabs -->
+    <div class="relative px-6">
+
+      <div class="flex justify-between">
+        <button id="signin-tab" [ngClass]="isSignIn ? 'text-primary' : 'text-gray-700'"
+          class="w-1/2 py-3 font-medium text-center focus:outline-none" (click)="showSignIn()">SIGN
+          IN</button>
+        <button id="signup-tab" [ngClass]="isSignUp ? 'text-primary' : 'text-gray-700'"
+          class="w-1/2 py-3 font-medium text-center focus:outline-none" (click)="showSignUp()">SIGN
+          UP</button>
       </div>
+      <!-- Active Tab Indicator -->
+      <div *ngIf="isSignIn || isSignUp" id="tab-indicator"
+        [ngStyle]="{'transform': isSignIn ? 'translateX(0)' : 'translateX(100%)'}"
+        class="tab-indicator absolute bottom-0 left-0 h-0.5 w-1/2 bg-primary"></div>
+    </div>
 
-      <div>
-        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-        <input formControlName="password" type="password" id="password"
-          class="w-full px-4 text-black py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition"
-          placeholder="Enter your password">
-        <div
-          *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)"
-          class="text-red-500 text-sm mt-1">
-          <div *ngIf="loginForm.get('password')?.errors?.['required']">Password is required</div>
-          <div *ngIf="loginForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters</div>
+    <div class="">
+      <!-- Sign In Form -->
+      <form *ngIf="isSignIn" [formGroup]="loginForm" (ngSubmit)="signInWithEmail()" id="signin-form"
+        class="px-6 pt-6 pb-8 space-y-4">
+
+        <div>
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <input formControlName="email" type="email" id="email"
+              class="w-full px-4 text-black py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition"
+              placeholder="Enter your email">
+          </div>
+
+          <!-- Email guards -->
+          <div
+            *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)"
+            class="text-red-500 text-sm mt-1">
+            <div *ngIf="loginForm.get('email')?.errors?.['required']">Email is required</div>
+            <div *ngIf="loginForm.get('email')?.errors?.['email']">Please enter a valid email</div>
+          </div>
         </div>
-      </div>
 
-      <!-- TODO: add primary-bg stuff -->
-      <div class="flex justify-end">
-        <a href="#" class="text-sm text-[#ff3b30]  hover:text-primary-dark transition">Forgot Password?</a>
-      </div>
+        <div>
+          <div>
+            <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+            <input formControlName="password" type="password" id="password"
+              class="w-full text-black px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition"
+              placeholder="Enter your password">
+          </div>
 
-      <!-- TODO: add primary-bg stuff -->
-      <button type="submit"
-        class="w-full bg-[#ff3b30] hover:bg-primary-dark text-white font-medium py-3 rounded-lg transition transform hover:scale-[1.02] active:scale-[0.98] shadow-sm"
-        type='submit'>
-        SIGN IN
-      </button>
-
-      <div class="relative flex items-center justify-center mt-6">
-        <div class="absolute inset-0 flex items-center">
-          <div class="w-full border-t border-gray-300"></div>
+          <!-- Password guards -->
+          <div
+            *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)"
+            class="text-red-500 text-sm mt-1">
+            <div *ngIf="loginForm.get('password')?.errors?.['required']">Password is required</div>
+            <div *ngIf="loginForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters</div>
+          </div>
         </div>
-        <div class="relative px-4 bg-white text-sm text-gray-500">
-          Or Sign In with
+
+        <div class="flex justify-end">
+          <a href="#" class="text-sm text-primary hover:text-primary-dark transition">Forgot Password?</a>
         </div>
-      </div>
 
-      <div class="flex justify-center space-x-4 mt-4">
-        <!-- TODO: extract this icons in to their own components -->
-
-        <!-- Google -->
-        <button
-          class="flex items-center justify-center w-12 h-12 rounded-full border border-gray-300 hover:bg-neutral-light transition"
-          (click)="signInWithGoogle()">
-          <svg class="w-5 h-5" viewBox="0 0 24 24">
-            <path
-              d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-              fill="#4285F4" />
-            <path
-              d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-              fill="#34A853" />
-            <path
-              d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
-              fill="#FBBC05" />
-            <path
-              d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
-              fill="#EA4335" />
-          </svg>
+        <button type="submit"
+          class="w-full bg-primary hover:bg-primary-dark text-white font-medium py-3 rounded-lg transition transform hover:scale-[1.02] active:scale-[0.98] shadow-sm">
+          SIGN IN
         </button>
 
-        <!-- Twitter -->
-        <button
-          class="flex items-center justify-center w-12 h-12 rounded-full border border-gray-300 hover:bg-neutral-light transition"
-          (click)="signInWithTwitter()">
-          >
-          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#1DA1F2">
-            <path
-              d="M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.7-1.49 2.048-2.578-.9.534-1.897.922-2.958 1.13-.85-.904-2.06-1.47-3.4-1.47-2.572 0-4.658 2.086-4.658 4.66 0 .364.042.718.12 1.06-3.873-.195-7.304-2.05-9.602-4.868-.4.69-.63 1.49-.63 2.342 0 1.616.823 3.043 2.072 3.878-.764-.025-1.482-.234-2.11-.583v.06c0 2.257 1.605 4.14 3.737 4.568-.392.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.85 2.313 3.198 4.352 3.234-1.595 1.25-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.51 2.093 7.14 2.093 8.57 0 13.255-7.098 13.255-13.254 0-.2-.005-.402-.014-.602.91-.658 1.7-1.477 2.323-2.41z" />
-          </svg>
-        </button>
+        <div class="relative flex items-center justify-center mt-6">
+          <div class="absolute inset-0 flex items-center">
+            <div class="w-full border-t border-gray-300"></div>
+          </div>
+          <div class="relative px-4 bg-white text-sm text-gray-500">
+            Or Sign In with
+          </div>
+        </div>
 
-        <!-- Facebook -->
-        <button
-          class="flex items-center justify-center w-12 h-12 rounded-full border border-gray-300 hover:bg-neutral-light transition"
-          (click)="signInWithTwitter()">
-        >
-          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#1877F2">
-            <path
-              d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-          </svg>
-        </button>
-      </div>
-    </form>
+        <div class="flex justify-center space-x-4 mt-4">
+          <!-- Google -->
+          <button (click)="signInWithGoogle()"
+            class="flex items-center justify-center w-12 h-12 rounded-full border border-gray-300 hover:bg-neutral-light transition">
+            <svg class="w-5 h-5" viewBox="0 0 24 24">
+              <path
+                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                fill="#4285F4" />
+              <path
+                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                fill="#34A853" />
+              <path
+                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                fill="#FBBC05" />
+              <path
+                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                fill="#EA4335" />
+            </svg>
+          </button>
 
-    <!-- Sign-up form -->
+          <!-- Twitter -->
+          <button
+            class="flex items-center justify-center w-12 h-12 rounded-full border border-gray-300 hover:bg-neutral-light transition">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#1DA1F2">
+              <path
+                d="M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.7-1.49 2.048-2.578-.9.534-1.897.922-2.958 1.13-.85-.904-2.06-1.47-3.4-1.47-2.572 0-4.658 2.086-4.658 4.66 0 .364.042.718.12 1.06-3.873-.195-7.304-2.05-9.602-4.868-.4.69-.63 1.49-.63 2.342 0 1.616.823 3.043 2.072 3.878-.764-.025-1.482-.234-2.11-.583v.06c0 2.257 1.605 4.14 3.737 4.568-.392.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.85 2.313 3.198 4.352 3.234-1.595 1.25-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.51 2.093 7.14 2.093 8.57 0 13.255-7.098 13.255-13.254 0-.2-.005-.402-.014-.602.91-.658 1.7-1.477 2.323-2.41z" />
+            </svg>
+          </button>
 
-    <form class="sign-up" *ngIf="isSignUp">
+          <!-- Facebook -->
+          <button
+            class="flex items-center justify-center w-12 h-12 rounded-full border border-gray-300 hover:bg-neutral-light transition">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#1877F2">
+              <path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+            </svg>
+          </button>
+        </div>
+      </form>
 
-      <div id="signup-form" class="space-y-4">
+      <!-- Sign Up Form (Hidden by default) -->
+      <div id="signup-form" *ngIf="isSignUp" class="px-6 pt-6 pb-8 space-y-4">
         <div>
           <label for="fullname" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
           <input type="text" id="fullname"
-            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition"
+            class="w-full px-4 py-3 text-black rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition"
             placeholder="Enter your full name">
         </div>
 
         <div>
           <label for="signup-email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
           <input type="email" id="signup-email"
-            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition"
+            class="w-full px-4 py-3 text-black rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition"
             placeholder="Enter your email">
         </div>
 
         <div>
           <label for="signup-password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
           <input type="password" id="signup-password"
-            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition"
+            class="w-full px-4 py-3 text-black rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition"
             placeholder="Create a password">
         </div>
 
-        <div class="flex items-center">
+        <div class="flex items-start">
           <input type="checkbox" id="terms"
             class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
-          <label for="terms" class=" ml-2 block text-sm text-gray-600">
-            I agree to the <a href="#" class="text-[#ff3b30] hover:text-primary-dark">Terms of Service</a> and <a
-              href="#" class="text-[#ff3b30] hover:text-primary-dark">Privacy Policy</a>
+          <label for="terms" class="ml-2 block text-sm text-gray-600">
+            I agree to the <a href="#" class="text-primary hover:text-primary-dark">Terms of Service</a> and <a href="#"
+              class="text-primary hover:text-primary-dark">Privacy Policy</a>
           </label>
         </div>
 
         <button
-          class="w-full bg-[#ff3b30] hover:bg-primary-dark text-white font-medium py-3 rounded-lg transition transform hover:scale-[1.02] active:scale-[0.98] shadow-sm">
+          class="w-full bg-primary hover:bg-primary-dark text-white font-medium py-3 rounded-lg transition transform hover:scale-[1.02] active:scale-[0.98] shadow-sm">
           SIGN UP
         </button>
 
@@ -187,7 +188,7 @@
 
         <div class="flex justify-center space-x-4 mt-4">
           <!-- Google -->
-          <button
+          <button (click)="signInWithGoogle()"
             class="flex items-center justify-center w-12 h-12 rounded-full border border-gray-300 hover:bg-neutral-light transition">
             <svg class="w-5 h-5" viewBox="0 0 24 24">
               <path
@@ -224,7 +225,6 @@
           </button>
         </div>
       </div>
-
-    </form>
+    </div>
   </div>
-</ion-content>
+</body>
