@@ -2,7 +2,7 @@
 
 # Define the output directory and file
 OUTPUT_DIR="src/environments"
-OUTPUT_FILE="$OUTPUT_DIR/environment.ts"
+OUTPUT_FILE="$OUTPUT_DIR/environment.prod.ts"
 
 # Ensure the directory exists
 mkdir -p "$OUTPUT_DIR"
