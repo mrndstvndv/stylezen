@@ -1,5 +1,5 @@
 import { inject, Injectable, Signal } from '@angular/core';
-import { Auth, user, GoogleAuthProvider, User, signInWithPopup, UserCredential, signInWithEmailAndPassword } from '@angular/fire/auth'
+import { Auth, user, GoogleAuthProvider, User, signInWithPopup, UserCredential, signInWithEmailAndPassword, createUserWithEmailAndPassword } from '@angular/fire/auth'
 import { Router } from '@angular/router';
 import { toSignal } from "@angular/core/rxjs-interop"
 import { TwitterAuthProvider } from 'firebase/auth';
@@ -38,6 +38,17 @@ export class AuthService {
     await signInWithPopup(this.auth, new TwitterAuthProvider())
       .then(response => {
         this.handleUserLogin(response)
+      })
+  }
+
+  public async signUpWithEmailAndPassword(email: string, password: string) {
+    await createUserWithEmailAndPassword(this.auth, email, password)
+      .then(response => {
+        if (response.user) {
+          this.router.navigate(['/home'])
+        } else {
+          console.error('Signup failed')
+        }
       })
   }
 

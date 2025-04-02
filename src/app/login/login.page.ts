@@ -15,12 +15,18 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginPage implements OnInit {
   loginForm: FormGroup
+  signUpForm: FormGroup
 
   constructor(private router: Router, private authService: AuthService, private formBuilder: FormBuilder) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
+
+    this.signUpForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    })
   }
 
   navigateToHome() {
@@ -31,6 +37,25 @@ export class LoginPage implements OnInit {
   isSignIn: boolean = false;
   isSignUp: boolean = false;
   ishidden: boolean = true;
+
+  // TODO: add the full name of user to firestore, we use auth useruuid for identification
+  signUpWithEmailAndPassword() {
+
+    console.log("run")
+
+    Object.keys(this.signUpForm.controls).forEach(field => {
+      const control = this.signUpForm.get(field);
+      control?.markAsTouched({ onlySelf: true });
+    });
+
+    console.log(this.signUpForm.valid)
+
+    if (this.signUpForm.valid) {
+      const email = this.signUpForm.get('email')?.value;
+      const password = this.signUpForm.get('password')?.value;
+      this.authService.signUpWithEmailAndPassword(email, password);
+    }
+  }
 
   signInWithGoogle() {
     this.authService.loginWithGoogle()
