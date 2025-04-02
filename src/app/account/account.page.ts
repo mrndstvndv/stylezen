@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, computed, effect, signal } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonIcon, IonItem, IonLabel, IonCard, IonAvatar, IonList, IonButtons, IonBackButton } from '@ionic/angular/standalone';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-account',
@@ -10,8 +11,10 @@ import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonIcon, IonIte
 })
 export class AccountPage {
   profileImage = 'assets/pfp.avif'; // Use forward slashes for the image path
+  // TODO: this should first check the provider, if we are using email and password signin then we must use the user provided name from the database
+  user = computed(() => this.auth.user()?.displayName || "Username");
 
-  constructor() {}
+  constructor(private auth: AuthService) { }
 
   // Add methods for handling button clicks
   onEditProfile() {
@@ -19,7 +22,7 @@ export class AccountPage {
   }
 
   onLogout() {
-    console.log('Logout clicked');
+    this.auth.logout()
   }
 
   onMenuItemClick(item: string) {
