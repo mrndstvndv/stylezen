@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton } from '@ionic/angular/standalone';
-import { environment } from 'src/environments/environment.ts';
 
 @Component({
   selector: 'app-landing',
@@ -11,10 +10,7 @@ import { environment } from 'src/environments/environment.ts';
   imports: [IonButton, IonHeader, IonToolbar, IonContent],
 })
 export class LandingPage {
-  constructor(private router: Router) {
-    console.log("run")
-    console.log(environment.firebaseConfig.apiKey)
-  }
+  constructor(private router: Router) { }
 
   /**
    * Navigates the user to the login page.
