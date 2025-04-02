@@ -10,7 +10,8 @@ import { AuthService } from '../services/auth.service';
   imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonIcon, IonItem, IonLabel, IonCard, IonAvatar, IonList, IonButtons, IonBackButton],
 })
 export class AccountPage {
-  profileImage = 'assets/pfp.avif'; // Use forward slashes for the image path
+  profileImage = computed(() => this.auth.user()?.photoURL || 'assets/pfp.avif')
+  // profileImage = 'assets/pfp.avif'; // Use forward slashes for the image path
   // TODO: this should first check the provider, if we are using email and password signin then we must use the user provided name from the database
   user = computed(() => this.auth.user()?.displayName || "Username");
 
