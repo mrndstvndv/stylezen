@@ -10,7 +10,7 @@ import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton } from '@ionic/a
   imports: [IonButton, IonHeader, IonToolbar, IonContent],
 })
 export class LandingPage {
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   /**
    * Navigates the user to the login page.
