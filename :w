@@ -1,0 +1,44 @@
+ion-content {
+  --background: white; /* Set the background of the entire page to white */
+  --ion-border-width: 0; /* Remove the border below the content */
+  --ion-border-color: transparent; /* Set the border color to transparent */
+}
+
+ion-header {
+  --background: white; /* Set the background of the header to white */
+  --color: #333; /* Complementary text color */
+  --ion-toolbar-border-width: 0; /* Remove the border below the header */
+  --ion-toolbar-border-color: transparent;
+
+  ion-toolbar {
+    --background: white; /* Set the background of the toolbar to white */
+    --color: #333; /* Complementary text color */
+
+    ion-title {
+      color: #333; /* Complementary text color */
+    }
+
+    ion-buttons {
+      ion-button {
+        --background: white; /* Set the background of the button to white */
+        --color: #333; /* Complementary text color */
+
+        ion-icon {
+          color: #333; /* Complementary icon color */
+        }
+      }
+    }
+  }
+
+  .custom-back-button {
+    --color: #333; /* Set the color of the back button icon */
+  }
+}
+
+.size-btn {
+  @apply px-4 py-2 border-2 border-gray-300 text-gray-700 font-medium rounded-full hover:border-black w-[48px] h-[48px] flex items-center justify-center;
+
+  &.active {
+    @apply bg-gray-400 text-white border-gray-300;
+  }
+}

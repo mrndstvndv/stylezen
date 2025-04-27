@@ -159,4 +159,8 @@ export class HomePage {
   navigateToAccount() {
     this.router.navigate(['/account']);
   }
+
+  navigateToProduct() {
+    this.router.navigate(['/product']);
+  }
 }

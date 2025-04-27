@@ -1,0 +1,121 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" text="" class="custom-back-button"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Product Details</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" src="assets/icon/edit.svg"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Product Image Gallery -->
+  <div class="relative">
+    <div class="w-full h-[400px] bg-gray-100 overflow-hidden">
+      <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-BiLfat9XOSGGlY3lUNTI6OUlLnEuFJ.png"
+        alt="AlRism Cotton Crew Neck Long Sleeve T-Shirt" class="w-full h-full object-cover">
+    </div>
+
+    <!-- Image Navigation Dots -->
+    <div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
+      <span class="h-2 w-2 rounded-full bg-white opacity-100"></span>
+      <span class="h-2 w-2 rounded-full bg-white opacity-50"></span>
+      <span class="h-2 w-2 rounded-full bg-white opacity-50"></span>
+    </div>
+
+    <!-- Favorite Button -->
+    <button class="absolute top-4 right-4 bg-white rounded-full p-2 shadow-md">
+      <i class="far fa-heart text-gray-700"></i>
+    </button>
+  </div>
+
+  <!-- Product Information -->
+  <div class="p-4">
+    <div class="flex justify-between items-start">
+      <div>
+        <h2 class="text-2xl text-black font-semibold">AlRism Cotton Crew Neck Long Sleeve T-Shirt</h2>
+        <p class="text-gray-500 mt-1">Your personal style, perfected</p>
+      </div>
+      <div class="text-2xl font-bold">PHP 990</div>
+    </div>
+
+    <!-- Ratings -->
+    <div class="flex items-center mt-3">
+      <div class="star-rating flex">
+        <ion-icon *ngFor="let star of [1, 2, 3, 4, 5]" name="star-filled">
+        </ion-icon>
+      </div>
+      <span class="ml-2 text-2xl font-semibold text-gray-700">5</span>
+      <span class="ml-3 text-sm text-gray-500">(128 reviews)</span>
+    </div>
+  </div>
+
+  <!-- Divider -->
+  <div class="h-2 bg-gray-100"></div>
+
+  <!-- Size Selection -->
+  <div class="p-4">
+    <div class="flex justify-between items-center">
+      <h3 class="text-lg text-black font-medium">Size</h3>
+      <span class="text-gray-500">UNISEX</span>
+    </div>
+
+    <div class="flex space-x-3 mt-3">
+      <a *ngFor="let size of ['XS', 'S', 'M', 'L', 'XL']" (click)="updateSize(size)" class="size-btn"
+        [class.active]="selectedSize() === size">{{size}}</a>
+    </div>
+  </div>
+
+  <!-- Divider -->
+  <div class="h-2 bg-gray-100"></div>
+
+  <!-- Color Selection -->
+  <div class="p-4">
+    <h3 class="text-lg text-black font-medium">Color</h3>
+
+    <div class="flex space-x-3 mt-3">
+      <a *ngFor="let color of ['#FFFFFF', '#000000', '#3226B6']" (click)="updateColor(color)"
+        class="w-12 h-12 rounded-full bg-white border-2 flex items-center justify-center"
+        [class.border-black]="selectedColor() === color">
+
+        <span class="w-8 h-8 rounded-full" [style]="'background-color: '+color+';'"></span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Divider -->
+  <div class="h-2 bg-gray-100"></div>
+
+  <!-- Product Description -->
+  <div class="p-4">
+    <h3 class="text-lg text-black font-medium">Description</h3>
+
+    <p class="mt-2 text-gray-700 leading-relaxed">
+      Premium cotton crew neck long sleeve t-shirt. Made with 100% organic cotton for ultimate comfort and durability.
+      Perfect for casual everyday wear or layering during cooler weather.
+    </p>
+  </div>
+
+  <!-- Quantity and Add to Cart Button -->
+  <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4">
+    <div class="flex items-center justify-between mb-4">
+      <span class="text-lg text-black font-medium">Quantity</span>
+      <div class="flex items-center border border-gray-300 rounded-lg">
+        <button (click)="decrementQuantity()"
+          class="px-3 py-2 text-xl font-medium text-gray-500 hover:text-black">-</button>
+        <input [ngModel]="quantity()" (ngModelChange)="updateQuantity($event)" [size]="1"
+          class="px-0 text-center text-lg text-gray-700 font-medium border-none min-w-[20px]" />
+        <button (click)="incrementQuantity()"
+          class="px-3 py-2 text-xl font-medium text-gray-500 hover:text-black">+</button>
+      </div>
+    </div>
+    <button class="w-full bg-[#FF3B30] text-white py-4 rounded-lg font-medium text-lg flex items-center justify-center">
+      <i class="fas fa-shopping-cart mr-2"></i>
+      Add to Cart
+    </button>
+  </div>
+</ion-content>
