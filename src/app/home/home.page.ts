@@ -5,6 +5,7 @@ import { addIcons } from 'ionicons';
 import { cartOutline, heart, heartOutline, home, notificationsOutline, personOutline, searchOutline, star } from 'ionicons/icons';
 import { Router } from '@angular/router';
 import { Product } from 'src/libs/types';
+import { ProductsService } from '../services/products.service';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ import { Product } from 'src/libs/types';
   imports: [IonicModule, CommonModule],
 })
 export class HomePage {
-  constructor(private router: Router) {
+  constructor(private router: Router, private productsService: ProductsService) {
     // Register icons manually in the constructor with an object
     // This allows the use of custom icons in the application
     addIcons({
@@ -64,68 +65,7 @@ export class HomePage {
    * - `image` (string): The file path to the product's image.
    * - `isFavorite` (boolean): A flag indicating whether the product is marked as a favorite by the user.
    */
-  products: Product[] = [
-    {
-      id: 1,
-      title: 'Cotton Baggy Pants',
-      category: 'UNISEX',
-      size: 'S-XL',
-      price: 790,
-      rating: 5.0,
-      image: 'assets/images/cotton-baggy-pants.png',
-      isFavorite: false
-    },
-    {
-      id: 2,
-      title: 'AIRism Cotton Crew Neck Long Sleeve T-Shirt',
-      category: 'UNISEX',
-      size: 'S-XL',
-      price: 990,
-      rating: 5.0,
-      image: 'assets/images/airism-cotton-tshirt.png',
-      isFavorite: false
-    },
-    {
-      id: 3,
-      title: 'Cotton T-Shirt',
-      category: 'MENS',
-      size: 'S-XL',
-      price: 690,
-      rating: 3.0,
-      image: 'assets/images/cotton-tshirt.png',
-      isFavorite: false
-    },
-    {
-      id: 4,
-      title: "WOMEN'S SMART ANKLE PANTS 2WAY STRETCH",
-      category: 'WOMENS',
-      size: 'S-XL',
-      price: 990,
-      rating: 4.0,
-      image: 'assets/images/womens-smart-ankle-pants.png',
-      isFavorite: false
-    },
-    {
-      id: 5,
-      title: "WOMEN'S U CREW NECK SHORT SLEEVE T-SHIRT",
-      category: 'WOMENS',
-      size: 'S-XL',
-      price: 780,
-      rating: 5.0,
-      image: 'assets/images/WOMENSUCREWNECKSHORTSLEEVET-SHIRT.png',
-      isFavorite: false
-    },
-    {
-      id: 6,
-      title: "Rayon Skipper Collar 3/4 Sleeve Blouse",
-      category: 'WOMENS',
-      size: 'S-L',
-      price: 990,
-      rating: 5.0,
-      image: 'assets/images/RayonSkipperCollarSleeveBlouse.png',
-      isFavorite: false
-    }
-  ];
+  products: Product[] = this.productsService.getProducts();
 
   filteredProducts = computed(() => {
     if (this.selectedCategory() == "Popular") {

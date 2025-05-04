@@ -1,37 +1,50 @@
 ion-content {
-  --background: white; /* Set the background of the entire page to white */
-  --ion-border-width: 0; /* Remove the border below the content */
-  --ion-border-color: transparent; /* Set the border color to transparent */
+  --background: white;
+  /* Set the background of the entire page to white */
+  --ion-border-width: 0;
+  /* Remove the border below the content */
+  --ion-border-color: transparent;
+  /* Set the border color to transparent */
 }
 
 ion-header {
-  --background: white; /* Set the background of the header to white */
-  --color: #333; /* Complementary text color */
-  --ion-toolbar-border-width: 0; /* Remove the border below the header */
+  --background: white;
+  /* Set the background of the header to white */
+  --color: #333;
+  /* Complementary text color */
+  --ion-toolbar-border-width: 0;
+  /* Remove the border below the header */
   --ion-toolbar-border-color: transparent;
 
   ion-toolbar {
-    --background: white; /* Set the background of the toolbar to white */
-    --color: #333; /* Complementary text color */
+    --background: white;
+    /* Set the background of the toolbar to white */
+    --color: #333;
+    /* Complementary text color */
 
     ion-title {
-      color: #333; /* Complementary text color */
+      color: #333;
+      /* Complementary text color */
     }
 
     ion-buttons {
       ion-button {
-        --background: white; /* Set the background of the button to white */
-        --color: #333; /* Complementary text color */
+        --background: white;
+        /* Set the background of the button to white */
+        --color: #333;
+        /* Complementary text color */
 
         ion-icon {
-          color: #333; /* Complementary icon color */
+          color: #333;
+          /* Complementary icon color */
         }
       }
     }
   }
 
   .custom-back-button {
-    --color: #333; /* Set the color of the back button icon */
+    --color: #333;
+    /* Set the color of the back button icon */
   }
 }
 
@@ -41,4 +54,12 @@ ion-header {
   &.active {
     @apply text-black bg-gray-100 border-black;
   }
+}
+
+root {
+  --first: #3e404c;
+  --second: #ddbebb;
+  --third: #ddccba;
+  --fourth: #4a392f;
+  --fifth: #1d2c3f;
 }

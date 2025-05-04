@@ -38,14 +38,14 @@
 
     <!-- Product Grid Section: Displays a grid of products with image, title, category, size, price, and rating -->
     <div class="product-grid ion-padding">
-      <div class="product-card" *ngFor="let product of filteredProducts()">
+      <div class="product-card" *ngFor="let product of filteredProducts()" (click)="navigateToProduct(product.id)">
         <div class="product-image-container">
           <img [src]="product.image" [alt]="product.title">
           <ion-button fill="clear" class="favorite-button" (click)="toggleFavorite(product)">
             <ion-icon [name]="product.isFavorite ? 'heart' : 'add-to-fave'"></ion-icon>
           </ion-button>
         </div>
-        <div class="product-details" (click)="navigateToProduct(product.id)">
+        <div class="product-details">
           <div class="category-size">
             <span class="category">{{ product.category }}</span>
             <span class="size">{{ product.size }}</span>

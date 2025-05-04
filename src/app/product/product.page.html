@@ -2,7 +2,7 @@
 
   <div
     class="sticky top-0 z-10 bg-[color-mix(in_srgb,var(--background)_50%,transparent)] backdrop-blur-lg min-h-[56px] flex items-center p-2">
-    <div class="rounded-full text-[--foreground] hover:bg-[--border] size-10 flex items-center justify-center">
+    <div (click)="navigateBack()" class="rounded-full text-[--foreground] hover:bg-[--border] size-10 flex items-center justify-center">
       <ion-icon name="chevron-back-outline" class="w-[24px] h-[48px]"></ion-icon>
     </div>
 
@@ -13,30 +13,30 @@
 
     <!-- Product Image Card -->
     <div class="p-4 shadow-[0_4px_10px_rgba(0,0,0,0.5)] rounded-3xl overflow-clip mx-4 mt-1">
-      <div class="bg-[var(--secondary)] p-4 relative rounded-[var(--radius)]">
+      <div class="p-4 h-[300px] relative rounded-[var(--radius)] bg-center bg-contain" [style.background-image]="'url(' + (product?.image || '') + ')'">
         <button class="absolute top-4 right-4 text-[var(--muted-foreground)]">
           <i class="far fa-heart text-xl"></i>
         </button>
-        <img
-          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/494358147_1629906714351101_2951782665838893488_n-kWu2VX6hZh1ICUHWwg23wdRJ80WRfF.png"
-          alt="U Crew Neck T-Shirt" class="mx-auto h-64 object-contain">
-        <div class="absolute bottom-4 left-4 font-semibold text-[var(--foreground)]">
-          PHP 590
+        <!-- <img -->
+        <!--   src="{{product?.image || ''}}" -->
+        <!--   alt="{{product?.title || ''}}" class="mx-auto object-cover"> -->
+        <div class="flex justify-center items-center absolute bottom-4 left-4 font-semibold text-[var(--foreground)] rounded-full bg-[--secondary] px-2 py-1">
+          <span>PHP 590</span>
         </div>
         <div class="absolute bottom-4 right-4 flex items-center">
           <div class="flex gap-1">
-            <ion-icon *ngFor="let star of [1, 2, 3, 4, 5]" name="star"
-              class="w-[24px] h-[48px] text-yellow-200"></ion-icon>
+            <ion-icon *ngFor="let i of [].constructor(product?.rating || 0)" name="star"
+              class="w-[24px] h-[48px] text-yellow-400"></ion-icon>
           </div>
 
-          <span class="ml-2 text-xl font-semibold text-[var(--foreground)]">5.0</span>
+          <span class="ml-2 text-xl font-semibold text-[var(--foreground)]">{{product?.rating}}</span>
         </div>
       </div>
     </div>
 
     <!-- Product Title and Share -->
     <div class="px-4 py-2 flex justify-between items-center">
-      <h2 class="text-2xl font-bold text-[var(--foreground)]">U Crew Neck Short Sleeve T-Shirt</h2>
+      <h2 class="text-2xl font-bold text-[var(--foreground)]">{{product?.title || ''}}</h2>
       <button class="text-[var(--foreground)]">
         <ion-icon name="share-social-outline" class="w-[32px] h-[32px]"></ion-icon>
       </button>
@@ -44,42 +44,38 @@
 
     <!-- Color Options -->
     <div class="px-4 py-2">
-      <h3 class="text-lg mb-3 text-[var(--muted-foreground)]">Color:</h3>
+      <h3 class="text-xl font-bold mb-3 text-[var(--muted-foreground)]">Color:</h3>
       <div class="flex space-x-4">
-        <div class="color-option size-16 bg-gray-700 border-2 rounded-full border-[var(--ring)] shadow-md"></div>
-        <div class="color-option size-16 bg-pink-200 border-2 rounded-lg border-transparent shadow-md"></div>
-        <div class="color-option size-16 bg-yellow-100 border-2 rounded-lg border-transparent shadow-md"></div>
-        <div class="color-option size-16 bg-brown-500 border-2 rounded-lg border-transparent shadow-md"></div>
-        <div class="color-option size-16 bg-blue-900 border-2 rounded-lg border-transparent shadow-md"></div>
+        <div
+          *ngFor="let color of colors"
+          class="size-16 shadow-lg"
+          style="background-color: {{color}}"
+          [ngClass]="selectedColor() === color? 'rounded-full': 'rounded-xl'"
+          (click)="updateColor(color)"
+        ></div>
       </div>
     </div>
 
     <!-- Size Options -->
     <div class="px-4 py-2">
-      <h3 class="text-lg mb-3 text-[var(--muted-foreground)]">Size:</h3>
+      <h3 class="text-xl font-bold mb-3 text-[var(--muted-foreground)]">Size:</h3>
       <div class="flex space-x-4">
         <a
-          class="shadow-md size-16 bg-[var(--background)]  text-[var(--foreground)] flex items-center justify-center font-medium rounded-[var(--radius)]">XS</a>
-        <a
-          class="shadow-md size-16 bg-[var(--background)] text-[var(--foreground)] flex items-center justify-center font-medium rounded-[var(--radius)]">S</a>
-        <a
-          class="shadow-md size-16 bg-[var(--background)] text-[var(--foreground)] flex items-center justify-center font-medium rounded-[var(--radius)]">M</a>
-        <a
-          class="shadow-md size-16 bg-[var(--background)] text-[var(--foreground)] flex items-center justify-center font-medium rounded-[var(--radius)]">L</a>
-        <a
-          class="shadow-md size-16 bg-[var(--background)] text-[var(--foreground)] flex items-center justify-center font-medium rounded-[var(--radius)]">XL</a>
+          (click)="updateSize(size)"
+          *ngFor="let size of sizes()"
+          class="shadow-md size-16 bg-[var(--background)]  text-[var(--foreground)] flex items-center justify-center font-medium"
+          [ngClass]="selectedSize() === size? 'rounded-full border' : 'rounded-[var(--radius)]'"
+        >
+          <span class="text-[--muted-foreground] text-2xl">{{size}}</span>
+        </a>
       </div>
     </div>
 
     <!-- Description -->
     <div class="px-4 py-2">
-      <h3 class="text-lg mb-2 text-[var(--muted-foreground)]">Description</h3>
+      <h3 class="text-xl font-bold mb-2 text-[var(--muted-foreground)]">Description</h3>
       <p class="text-[var(--muted-foreground)] text-sm">
-        The Uniqlo U collection is the realization of a dedicated and skilled team of international designers based at
-        our
-        Paris Research Center. This fine cotton t-shirt combines comfort and elegance. The fabric is incredibly soft and
-        breathable, making it perfect for any occasion.
-        <button class="text-[var(--primary)] font-medium">Read More</button>
+        {{product?.description}}
       </p>
     </div>
 
@@ -89,60 +85,40 @@
         <div class="flex items-center">
           <span class="text-2xl font-bold text-[var(--foreground)]">5.0</span>
           <i class="fas fa-star star-rating ml-1"></i>
-          <span class="ml-2 text-[var(--muted-foreground)]">Reviews (1,432)</span>
+          <span class="ml-2 font-semibold text-xl text-[var(--muted-foreground)]">Reviews (1,432)</span>
         </div>
-        <button class="text-[var(--muted-foreground)]">See More</button>
+        <button class="font-bold text-[var(--muted-foreground)]">See More</button>
       </div>
-    </div>
 
-    <!-- Reviews -->
-    <div class="px-4 py-2 mt-2 border-t border-[var(--border)]">
-      <div class="flex justify-between items-center">
-        <div class="flex items-center">
-          <span class="text-2xl font-bold text-[var(--foreground)]">5.0</span>
-          <i class="fas fa-star star-rating ml-1"></i>
-          <span class="ml-2 text-[var(--muted-foreground)]">Reviews (1,432)</span>
+      <div class="flex flex-col gap-6 mt-4">
+        <div class="flex gap-4" *ngFor="let review of product?.reviews">
+
+          <!-- Avatar -->
+          <div class="rounded-full size-12 bg-gray-700 border-2 border-[--background] shadow-md"></div>
+
+          <div class="flex-1">
+
+            <div class="flex justify-between items-start">
+              <div>
+                <h2 class="text-[--foreground] font-bold text-lg m-0">{{review.username}}</h2>
+                <span>
+                <ion-icon *ngFor="let i of [].constructor(product?.rating || 0)" name="star"
+                  class="size-4 text-yellow-400 m-0"></ion-icon>
+                  </span>
+              </div>
+
+              <p class="text-sm font-semibold text-[--muted-foreground]">{{review.date}}</p>
+            </div>
+
+            <div class="shadow-[0px_3px_12px_-5px_rgba(0,0,0,0.75)] rounded-xl text-[--muted-foreground] p-4">
+              {{review.comment}}
+            </div>
+          </div>
+
         </div>
-        <button class="text-[var(--muted-foreground)]">See More</button>
       </div>
-    </div>
 
-    <!-- Reviews -->
-    <div class="px-4 py-2 mt-2 border-t border-[var(--border)]">
-      <div class="flex justify-between items-center">
-        <div class="flex items-center">
-          <span class="text-2xl font-bold text-[var(--foreground)]">5.0</span>
-          <i class="fas fa-star star-rating ml-1"></i>
-          <span class="ml-2 text-[var(--muted-foreground)]">Reviews (1,432)</span>
-        </div>
-        <button class="text-[var(--muted-foreground)]">See More</button>
-      </div>
     </div>
-
-    <!-- Reviews -->
-    <div class="px-4 py-2 mt-2 border-t border-[var(--border)]">
-      <div class="flex justify-between items-center">
-        <div class="flex items-center">
-          <span class="text-2xl font-bold text-[var(--foreground)]">5.0</span>
-          <i class="fas fa-star star-rating ml-1"></i>
-          <span class="ml-2 text-[var(--muted-foreground)]">Reviews (1,432)</span>
-        </div>
-        <button class="text-[var(--muted-foreground)]">See More</button>
-      </div>
-    </div>
-
-    <!-- Reviews -->
-    <div class="px-4 py-2 mt-2 border-t border-[var(--border)]">
-      <div class="flex justify-between items-center">
-        <div class="flex items-center">
-          <span class="text-2xl font-bold text-[var(--foreground)]">5.0</span>
-          <i class="fas fa-star star-rating ml-1"></i>
-          <span class="ml-2 text-[var(--muted-foreground)]">Reviews (1,432)</span>
-        </div>
-        <button class="text-[var(--muted-foreground)]">See More</button>
-      </div>
-    </div>
-
 
 
     <!-- Action Buttons -->

@@ -1,4 +1,11 @@
-export type Product = {
+export interface Review {
+  username: string;
+  rating: number;
+  date: string;
+  comment: string;
+}
+
+export interface Product {
   id: number;
   title: string;
   category: string;
@@ -7,4 +14,6 @@ export type Product = {
   rating: number;
   image: string;
   isFavorite: boolean;
-};
+  description: string;
+  reviews?: Review[];
+}
