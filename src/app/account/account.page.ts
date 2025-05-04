@@ -48,4 +48,8 @@ export class AccountPage {
   navigateToFavorites() {
     this.router.navigate(['/favorites'])
   }
+
+  navigateOrders() {
+    this.router.navigate(['/orders'])
+  }
 }

@@ -1,45 +1,60 @@
 ion-content {
-  --background: white; /* Set the background of the entire page to white */
-  --ion-border-width: 0; /* Remove the border below the content */
-  --ion-border-color: transparent; /* Set the border color to transparent */
+  --background: white;
+  /* Set the background of the entire page to white */
+  --ion-border-width: 0;
+  /* Remove the border below the content */
+  --ion-border-color: transparent;
+  /* Set the border color to transparent */
 }
 
 ion-header {
-  --background: white; /* Set the background of the header to white */
-  --color: #333; /* Complementary text color */
-  --ion-toolbar-border-width: 0; /* Remove the border below the header */
+  --background: white;
+  /* Set the background of the header to white */
+  --color: #333;
+  /* Complementary text color */
+  --ion-toolbar-border-width: 0;
+  /* Remove the border below the header */
   --ion-toolbar-border-color: transparent;
 
   ion-toolbar {
-    --background: white; /* Set the background of the toolbar to white */
-    --color: #333; /* Complementary text color */
+    --background: white;
+    /* Set the background of the toolbar to white */
+    --color: #333;
+    /* Complementary text color */
 
     ion-title {
-      color: #333; /* Complementary text color */
+      color: #333;
+      /* Complementary text color */
     }
 
     ion-buttons {
       ion-button {
-        --background: white; /* Set the background of the button to white */
-        --color: #333; /* Complementary text color */
+        --background: white;
+        /* Set the background of the button to white */
+        --color: #333;
+        /* Complementary text color */
 
         ion-icon {
-          color: #333; /* Complementary icon color */
+          color: #333;
+          /* Complementary icon color */
         }
       }
     }
   }
 
   .custom-back-button {
-    --color: #333; /* Set the color of the back button icon */
+    --color: #333;
+    /* Set the color of the back button icon */
   }
 }
 
 .profile-card {
   margin: 16px;
   border-radius: 16px;
-  background: white; /* Set the background to white */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
+  background: white;
+  /* Set the background to white */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Add shadow */
 
   .profile-header {
     padding: 20px;
@@ -61,11 +76,14 @@ ion-header {
         margin: 0;
         font-size: 24px;
         font-weight: 600;
-        color: #333; /* Complementary text color */
+        color: #333;
+        /* Complementary text color */
       }
+
       p {
         margin: 4px 0 0;
-        color: #666; /* Complementary text color */
+        color: #666;
+        /* Complementary text color */
         font-size: 14px;
       }
     }
@@ -73,8 +91,10 @@ ion-header {
 
   .contact-info {
     ion-item {
-      --background: white; /* Set the background to white */
-      --color: #333; /* Complementary text color */
+      --background: white;
+      /* Set the background to white */
+      --color: #333;
+      /* Complementary text color */
       --padding-start: 16px;
       --inner-padding-end: 16px;
       margin-bottom: 8px;
@@ -84,11 +104,13 @@ ion-header {
       ion-icon {
         font-size: 24px;
         margin-right: 16px;
-        color: #333; /* Complementary icon color */
+        color: #333;
+        /* Complementary icon color */
       }
 
       ion-label {
-        color: #333; /* Complementary text color */
+        color: #333;
+        /* Complementary text color */
       }
     }
   }
@@ -97,8 +119,10 @@ ion-header {
 .stats-card {
   margin: 16px;
   border-radius: 16px;
-  background: white; /* Set the background to white */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
+  background: white;
+  /* Set the background to white */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Add shadow */
 
   .stats-container {
     display: flex;
@@ -112,11 +136,14 @@ ion-header {
         margin: 0;
         font-size: 20px;
         font-weight: 600;
-        color: #333; /* Complementary text color */
+        color: #333;
+        /* Complementary text color */
       }
+
       p {
         margin: 4px 0 0;
-        color: #666; /* Complementary text color */
+        color: #666;
+        /* Complementary text color */
         font-size: 14px;
       }
     }
@@ -129,19 +156,27 @@ ion-header {
   }
 }
 
+ion-item:hover {
+  cursor: pointer;
+}
+
 ion-list {
   margin: 16px;
   border-radius: 16px;
-  background: white; /* Set the background to white */
+  background: white;
+  /* Set the background to white */
   padding: 0 16px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Add shadow */
 
   ion-item {
     margin-top: 12px;
     --padding-start: 16px;
     --inner-padding-end: 16px;
-    --background: white; /* Set the background to white */
-    --color: #333; /* Complementary text color */
+    --background: white;
+    /* Set the background to white */
+    --color: #333;
+    /* Complementary text color */
     margin-bottom: 8px;
     border-radius: 12px;
     --border-radius: 12px;
@@ -149,11 +184,14 @@ ion-list {
     ion-icon {
       font-size: 24px;
       margin-right: 16px;
-      color: #333; /* Complementary icon color */
+      color: #333;
+      /* Complementary icon color */
     }
 
     ion-label {
-      color: #333; /* Complementary text color */
+      color: #333;
+
+      /* Complementary text color */
       h3 {
         font-size: 16px;
         font-weight: 500;
@@ -163,11 +201,13 @@ ion-list {
 
   .logout-item {
     ion-icon {
-      color: #ff3b30; /* Set the icon color to red */
+      color: #ff3b30;
+      /* Set the icon color to red */
     }
 
     ion-label {
-      color: #ff3b30; /* Set the text color to red */
+      color: #ff3b30;
+      /* Set the text color to red */
 
       h3 {
         font-size: 16px;
@@ -176,7 +216,8 @@ ion-list {
 
       p {
         font-size: 14px;
-        color: #ff3b30; /* Set the paragraph text color to red */
+        color: #ff3b30;
+        /* Set the paragraph text color to red */
       }
     }
   }
