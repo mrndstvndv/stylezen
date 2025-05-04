@@ -1,9 +1,10 @@
 import { CommonModule } from "@angular/common";
 import { Component, signal } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { ActivatedRoute } from "@angular/router";
 import { IonBackButton, IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonTitle, IonToolbar } from "@ionic/angular/standalone";
-import { sign } from "crypto";
 import { addIcons } from "ionicons";
+import { arrowBackOutline, cartOutline, chevronBackOutline, shareOutline, shareSocialOutline, shareSocialSharp, star } from "ionicons/icons";
 
 @Component({
   selector: 'app-product',
@@ -18,11 +19,25 @@ export class ProductPage {
   selectedColor = signal('');
   quantity = signal(1);
 
-  constructor() {
+  constructor(
+    private route: ActivatedRoute
+  ) {
     addIcons({
+      chevronBackOutline,
+      shareSocialOutline,
+      cartOutline,
+      star,
       'star-filled': 'assets/icon/star-rating-filled.svg',
     })
   }
+
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      const id = Number(params['id']);
+      console.log('Product ID:', id);
+    });
+  }
+
 
   updateColor(color: string) {
     if (color != this.selectedColor()) {

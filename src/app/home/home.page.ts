@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { addIcons } from 'ionicons';
 import { cartOutline, heart, heartOutline, home, notificationsOutline, personOutline, searchOutline, star } from 'ionicons/icons';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
+import { Product } from 'src/libs/types';
 
 @Component({
   selector: 'app-home',
@@ -64,7 +64,7 @@ export class HomePage {
    * - `image` (string): The file path to the product's image.
    * - `isFavorite` (boolean): A flag indicating whether the product is marked as a favorite by the user.
    */
-  products = [
+  products: Product[] = [
     {
       id: 1,
       title: 'Cotton Baggy Pants',
@@ -140,7 +140,7 @@ export class HomePage {
    *
    * @param product - The product object whose favorite status is to be toggled.
    */
-  toggleFavorite(product: any) {
+  toggleFavorite(product: Product) {
     product.isFavorite = !product.isFavorite;
   }
 
@@ -160,7 +160,7 @@ export class HomePage {
     this.router.navigate(['/account']);
   }
 
-  navigateToProduct() {
-    this.router.navigate(['/product']);
+  navigateToProduct(id: number) {
+    this.router.navigate(['/product', id]);
   }
 }

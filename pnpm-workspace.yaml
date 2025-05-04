@@ -1,0 +1,7 @@
+onlyBuiltDependencies:
+  - '@firebase/util'
+  - esbuild
+  - lmdb
+  - msgpackr-extract
+  - nice-napi
+  - protobufjs

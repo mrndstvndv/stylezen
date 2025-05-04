@@ -1,160 +1,163 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/" text="" class="custom-back-button"></ion-back-button>
-    </ion-buttons>
-    <ion-title>Product Details</ion-title>
-    <ion-buttons slot="end">
-      <ion-button>
-        <ion-icon slot="icon-only" src="assets/icon/edit.svg"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<div class="bg-[var(--background)] overflow-auto">
 
-<ion-content>
-  <!-- Product Image -->
-  <div class="relative mx-4 bg-gray-100 rounded-3xl p-4">
-    <img src="/placeholder.svg?height=400&width=300" alt="Gray T-Shirt" class="w-full h-64 object-contain">
-    <button class="absolute top-4 right-4 text-gray-500">
-      <i class="far fa-heart text-2xl"></i>
-    </button>
-
-    <!-- Price -->
-    <div class="absolute bottom-4 left-4">
-      <p class="text-gray-600 text-xl font-semibold">PHP 590</p>
+  <div
+    class="sticky top-0 z-10 bg-[color-mix(in_srgb,var(--background)_50%,transparent)] backdrop-blur-lg min-h-[56px] flex items-center p-2">
+    <div class="rounded-full text-[--foreground] hover:bg-[--border] size-10 flex items-center justify-center">
+      <ion-icon name="chevron-back-outline" class="w-[24px] h-[48px]"></ion-icon>
     </div>
 
-    <!-- Rating -->
-    <div class="absolute bottom-4 right-4 flex items-center">
-      <div class="flex text-yellow-400">
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-      </div>
-      <span class="ml-1 text-lg font-semibold">5.0</span>
-    </div>
+    <h1 class="text-2xl text-[1.25rem] text-[--foreground] ml-4 font-semibold">Product Details</h1>
   </div>
 
-  <!-- Product Title and Share -->
-  <div class="flex justify-between items-center px-4 mt-4">
-    <h2 class="text-xl font-bold">U Crew Neck Short Sleeve T-Shirt</h2>
-    <button class="text-gray-700">
-      <i class="fas fa-share-alt text-xl"></i>
-    </button>
-  </div>
+  <div class="flex flex-col gap-4">
 
-  <!-- Color Selection -->
-  <div class="px-4 mt-6">
-    <p class="text-gray-600 mb-2">Color:</p>
-    <div class="flex gap-3">
-      <button class="w-12 h-12 bg-gray-700 rounded-full ring-2 ring-offset-2 ring-gray-700"></button>
-      <button class="w-12 h-12 bg-pink-200 rounded-full"></button>
-      <button class="w-12 h-12 bg-amber-100 rounded-full"></button>
-      <button class="w-12 h-12 bg-brown-500 rounded-full"></button>
-      <button class="w-12 h-12 bg-indigo-900 rounded-full"></button>
-    </div>
-  </div>
-
-  <!-- Size Selection -->
-  <div class="px-4 mt-6">
-    <p class="text-gray-600 mb-2">Size:</p>
-    <div class="flex gap-3">
-      <button
-        class="w-16 h-16 border border-gray-300 rounded-xl flex items-center justify-center text-gray-700">XS</button>
-      <button
-        class="w-16 h-16 border border-gray-300 rounded-xl flex items-center justify-center text-gray-700">S</button>
-      <button
-        class="w-16 h-16 border border-gray-300 rounded-xl flex items-center justify-center text-gray-700">M</button>
-      <button
-        class="w-16 h-16 border border-gray-300 rounded-xl flex items-center justify-center text-gray-700">L</button>
-      <button
-        class="w-16 h-16 border border-gray-300 rounded-xl flex items-center justify-center text-gray-700">XL</button>
-    </div>
-  </div>
-
-  <!-- Description -->
-  <div class="px-4 mt-6">
-    <p class="text-gray-600">Description</p>
-    <p class="text-gray-500 text-sm mt-2">
-      The Uniqlo U collection is the realization of a dedicated and skilled team of international designers based at our
-      Paris Research
-      <a href="#" class="text-gray-600 font-medium">Read More</a>
-    </p>
-  </div>
-
-  <!-- Reviews Section -->
-  <div class="px-4 mt-6 pb-24">
-    <div class="flex justify-between items-center border-t pt-4">
-      <div class="flex items-center gap-2">
-        <span class="text-2xl font-bold">5.0</span>
-        <i class="fas fa-star text-yellow-400"></i>
-        <span class="text-gray-500">Reviews (1,432)</span>
-      </div>
-      <a href="#" class="text-gray-500">See More</a>
-    </div>
-
-    <!-- Review Item 1 -->
-    <div class="mt-4 border-b pb-4">
-      <div class="flex justify-between items-center">
-        <div class="flex items-center gap-3">
-          <img src="/placeholder.svg?height=40&width=40" alt="User" class="w-10 h-10 rounded-full object-cover">
-          <span class="font-semibold">Cheese_Guru</span>
+    <!-- Product Image Card -->
+    <div class="p-4 shadow-[0_4px_10px_rgba(0,0,0,0.5)] rounded-3xl overflow-clip mx-4 mt-1">
+      <div class="bg-[var(--secondary)] p-4 relative rounded-[var(--radius)]">
+        <button class="absolute top-4 right-4 text-[var(--muted-foreground)]">
+          <i class="far fa-heart text-xl"></i>
+        </button>
+        <img
+          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/494358147_1629906714351101_2951782665838893488_n-kWu2VX6hZh1ICUHWwg23wdRJ80WRfF.png"
+          alt="U Crew Neck T-Shirt" class="mx-auto h-64 object-contain">
+        <div class="absolute bottom-4 left-4 font-semibold text-[var(--foreground)]">
+          PHP 590
         </div>
-        <span class="text-gray-500 text-sm">Today</span>
+        <div class="absolute bottom-4 right-4 flex items-center">
+          <div class="flex gap-1">
+            <ion-icon *ngFor="let star of [1, 2, 3, 4, 5]" name="star"
+              class="w-[24px] h-[48px] text-yellow-200"></ion-icon>
+          </div>
+
+          <span class="ml-2 text-xl font-semibold text-[var(--foreground)]">5.0</span>
+        </div>
       </div>
-      <div class="flex text-yellow-400 mt-1">
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
+    </div>
+
+    <!-- Product Title and Share -->
+    <div class="px-4 py-2 flex justify-between items-center">
+      <h2 class="text-2xl font-bold text-[var(--foreground)]">U Crew Neck Short Sleeve T-Shirt</h2>
+      <button class="text-[var(--foreground)]">
+        <ion-icon name="share-social-outline" class="w-[32px] h-[32px]"></ion-icon>
+      </button>
+    </div>
+
+    <!-- Color Options -->
+    <div class="px-4 py-2">
+      <h3 class="text-lg mb-3 text-[var(--muted-foreground)]">Color:</h3>
+      <div class="flex space-x-4">
+        <div class="color-option size-16 bg-gray-700 border-2 rounded-full border-[var(--ring)] shadow-md"></div>
+        <div class="color-option size-16 bg-pink-200 border-2 rounded-lg border-transparent shadow-md"></div>
+        <div class="color-option size-16 bg-yellow-100 border-2 rounded-lg border-transparent shadow-md"></div>
+        <div class="color-option size-16 bg-brown-500 border-2 rounded-lg border-transparent shadow-md"></div>
+        <div class="color-option size-16 bg-blue-900 border-2 rounded-lg border-transparent shadow-md"></div>
       </div>
-      <p class="text-gray-600 mt-2 text-sm">
-        This fine cotton t-shirt combines comfort and elegance. The fabric is incredibly soft and breathable, making it
-        perfect for any occasion. The classic cut ensures a flattering fit without sacrificing ease of movement...
+    </div>
+
+    <!-- Size Options -->
+    <div class="px-4 py-2">
+      <h3 class="text-lg mb-3 text-[var(--muted-foreground)]">Size:</h3>
+      <div class="flex space-x-4">
+        <a
+          class="shadow-md size-16 bg-[var(--background)]  text-[var(--foreground)] flex items-center justify-center font-medium rounded-[var(--radius)]">XS</a>
+        <a
+          class="shadow-md size-16 bg-[var(--background)] text-[var(--foreground)] flex items-center justify-center font-medium rounded-[var(--radius)]">S</a>
+        <a
+          class="shadow-md size-16 bg-[var(--background)] text-[var(--foreground)] flex items-center justify-center font-medium rounded-[var(--radius)]">M</a>
+        <a
+          class="shadow-md size-16 bg-[var(--background)] text-[var(--foreground)] flex items-center justify-center font-medium rounded-[var(--radius)]">L</a>
+        <a
+          class="shadow-md size-16 bg-[var(--background)] text-[var(--foreground)] flex items-center justify-center font-medium rounded-[var(--radius)]">XL</a>
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div class="px-4 py-2">
+      <h3 class="text-lg mb-2 text-[var(--muted-foreground)]">Description</h3>
+      <p class="text-[var(--muted-foreground)] text-sm">
+        The Uniqlo U collection is the realization of a dedicated and skilled team of international designers based at
+        our
+        Paris Research Center. This fine cotton t-shirt combines comfort and elegance. The fabric is incredibly soft and
+        breathable, making it perfect for any occasion.
+        <button class="text-[var(--primary)] font-medium">Read More</button>
       </p>
     </div>
 
-    <!-- Review Item 2 -->
-    <div class="mt-4">
+    <!-- Reviews -->
+    <div class="px-4 py-2 mt-2 border-t border-[var(--border)]">
       <div class="flex justify-between items-center">
-        <div class="flex items-center gap-3">
-          <img src="/placeholder.svg?height=40&width=40" alt="User" class="w-10 h-10 rounded-full object-cover">
-          <span class="font-semibold">John Elden Ring</span>
+        <div class="flex items-center">
+          <span class="text-2xl font-bold text-[var(--foreground)]">5.0</span>
+          <i class="fas fa-star star-rating ml-1"></i>
+          <span class="ml-2 text-[var(--muted-foreground)]">Reviews (1,432)</span>
         </div>
-        <span class="text-gray-500 text-sm">Today</span>
+        <button class="text-[var(--muted-foreground)]">See More</button>
       </div>
-      <div class="flex text-yellow-400 mt-1">
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-      </div>
-      <p class="text-gray-600 mt-2 text-sm">
-        Behold, a garment forged from the finest cotton, crafted with precision and care. This shirt, a testament to
-        quality craftsmanship, provides both comfort and durability for the discerning wearer.
-      </p>
     </div>
+
+    <!-- Reviews -->
+    <div class="px-4 py-2 mt-2 border-t border-[var(--border)]">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center">
+          <span class="text-2xl font-bold text-[var(--foreground)]">5.0</span>
+          <i class="fas fa-star star-rating ml-1"></i>
+          <span class="ml-2 text-[var(--muted-foreground)]">Reviews (1,432)</span>
+        </div>
+        <button class="text-[var(--muted-foreground)]">See More</button>
+      </div>
+    </div>
+
+    <!-- Reviews -->
+    <div class="px-4 py-2 mt-2 border-t border-[var(--border)]">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center">
+          <span class="text-2xl font-bold text-[var(--foreground)]">5.0</span>
+          <i class="fas fa-star star-rating ml-1"></i>
+          <span class="ml-2 text-[var(--muted-foreground)]">Reviews (1,432)</span>
+        </div>
+        <button class="text-[var(--muted-foreground)]">See More</button>
+      </div>
+    </div>
+
+    <!-- Reviews -->
+    <div class="px-4 py-2 mt-2 border-t border-[var(--border)]">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center">
+          <span class="text-2xl font-bold text-[var(--foreground)]">5.0</span>
+          <i class="fas fa-star star-rating ml-1"></i>
+          <span class="ml-2 text-[var(--muted-foreground)]">Reviews (1,432)</span>
+        </div>
+        <button class="text-[var(--muted-foreground)]">See More</button>
+      </div>
+    </div>
+
+    <!-- Reviews -->
+    <div class="px-4 py-2 mt-2 border-t border-[var(--border)]">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center">
+          <span class="text-2xl font-bold text-[var(--foreground)]">5.0</span>
+          <i class="fas fa-star star-rating ml-1"></i>
+          <span class="ml-2 text-[var(--muted-foreground)]">Reviews (1,432)</span>
+        </div>
+        <button class="text-[var(--muted-foreground)]">See More</button>
+      </div>
+    </div>
+
+
+
+    <!-- Action Buttons -->
+    <div class="fixed bottom-0 left-0 right-0 max-w-md mx-auto flex justify-between p-2">
+      <div
+        class="flex-1 mr-2 bg-[var(--background)] shadow-[0_4px_10px_rgba(0,0,0,0.5)] text-[var(--foreground)] rounded-full flex items-center justify-center font-semibold">
+      <ion-icon name="cart-outline" class="w-[24px] h-[48px] mr-2"></ion-icon>
+        Add To Cart
+      </div>
+      <div
+        class="flex-1 shadow-[0_0_10px_rgba(251,146,60,0.8)] ml-2 bg-[var(--destructive)] text-[var(--destructive-foreground)] rounded-full flex items-center justify-center font-semibold">
+        Buy Now
+      </div>
+    </div>
+
   </div>
 
-  <!-- Action Buttons -->
-  <div class="fixed bottom-0 left-0 right-0 max-w-md mx-auto flex gap-4 p-4 bg-white">
-    <button class="flex-1 border border-gray-300 rounded-full py-3 flex items-center justify-center gap-2">
-      <i class="fas fa-shopping-cart"></i>
-      <span>Add To Cart</span>
-    </button>
-    <button class="flex-1 bg-red-500 text-white rounded-full py-3">
-      Buy Now
-    </button>
-  </div>
-
-  <!-- Bottom Indicator -->
-  <div class="h-20"></div> <!-- Space for fixed buttons -->
-  <div class="flex justify-center pb-8">
-    <div class="w-1/3 h-1 bg-black rounded-full"></div>
-  </div>
-</ion-content>
+</div>
