@@ -1,24 +1,43 @@
-  <!-- Header -->
-  <div
-    class="fixed w-full top-0 z-10 bg-[color-mix(in_srgb,var(--background)_50%,transparent)] backdrop-blur-sm min-h-[56px] flex items-center justify-between p-2">
-    <div (click)="navigateBack()"
-      class="rounded-full text-[--foreground] hover:bg-[--border] size-10 flex items-center justify-center">
-      <ion-icon name="chevron-back-outline" class="w-[24px] h-[48px]"></ion-icon>
-    </div>
-
-    <h1
-      class="text-2xl text-[--muted-foreground] font-bold absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
-      Profile</h1>
-
-    <div (click)="navigateBack()"
-      class="rounded-full text-[--foreground] hover:bg-[--border] size-10 flex items-center justify-center">
-      <ion-icon name="create-outline" class="w-[24px] h-[48px]"></ion-icon>
-    </div>
+<!-- Header -->
+<div
+  class="fixed w-full top-0 z-10 bg-[color-mix(in_srgb,var(--background)_50%,transparent)] backdrop-blur-sm min-h-[56px] flex items-center justify-between p-2">
+  <div (click)="navigateBack()"
+    class="rounded-full text-[--foreground] hover:bg-[--border] size-10 flex items-center justify-center">
+    <ion-icon name="chevron-back-outline" class="w-[24px] h-[48px]"></ion-icon>
   </div>
+
+  <h1
+    class="text-2xl text-[--muted-foreground] font-bold absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+    Profile</h1>
+
+  <div (click)="navigateBack()"
+    class="rounded-full text-[--foreground] hover:bg-[--border] size-10 flex items-center justify-center">
+    <ion-icon name="create-outline" class="w-[24px] h-[48px]"></ion-icon>
+  </div>
+</div>
+
+
+<!-- Dialog -->
+<div class="dialog-overlay fixed inset-0 bg-black flex items-center justify-center" *ngIf="isDialogVisible">
+  <dialog #logoutDialog class="bg-[--background] rounded-lg shadow-lg p-4 w-11/12 max-w-md">
+    <h1 class="text-2xl font-bold text-[--foreground] mb-2">
+      Logout
+    </h1>
+
+    <p class="text-[--muted-foreground]">
+      Are you sure you want to logout? You will be redirected to the login page.
+    </p>
+
+    <div class="flex mt-4 gap-2">
+      <button (click)="hideDialog()" class="bg-[--foreground] shadow-md hover:shadow-lg hover:translate-y-[-2px] text-white rounded-lg px-4 py-2 flex-1">Cancel</button>
+      <button (click)="onLogout()" class="bg-red-500 text-white shadow-md hover:shadow-lg hover:translate-y-[-2px] rounded-lg px-4 py-2 flex-1">Logout</button>
+    </div>
+  </dialog>
+</div>
 
 <ion-content>
 
-    <div class="mt-16"></div>
+  <div class="mt-16"></div>
 
   <ion-card class="profile-card">
     <div class="profile-header">
@@ -44,17 +63,18 @@
   </ion-card>
 
   <div class="bg-[--background] text-[--foreground] shadow-lg mx-4 p-4 rounded-xl flex">
-      <div class="hover:cursor-pointer hover:bg-[--border] rounded-xl flex-1 flex items-center justify-center flex-col">
-        <h3 class="font-bold text-xl">PHP 12,022</h3>
-        <p class="text-[--muted-foreground]">Wallet</p>
-      </div>
+    <div class="hover:cursor-pointer hover:bg-[--border] rounded-xl flex-1 flex items-center justify-center flex-col">
+      <h3 class="font-bold text-xl">PHP 12,022</h3>
+      <p class="text-[--muted-foreground]">Wallet</p>
+    </div>
 
-      <div class="self-stretch w-[2px] bg-[--foreground] mx-2"></div>
+    <div class="self-stretch w-[2px] bg-[--foreground] mx-2"></div>
 
-      <div class="hover:cursor-pointer hover:bg-[--border] rounded-xl flex-1 flex items-center justify-center flex-col" (click)="navigateOrders()">
-        <h3 class="font-bold text-xl">12</h3>
-        <p class="text-[--muted-foreground]">Orders</p>
-      </div>
+    <div class="hover:cursor-pointer hover:bg-[--border] rounded-xl flex-1 flex items-center justify-center flex-col"
+      (click)="navigateOrders()">
+      <h3 class="font-bold text-xl">12</h3>
+      <p class="text-[--muted-foreground]">Orders</p>
+    </div>
   </div>
 
   <ion-list>
@@ -98,7 +118,7 @@
       </ion-label>
     </ion-item>
 
-    <ion-item button class="logout-item" (click)="onLogout()">
+    <ion-item button class="logout-item" (click)="showDialog()">
       <ion-icon src="assets/icon/logout.svg" slot="start"></ion-icon>
       <ion-label>
         <h3>Logout</h3>
