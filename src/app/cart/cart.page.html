@@ -1,0 +1,93 @@
+<div class="bg-[#f5f5f5] overflow-auto h-full">
+
+  <!-- Header -->
+  <div
+    class="fixed w-full top-0 z-10 bg-[color-mix(in_srgb,var(--background)_50%,transparent)] backdrop-blur-sm min-h-[56px] flex items-center p-2">
+    <div (click)="navigateBack()"
+      class="rounded-full text-[--foreground] hover:bg-[--border] size-10 flex items-center justify-center">
+      <ion-icon name="chevron-back-outline" class="w-[24px] h-[48px]"></ion-icon>
+    </div>
+
+    <h1
+      class="text-2xl text-[--muted-foreground] font-bold absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+      My Cart</h1>
+  </div>
+
+  <main class="flex flex-col gap-6 px-2 flex-1 mt-16">
+    <div *ngFor="let item of cart()" class="flex shadow-lg p-4 border rounded-xl gap-2 bg-[--background]">
+
+      <!-- Check -->
+      <div class="flex items-center bg-white" (click)="select(item)">
+        <ion-icon *ngIf="item.checkout == true" name="checkmark-circle"
+          class="text-red-500 size-7 shadow-lg rounded-full border border-transparent"></ion-icon>
+        <ion-icon *ngIf="item.checkout == false" name="checkmark-circle"
+          class="size-7 shadow-lg rounded-full border"></ion-icon>
+      </div>
+
+      <!-- Image -->
+      <div class="w-[125px] border-[6px] border-[--background] shadow-lg rounded-xl">
+        <img src="{{item.product.image}}" alt="{{item.product.title}}" class="rounded-xl h-full">
+      </div>
+
+      <div class="flex-1 flex flex-col">
+
+        <!-- Title -->
+        <div class="flex justify-between">
+          <h2 class="text-lg font-bold text-[--muted-foreground] max-w-[50vw]">
+            {{item.product.title}}
+          </h2>
+          <ion-icon (click)="delete(item)" name="trash-outline" class="text-red-500 size-6"></ion-icon>
+        </div>
+
+        <!-- Color -->
+        <div class="flex items-center text-[var(--muted-foreground)]">
+          <div>Color: </div>
+          <div class="size-1 rounded-full p-2 ml-1 flex-shrink-0" style="background-color: {{item.color}};">
+          </div>
+        </div>
+
+        <div class="flex items-center text-[var(--muted-foreground)]">
+          Size: {{item.size}}
+        </div>
+
+        <div class="mt-2 flex justify-between flex-1 items-end">
+          <!-- Price -->
+          <div class="text-lg font-bold text-[var(--muted-foreground)]">
+            PHP {{item.product.price}}
+          </div>
+
+          <!-- quantity -->
+          <div class="shadow-lg flex p-1 gap-2 rounded-md">
+            <ion-icon name="remove-outline" (click)="decrementQuant(item)"
+              class="text-[--background] bg-[--foreground] rounded-md size-7"></ion-icon>
+            <div class="bg-[--border] text-[--foreground] px-4 rounded-md">
+              {{item.quantity}}
+            </div>
+            <ion-icon name="add-outline" (click)="incrementQuant(item)"
+              class="text-[--background] bg-[--foreground] rounded-md size-7"></ion-icon>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="h-32">
+
+    </div>
+
+  </main>
+
+  <div class="fixed bottom-0 w-full z-10 bg-white rounded-t-2xl p-4 border flex flex-col gap-4">
+
+    <div class="flex justify-between text-[var(--muted-foreground)]">
+      <p class="text-2xl font-bold">Total Amount</p>
+      <p class="font-bold text-2xl text-[--foreground]">PHP {{totalAmount()}}</p>
+    </div>
+
+    <button
+      class="bg-[--primary] shadow-[0_0_10px_rgba(251,146,60,0.8)] text-2xl font-semibold rounded-xl py-2 mx-10">Check
+      Out ({{selectedItems()}})</button>
+  </div>
+
+</div>

@@ -17,3 +17,11 @@ export interface Product {
   description: string;
   reviews?: Review[];
 }
+
+export interface CartItem {
+  product: Product
+  quantity: number
+  color: string,
+  size: string,
+  checkout: boolean
+}

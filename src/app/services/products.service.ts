@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Product } from "src/libs/types";
+import { CartItem, Product } from "src/libs/types";
 
 @Injectable({ providedIn: 'root' })
 export class ProductsService {
@@ -120,11 +120,46 @@ export class ProductsService {
     }
   ]
 
+  private cart: CartItem[] = [
+    {
+      product: this.products[0],
+      quantity: 1,
+      color: "#3e404c",
+      size: "L",
+      checkout: false
+    },
+    {
+      product: this.products[2],
+      quantity: 3,
+      color: "#ddccba",
+      size: "S",
+      checkout: true
+    },
+    {
+      product: this.products[3],
+      quantity: 1,
+      color: "#4a392f",
+      size: "M",
+      checkout: true
+    },
+    {
+      product: this.products[4],
+      quantity: 2,
+      color: "#1d2c3f",
+      size: "XL",
+      checkout: false
+    },
+  ]
+
   getProducts() {
     return this.products
   }
 
   getProduct(id: number) {
     return this.products.find((e) => { return e.id == id });
+  }
+
+  getCart() {
+    return this.cart
   }
 }

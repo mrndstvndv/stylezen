@@ -100,6 +100,14 @@ export class HomePage {
     this.router.navigate(['/account']);
   }
 
+  navigateToNotifications() {
+    this.router.navigate(['/notifications']);
+  }
+
+  navigateToCart() {
+    this.router.navigate(['/cart']);
+  }
+
   navigateToProduct(id: number) {
     this.router.navigate(['/product', id]);
   }
