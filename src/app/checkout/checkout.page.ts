@@ -1,3 +1,4 @@
+import { CommonModule } from "@angular/common";
 import { Component, signal } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { IonIcon } from "@ionic/angular/standalone";
@@ -8,7 +9,7 @@ import { chevronBackOutline, locationOutline } from "ionicons/icons";
   selector: 'app-checkout',
   templateUrl: 'checkout.page.html',
   standalone: true,
-  imports: [IonIcon],
+  imports: [IonIcon, CommonModule],
   styles: [`
     .payment-option {
       transition: all 0.2s ease;
@@ -20,6 +21,7 @@ import { chevronBackOutline, locationOutline } from "ionicons/icons";
 })
 export class CheckoutPage {
     amount = signal(0);
+    selectedMethod = signal('Cash on Delivery');
 
   constructor(
     private route: ActivatedRoute,
@@ -40,9 +42,7 @@ export class CheckoutPage {
     window.history.back()
   }
 
-  selectedPayment: string = 'mastercard';
-  
   selectPayment(method: string): void {
-    this.selectedPayment = method;
+    this.selectedMethod.set(method);
   }
 }
