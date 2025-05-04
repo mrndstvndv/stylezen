@@ -13,7 +13,7 @@
       My Cart</h1>
   </div>
 
-  <main class="flex flex-col gap-6 px-2 flex-1 mt-16">
+  <main class="flex flex-col gap-4 px-2 flex-1 mt-16">
     <div *ngFor="let item of cart()" class="flex shadow-lg p-4 border rounded-xl gap-2 bg-[--background]">
 
       <!-- Check -->
@@ -33,10 +33,10 @@
 
         <!-- Title -->
         <div class="flex justify-between">
-          <h2 class="text-lg font-bold text-[--muted-foreground] max-w-[50vw]">
+          <h2 class="font-bold text-[--muted-foreground] max-w-[50vw]">
             {{getProduct(item)?.title}}
           </h2>
-          <ion-icon (click)="delete(item)" name="trash-outline" class="text-red-500 size-6"></ion-icon>
+          <ion-icon (click)="delete(item)" name="trash-outline" class="text-red-500 size-6 flex-shrink-0"></ion-icon>
         </div>
 
         <!-- Color -->
@@ -52,19 +52,19 @@
 
         <div class="mt-2 flex justify-between flex-1 items-end">
           <!-- Price -->
-          <div class="text-lg font-bold text-[var(--muted-foreground)]">
+          <div class="font-bold text-[var(--muted-foreground)]">
             PHP {{getProduct(item)?.price}}
           </div>
 
           <!-- quantity -->
-          <div class="shadow-lg flex p-1 gap-2 rounded-md">
+          <div class="shadow-sm flex p-1 gap-2 rounded-md items-center">
             <ion-icon name="remove-outline" (click)="decrementQuant(item)"
-              class="text-[--background] bg-[--foreground] rounded-md size-7"></ion-icon>
-            <div class="bg-[--border] text-[--foreground] px-4 rounded-md">
-              {{item.quantity}}
+              class="text-[--background] bg-[--foreground] rounded-md size-5"></ion-icon>
+            <div class="bg-[--border] text-[--foreground] px-4 rounded-md flex items-center justify-center">
+                {{item.quantity}}
             </div>
             <ion-icon name="add-outline" (click)="incrementQuant(item)"
-              class="text-[--background] bg-[--foreground] rounded-md size-7"></ion-icon>
+              class="text-[--background] bg-[--foreground] rounded-md size-5"></ion-icon>
           </div>
         </div>
 
