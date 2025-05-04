@@ -1,15 +1,27 @@
 <ion-content [fullscreen]="true">
   <!-- Header -->
   <div
-    class="sticky top-0 z-10 bg-[color-mix(in_srgb,#f5f5f5_50%,transparent)] backdrop-blur-lg min-h-[56px] flex items-center p-2 justify-between">
+    class="sticky top-0 z-10 bg-[color-mix(in_srgb,#f5f5f5_50%,transparent)] backdrop-blur-lg min-h-[56px]">
+
+    <div class="flex items-center p-2 gap-2">
+
     <h1 class="text-4xl text-[1.25rem] text-[--muted-foreground] ml-4 font-semibold">Discover</h1>
+    <div class="flex flex-1 relative items-center">
+      <input #search type="text" placeholder="Search..." (blur)="hideSearch()"
+        class="w-full text-[--foreground] border-none outline-none shadow-md rounded-xl"
+        [class.invisible]="!searching()">
 
-    <input type="text">
-
-    <div
-      class="rounded-full text-[--foreground] bg-[--background] hover:bg-[--border] size-12 flex items-center justify-center shadow-md">
-      <ion-icon name="search-outline" class="size-8 text-[--foreground]"></ion-icon>
+      <div *ngIf="!searching()" (click)="showSearch()"
+        class="absolute right-0 rounded-full text-[--foreground] bg-[--background] hover:bg-[--border] size-10 items-center justify-center shadow-md flex">
+        <ion-icon name="search-outline" class="size-7 text-[--foreground]"></ion-icon>
+      </div>
     </div>
+    </div>
+
+<!-- 
+    <div *ngIf="searching()" class="text-[--foreground]">
+      gamer
+    </div> -->
 
   </div>
 
@@ -45,7 +57,8 @@
         <div class="product-image-container">
           <img [src]="product.image" [alt]="product.title">
           <ion-button fill="clear" class="favorite-button" (click)="toggleFavorite(product); $event.stopPropagation()">
-            <ion-icon [name]="product.isFavorite ? 'heart' : 'heart-outline'" [ngClass]="product.isFavorite? 'text-[--foreground]' : 'text-red-500'"></ion-icon>
+            <ion-icon [name]="product.isFavorite ? 'heart' : 'heart-outline'"
+              [ngClass]="product.isFavorite? 'text-[--foreground]' : 'text-red-500'"></ion-icon>
           </ion-button>
         </div>
         <div class="product-details">

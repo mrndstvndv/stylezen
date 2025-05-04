@@ -5,6 +5,7 @@ import { add, addOutline, checkmarkCircle, chevronBackOutline, removeOutline, tr
 import { ProductsService } from "../services/products.service";
 import { CartItem } from "src/libs/types";
 import { CommonModule } from "@angular/common";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-cart',
@@ -42,7 +43,7 @@ export class CartPage {
     return items;
   });
 
-  constructor() {
+  constructor(private router: Router) {
     addIcons({
       chevronBackOutline,
       checkmarkCircle,
@@ -96,6 +97,10 @@ export class CartPage {
 
   getProduct(cart: CartItem) {
     return this.productsService.getProduct(cart.productId)()
+  }
+
+  navigateToCheckOut() {
+    this.router.navigate(['/checkout', this.totalAmount()])
   }
 
   navigateBack() {

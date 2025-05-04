@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, ElementRef, input, signal, ViewChild, ViewChildren } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { addIcons } from 'ionicons';
@@ -15,6 +15,9 @@ import { ProductsService } from '../services/products.service';
   imports: [IonicModule, CommonModule],
 })
 export class HomePage {
+  @ViewChild('search') searchInput!: ElementRef
+  searching = signal(false);
+
   constructor(private router: Router, private productsService: ProductsService) {
     // Register icons manually in the constructor with an object
     // This allows the use of custom icons in the application
@@ -82,6 +85,17 @@ export class HomePage {
    */
   toggleFavorite(product: Product) {
     product.isFavorite = !product.isFavorite;
+  }
+
+  showSearch() {
+    this.searching.set(true);
+    setTimeout(() => {
+      this.searchInput.nativeElement.focus(); // Focus on the input field
+    }, 0); // Delay to ensure the DOM is updated
+  }
+
+  hideSearch() {
+    this.searching.set(false);
   }
 
   /**
