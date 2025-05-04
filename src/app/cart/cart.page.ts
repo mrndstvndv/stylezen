@@ -1,4 +1,4 @@
-import { Component, computed, signal, WritableSignal } from "@angular/core";
+import { Component, computed, inject, signal, WritableSignal } from "@angular/core";
 import { IonIcon } from "@ionic/angular/standalone";
 import { addIcons } from "ionicons";
 import { add, addOutline, checkmarkCircle, chevronBackOutline, removeOutline, trashBinOutline, trashOutline } from "ionicons/icons";
@@ -14,13 +14,17 @@ import { CommonModule } from "@angular/common";
   imports: [IonIcon, CommonModule]
 })
 export class CartPage {
+  productsService = inject(ProductsService)
+
   cart: WritableSignal<CartItem[]> = signal([]);
   totalAmount = computed(() => {
     let amount = 0;
 
     this.cart().forEach(element => {
       if (element.checkout == true) {
-        amount += element.product.price * element.quantity
+        const item = this.productsService.getProduct(element.productId)();
+
+        amount += item!.price * element.quantity
       }
     });
 
@@ -38,7 +42,7 @@ export class CartPage {
     return items;
   });
 
-  constructor(private productsService: ProductsService) {
+  constructor() {
     addIcons({
       chevronBackOutline,
       checkmarkCircle,
@@ -81,10 +85,17 @@ export class CartPage {
     this.cart.update((e) => {
       const itemIndex = e.indexOf(item);
       if (itemIndex !== -1) {
+        if (e[itemIndex].quantity - 1 == 0) {
+          return e.filter(cartItem => cartItem !== item);
+        }
         e[itemIndex].quantity -= 1;
       }
       return [...e];
     })
+  }
+
+  getProduct(cart: CartItem) {
+    return this.productsService.getProduct(cart.productId)()
   }
 
   navigateBack() {

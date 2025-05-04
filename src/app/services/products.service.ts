@@ -1,9 +1,9 @@
-import { Injectable } from "@angular/core";
-import { CartItem, Product } from "src/libs/types";
+import { computed, Injectable, signal } from "@angular/core";
+import { CartItem, Order, Product } from "src/libs/types";
 
 @Injectable({ providedIn: 'root' })
 export class ProductsService {
-  private products: Product[] = [
+  private products = signal<Product[]>([
     {
       id: 1,
       title: 'Cotton Baggy Pants',
@@ -118,32 +118,32 @@ export class ProductsService {
       isFavorite: false,
       description: 'Elegant rayon blouse featuring a skipper collar and 3/4 sleeves. Soft, flowing fabric for a sophisticated look.'
     }
-  ]
+  ])
 
   private cart: CartItem[] = [
     {
-      product: this.products[0],
+      productId: 1,
       quantity: 1,
       color: "#3e404c",
       size: "L",
       checkout: false
     },
     {
-      product: this.products[2],
+      productId: 3,
       quantity: 3,
       color: "#ddccba",
       size: "S",
       checkout: true
     },
     {
-      product: this.products[3],
+      productId: 4,
       quantity: 1,
       color: "#4a392f",
       size: "M",
       checkout: true
     },
     {
-      product: this.products[4],
+      productId: 5,
       quantity: 2,
       color: "#1d2c3f",
       size: "XL",
@@ -151,15 +151,49 @@ export class ProductsService {
     },
   ]
 
+  orders: Order[] = [
+    {
+      productId: 3,
+      quantity: 3,
+      color: "#ddccba",
+      size: "S",
+      shipping: true,
+
+    },
+    {
+      productId: 4,
+      quantity: 1,
+      color: "#4a392f",
+      size: "M",
+      shipping: true,
+
+    },
+    {
+      productId: 5,
+      quantity: 2,
+      color: "#1d2c3f",
+      size: "XL",
+      shipping: true,
+    },
+  ]
+
+  getOrders() {
+    return this.orders;
+  }
+
   getProducts() {
-    return this.products
+    return this.products()
   }
 
   getProduct(id: number) {
-    return this.products.find((e) => { return e.id == id });
+    return computed(() => this.products().find((product) => product.id === id));
   }
 
   getCart() {
     return this.cart
+  }
+
+  getFavorites() {
+    return computed(() => this.products().filter((p) => p.isFavorite == true));
   }
 }

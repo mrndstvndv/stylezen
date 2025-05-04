@@ -65,7 +65,7 @@ export class HomePage {
    * - `image` (string): The file path to the product's image.
    * - `isFavorite` (boolean): A flag indicating whether the product is marked as a favorite by the user.
    */
-  products: Product[] = this.productsService.getProducts();
+  products = this.productsService.getProducts();
 
   filteredProducts = computed(() => {
     if (this.selectedCategory() == "Popular") {

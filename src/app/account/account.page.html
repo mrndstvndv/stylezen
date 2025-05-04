@@ -1,18 +1,25 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/" text="" class="custom-back-button"></ion-back-button>
-    </ion-buttons>
-    <ion-title>Account</ion-title>
-    <ion-buttons slot="end">
-      <ion-button>
-        <ion-icon slot="icon-only" src="assets/icon/edit.svg"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+  <!-- Header -->
+  <div
+    class="fixed w-full top-0 z-10 bg-[color-mix(in_srgb,var(--background)_50%,transparent)] backdrop-blur-sm min-h-[56px] flex items-center justify-between p-2">
+    <div (click)="navigateBack()"
+      class="rounded-full text-[--foreground] hover:bg-[--border] size-10 flex items-center justify-center">
+      <ion-icon name="chevron-back-outline" class="w-[24px] h-[48px]"></ion-icon>
+    </div>
+
+    <h1
+      class="text-2xl text-[--muted-foreground] font-bold absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+      Profile</h1>
+
+    <div (click)="navigateBack()"
+      class="rounded-full text-[--foreground] hover:bg-[--border] size-10 flex items-center justify-center">
+      <ion-icon name="create-outline" class="w-[24px] h-[48px]"></ion-icon>
+    </div>
+  </div>
 
 <ion-content>
+
+    <div class="mt-16"></div>
+
   <ion-card class="profile-card">
     <div class="profile-header">
       <ion-avatar>
@@ -51,7 +58,7 @@
   </ion-card>
 
   <ion-list>
-    <ion-item button detail="true">
+    <ion-item button detail="true" (click)="navigateToFavorites()">
       <ion-icon src="assets/icon/favorite.svg" slot="start"></ion-icon>
       <ion-label>
         <h3>Your Favorites</h3>

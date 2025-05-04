@@ -19,9 +19,17 @@ export interface Product {
 }
 
 export interface CartItem {
-  product: Product
+  productId: number
   quantity: number
-  color: string,
-  size: string,
+  color: string
+  size: string
   checkout: boolean
+}
+
+export interface Order {
+  productId: number
+  size: string
+  shipping: boolean
+  quantity: number
+  color: string
 }

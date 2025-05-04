@@ -43,7 +43,7 @@ export class ProductPage {
   ngOnInit() {
     this.route.params.subscribe(params => {
       const id = Number(params['id']);
-      this.product = this.productsService.getProduct(id);
+      this.product = this.productsService.getProduct(id)();
       this.getSizes()
     });
   }

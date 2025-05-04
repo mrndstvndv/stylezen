@@ -41,8 +41,8 @@
       <div class="product-card" *ngFor="let product of filteredProducts()" (click)="navigateToProduct(product.id)">
         <div class="product-image-container">
           <img [src]="product.image" [alt]="product.title">
-          <ion-button fill="clear" class="favorite-button" (click)="toggleFavorite(product)">
-            <ion-icon [name]="product.isFavorite ? 'heart' : 'add-to-fave'"></ion-icon>
+          <ion-button fill="clear" class="favorite-button" (click)="toggleFavorite(product); $event.stopPropagation()">
+            <ion-icon [name]="product.isFavorite ? 'heart' : 'heart-outline'" [ngClass]="product.isFavorite? 'text-[--foreground]' : 'text-red-500'"></ion-icon>
           </ion-button>
         </div>
         <div class="product-details">

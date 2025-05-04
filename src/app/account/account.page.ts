@@ -2,6 +2,9 @@ import { Component, computed } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonIcon, IonItem, IonLabel, IonCard, IonAvatar, IonList, IonButtons, IonBackButton } from '@ionic/angular/standalone';
 import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { chevronBackOutline, createOutline, pencilOutline } from 'ionicons/icons';
+import { addIcons } from 'ionicons';
 
 @Component({
   selector: 'app-account',
@@ -18,7 +21,12 @@ export class AccountPage {
   email = computed(() => this.auth.user()?.email);
   phone = computed(() => this.auth.user()?.phoneNumber);
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private router: Router) {
+    addIcons({
+      chevronBackOutline,
+      createOutline
+    })
+  }
 
   // Add methods for handling button clicks
   onEditProfile() {
@@ -29,7 +37,15 @@ export class AccountPage {
     this.auth.logout()
   }
 
+  navigateBack() {
+    window.history.back()
+  }
+
   onMenuItemClick(item: string) {
     console.log(`${item} clicked`);
+  }
+
+  navigateToFavorites() {
+    this.router.navigate(['/favorites'])
   }
 }
