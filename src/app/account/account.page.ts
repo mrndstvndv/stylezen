@@ -1,29 +1,29 @@
 import { Component, computed, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonIcon, IonItem, IonLabel, IonCard, IonAvatar, IonList, IonButtons, IonBackButton } from '@ionic/angular/standalone';
+import { IonContent, IonIcon, IonItem, IonLabel, IonCard, IonAvatar, IonList } from '@ionic/angular/standalone';
 import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { chevronBackOutline, createOutline, pencilOutline } from 'ionicons/icons';
+import { chevronBackOutline, createOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
-import { DialogComponent } from './components/logoutdialog.component';
+import { StoreService } from '../services/store.service';
 
 @Component({
   selector: 'app-account',
   templateUrl: './account.page.html',
   styleUrls: ['./account.page.scss'],
   standalone: true,
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonIcon, IonItem, IonLabel, IonCard, IonAvatar, IonList, IonButtons, IonBackButton, CommonModule, DialogComponent],
+  imports: [IonContent, IonIcon, IonItem, IonLabel, IonCard, IonAvatar, IonList, CommonModule],
 })
 export class AccountPage {
   @ViewChild('logoutDialog') logoutDialog!: ElementRef<HTMLDialogElement>;
 
-  profileImage = computed(() => this.auth.user()?.photoURL || 'assets/pfp.avif');
-  user = computed(() => this.auth.user()?.displayName || "Username");
+  profileImage = computed(() => this.auth.user()?.photoURL);
+  user = computed(() => this.auth.user()?.displayName || this.store.userProfile()?.fullName || "Username");
   email = computed(() => this.auth.user()?.email);
   phone = computed(() => this.auth.user()?.phoneNumber);
   isDialogVisible = false;
 
-  constructor(private auth: AuthService, private router: Router, private cdr: ChangeDetectorRef) {
+  constructor(private auth: AuthService, private store: StoreService, private router: Router, private cdr: ChangeDetectorRef) {
     addIcons({
       chevronBackOutline,
       createOutline

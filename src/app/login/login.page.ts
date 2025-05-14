@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonIcon, IonInput, IonItem, IonLabel, IonButton } from '@ionic/angular/standalone';
 import { AuthService } from '../services/auth.service';
 
 // TODO: this whole thing needs a rewrite
@@ -11,7 +10,7 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonButton, IonLabel, IonItem, IonInput, IonIcon, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
 })
 export class LoginPage implements OnInit {
   loginForm: FormGroup
@@ -24,6 +23,7 @@ export class LoginPage implements OnInit {
     });
 
     this.signUpForm = this.formBuilder.group({
+      fullname: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     })
@@ -41,8 +41,6 @@ export class LoginPage implements OnInit {
   // TODO: add the full name of user to firestore, we use auth useruuid for identification
   signUpWithEmailAndPassword() {
 
-    console.log("run")
-
     Object.keys(this.signUpForm.controls).forEach(field => {
       const control = this.signUpForm.get(field);
       control?.markAsTouched({ onlySelf: true });
@@ -51,9 +49,10 @@ export class LoginPage implements OnInit {
     console.log(this.signUpForm.valid)
 
     if (this.signUpForm.valid) {
+      const fullName = this.signUpForm.get('fullname')?.value;
       const email = this.signUpForm.get('email')?.value;
       const password = this.signUpForm.get('password')?.value;
-      this.authService.signUpWithEmailAndPassword(email, password);
+      this.authService.signUpWithEmailAndPassword(fullName, email, password);
     }
   }
 

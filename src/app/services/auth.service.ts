@@ -3,6 +3,7 @@ import { Auth, user, GoogleAuthProvider, User, signInWithPopup, UserCredential, 
 import { Router } from '@angular/router';
 import { toSignal } from "@angular/core/rxjs-interop"
 import { TwitterAuthProvider } from 'firebase/auth';
+import { Firestore, doc, setDoc } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import { TwitterAuthProvider } from 'firebase/auth';
 export class AuthService {
   private auth: Auth = inject(Auth);
   private router: Router = inject(Router);
+  private firestore: Firestore = inject(Firestore);
   public user: Signal<User | undefined | null> = toSignal(user(this.auth));
 
   private handleUserLogin(response: UserCredential) {
@@ -41,11 +43,23 @@ export class AuthService {
       })
   }
 
-  public async signUpWithEmailAndPassword(email: string, password: string) {
+  public async signUpWithEmailAndPassword(fullName: string, email: string, password: string) {
     await createUserWithEmailAndPassword(this.auth, email, password)
-      .then(response => {
+      .then(async response => {
         if (response.user) {
-          this.router.navigate(['/home'])
+          try {
+            const userRef = doc(this.firestore, 'users', response.user.uid);
+            await setDoc(userRef, {
+              fullName: fullName,
+              email: email
+            });
+
+            this.router.navigate(['/home'])
+          } catch (error) {
+            console.error('Error writing document: ', error);
+            await response.user.delete();
+            throw new Error('Failed to create user profile. Please try again.');
+          }
         } else {
           console.error('Signup failed')
         }

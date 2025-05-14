@@ -41,9 +41,10 @@
 
   <ion-card class="profile-card">
     <div class="profile-header">
-      <ion-avatar>
-        <img [src]="profileImage()" alt="Profile photo" />
-      </ion-avatar>
+      <div class="size-16 rounded-full overflow-clip bg-white flex items-center justify-center text-2xl font-bold shadow-md">
+        <img *ngIf="profileImage() != null" [src]="profileImage()" alt="Profile photo" />
+        <div *ngIf="profileImage() == null" clas="text-center size-[100%]">{{user()[0].toUpperCase()}}</div>
+      </div>
       <div class="profile-info">
         <h2>{{user()}}</h2>
         <p>Member</p>

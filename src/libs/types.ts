@@ -33,3 +33,9 @@ export interface Order {
   quantity: number
   color: string
 }
+
+export interface User {
+  fullName: string,
+  email: string,
+  favorites: number[]
+}
