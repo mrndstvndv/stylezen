@@ -4,7 +4,7 @@ import { CanActivateFn, Router } from '@angular/router';
 import { map } from 'rxjs';
 
 // WARN: this does not work, I mean it works but injection is not working
-export const authGuard: CanActivateFn = (route, state) => {
+export const authGuard: CanActivateFn = (_, state) => {
   const auth: Auth = inject(Auth);
   const router: Router = inject(Router);
   const user$ = user(auth);
@@ -14,7 +14,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   return user$.pipe(
     map((user) => {
 
-      if (user && currentRouteIsLogin) {
+      if (user && currentRouteIsLogin || state.url.includes('/landing')) {
         router.navigate(['/home'])
         return false
       }

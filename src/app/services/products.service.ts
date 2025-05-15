@@ -56,7 +56,6 @@ export class ProductsService {
 
         let isFavorite = false;
         if (currentUserProfile && currentUserProfile.favorites) {
-          console.log(`User profile for favorites check:`, currentUserProfile); // Optional
           isFavorite = currentUserProfile.favorites.includes(parseInt(doc.id, 10));
         }
 

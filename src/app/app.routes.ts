@@ -19,10 +19,12 @@ export const routes: Routes = [
   },
   {
     path: 'landing',
+    canActivate: [authGuard],
     loadComponent: () => import('./landing/landing.page').then(m => m.LandingPage)
   },
   {
     path: 'account',
+    canActivate: [authGuard],
     loadComponent: () => import('./account/account.page').then(m => m.AccountPage)
   },
   {
