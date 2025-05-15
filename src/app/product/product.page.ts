@@ -1,10 +1,10 @@
 import { CommonModule } from "@angular/common";
 import { Component, signal } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { IonBackButton, IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonTitle, IonToolbar } from "@ionic/angular/standalone";
+import { ActivatedRoute } from "@angular/router";
+import { IonIcon } from "@ionic/angular/standalone";
 import { addIcons } from "ionicons";
-import { arrowBackOutline, cartOutline, chevronBackOutline, shareOutline, shareSocialOutline, shareSocialSharp, star } from "ionicons/icons";
+import { cartOutline, chevronBackOutline, shareSocialOutline, star } from "ionicons/icons";
 import { Product } from "src/libs/types";
 import { ProductsService } from "../services/products.service";
 
@@ -13,7 +13,7 @@ import { ProductsService } from "../services/products.service";
   templateUrl: 'product.page.html',
   styleUrl: 'product.page.scss',
   standalone: true,
-  imports: [IonHeader, IonToolbar, IonButtons, IonButton, IonBackButton, IonTitle, IonIcon, IonContent, CommonModule, FormsModule]
+  imports: [IonIcon, CommonModule, FormsModule]
 })
 export class ProductPage {
   // TODO: get the sizes and color from product

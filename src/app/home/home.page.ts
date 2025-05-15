@@ -6,6 +6,7 @@ import { cartOutline, heart, heartOutline, home, notificationsOutline, personOut
 import { Router } from '@angular/router';
 import { Product } from 'src/libs/types';
 import { ProductsService } from '../services/products.service';
+import { StoreService } from '../services/store.service';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,7 @@ export class HomePage {
   @ViewChild('search') searchInput!: ElementRef
   searching = signal(false);
 
-  constructor(private router: Router, private productsService: ProductsService) {
+  constructor(private router: Router, private store: StoreService, private productsService: ProductsService) {
     // Register icons manually in the constructor with an object
     // This allows the use of custom icons in the application
     addIcons({
@@ -68,14 +69,14 @@ export class HomePage {
    * - `image` (string): The file path to the product's image.
    * - `isFavorite` (boolean): A flag indicating whether the product is marked as a favorite by the user.
    */
-  products = this.productsService.getProducts();
+  products = this.productsService.products;
 
   filteredProducts = computed(() => {
     if (this.selectedCategory() == "Popular") {
-      return this.products
+      return this.products()
     }
 
-    return this.products.filter(product => product.category == this.selectedCategory().toUpperCase())
+    return this.products().filter(product => product.category == this.selectedCategory().toUpperCase())
   });
 
   /**
@@ -85,6 +86,12 @@ export class HomePage {
    */
   toggleFavorite(product: Product) {
     product.isFavorite = !product.isFavorite;
+
+    if (product.isFavorite) {
+      this.store.addToFavorites(product.id);
+    } else {
+      this.store.removeFromFavorites(product.id);
+    }
   }
 
   showSearch() {

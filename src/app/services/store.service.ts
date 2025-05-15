@@ -58,16 +58,7 @@ export class StoreService {
     }
   }
 
-  // Alternative approach using Observables, if you prefer
-  // This shows how to convert Signal → Observable → Signal
-  readonly userProfileAlternative = toSignal(
-    toObservable(this.auth.user).pipe(
-      switchMap(user => user?.uid ? this.getUserProfile(user.uid) : of(null))
-    ),
-    { initialValue: null }
-  );
-
-  async addToFavorites(productId: string): Promise<void> {
+  async addToFavorites(productId: number): Promise<void> {
     const userId = this.auth.user()?.uid;
     if (!userId) {
       console.error('User not authenticated');
@@ -77,6 +68,22 @@ export class StoreService {
     const userProfile = this.userProfileSignal();
     if (userProfile) {
       const updatedFavorites = [...(userProfile.favorites || []), productId];
+      await this.updateUserProfile(userId, { favorites: updatedFavorites });
+    } else {
+      console.error('User profile not found');
+    }
+  }
+
+  async removeFromFavorites(productId: number): Promise<void> {
+    const userId = this.auth.user()?.uid;
+    if (!userId) {
+      console.error('User not authenticated');
+      return;
+    }
+
+    const userProfile = this.userProfileSignal();
+    if (userProfile) {
+      const updatedFavorites = (userProfile.favorites || []).filter(id => id !== productId);
       await this.updateUserProfile(userId, { favorites: updatedFavorites });
     } else {
       console.error('User profile not found');
