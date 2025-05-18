@@ -8,13 +8,14 @@ import { cartOutline, chevronBackOutline, shareSocialOutline, star } from "ionic
 import { Product } from "src/libs/types";
 import { ProductsService } from "../services/products.service";
 import { StoreService } from "../services/store.service";
+import { LoadingSpinnerComponent } from "../components/loading-spinner.component";
 
 @Component({
   selector: 'app-product',
   templateUrl: 'product.page.html',
   styleUrl: 'product.page.scss',
   standalone: true,
-  imports: [IonIcon, CommonModule, FormsModule]
+  imports: [IonIcon, CommonModule, FormsModule, LoadingSpinnerComponent]
 })
 export class ProductPage {
   // TODO: get the sizes and color from product
@@ -27,6 +28,8 @@ export class ProductPage {
   selectedColor = signal(this.colors[0]);
   quantity = signal(1);
   product: Product | undefined = undefined;
+
+  addingToCart = signal(false);
 
   constructor(
     private route: ActivatedRoute,
@@ -88,12 +91,16 @@ export class ProductPage {
     this.sizes.set(this._sizes.splice(this._sizes.indexOf(size[0]), this._sizes.indexOf(size[1])));
   }
 
-  addToCart() {
+  async addToCart() {
     if (!this.product) {
       console.error("Product is not defined");
       return;
     }
 
-    this.storeService.addToCart(this.product.id, 1, this.selectedColor(), this.selectedSize())
+    this.addingToCart.set(true);
+
+    await this.storeService.addToCart(this.product.id, 1, this.selectedColor(), this.selectedSize())
+
+    this.addingToCart.set(false);
   }
 }

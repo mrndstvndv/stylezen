@@ -129,8 +129,15 @@
       <div
         (click)="addToCart()"
         class="flex-1 mr-2 bg-[var(--background)] shadow-[0_4px_10px_rgba(0,0,0,0.5)] text-[var(--foreground)] rounded-full flex items-center justify-center font-semibold">
-      <ion-icon name="cart-outline" class="w-[24px] h-[48px] mr-2"></ion-icon>
-        Add To Cart
+        <!-- Loading Spinner (hidden by default) -->
+    <app-loading-spinner
+      [visible]="addingToCart()"
+      customClass="w-[24px] h-[48px] mr-2"
+    ></app-loading-spinner>
+
+      <ion-icon *ngIf="!addingToCart()" name="cart-outline" class="w-[24px] h-[48px] mr-2"></ion-icon>
+        <span> Add To Cart </span>
+
       </div>
       <div
         class="flex-1 shadow-[0_0_10px_rgba(251,146,60,0.8)] ml-2 bg-[var(--destructive)] text-[var(--destructive-foreground)] rounded-full flex items-center justify-center font-semibold">
