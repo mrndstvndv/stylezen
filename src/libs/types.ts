@@ -38,4 +38,5 @@ export interface User {
   fullName: string,
   email: string,
   favorites: number[]
+  cart: CartItem[]
 }

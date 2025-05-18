@@ -7,6 +7,7 @@ import { addIcons } from "ionicons";
 import { cartOutline, chevronBackOutline, shareSocialOutline, star } from "ionicons/icons";
 import { Product } from "src/libs/types";
 import { ProductsService } from "../services/products.service";
+import { StoreService } from "../services/store.service";
 
 @Component({
   selector: 'app-product',
@@ -29,7 +30,8 @@ export class ProductPage {
 
   constructor(
     private route: ActivatedRoute,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private storeService: StoreService
   ) {
     addIcons({
       chevronBackOutline,
@@ -84,5 +86,14 @@ export class ProductPage {
     const size = this.product?.size.split("-") || ['S', 'L'];
 
     this.sizes.set(this._sizes.splice(this._sizes.indexOf(size[0]), this._sizes.indexOf(size[1])));
+  }
+
+  addToCart() {
+    if (!this.product) {
+      console.error("Product is not defined");
+      return;
+    }
+
+    this.storeService.addToCart(this.product.id, 1, this.selectedColor(), this.selectedSize())
   }
 }

@@ -125,8 +125,9 @@
 
 
     <!-- Action Buttons -->
-    <div class="fixed bottom-0 left-0 right-0 max-w-md mx-auto flex justify-between p-2">
+    <div class="fixed bottom-0 left-0 right-0 max-w-md mx-auto flex justify-between p-2 select-none">
       <div
+        (click)="addToCart()"
         class="flex-1 mr-2 bg-[var(--background)] shadow-[0_4px_10px_rgba(0,0,0,0.5)] text-[var(--foreground)] rounded-full flex items-center justify-center font-semibold">
       <ion-icon name="cart-outline" class="w-[24px] h-[48px] mr-2"></ion-icon>
         Add To Cart

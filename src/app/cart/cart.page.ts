@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal, WritableSignal } from "@angular/core";
+import { Component, computed, inject, Signal, signal, WritableSignal } from "@angular/core";
 import { IonIcon } from "@ionic/angular/standalone";
 import { addIcons } from "ionicons";
 import { add, addOutline, checkmarkCircle, chevronBackOutline, removeOutline, trashBinOutline, trashOutline } from "ionicons/icons";
@@ -6,6 +6,7 @@ import { ProductsService } from "../services/products.service";
 import { CartItem } from "src/libs/types";
 import { CommonModule } from "@angular/common";
 import { Router } from "@angular/router";
+import { StoreService } from "../services/store.service";
 
 @Component({
   selector: 'app-cart',
@@ -16,8 +17,9 @@ import { Router } from "@angular/router";
 })
 export class CartPage {
   productsService = inject(ProductsService)
+  storeService = inject(StoreService)
 
-  cart: WritableSignal<CartItem[]> = signal([]);
+  cart: Signal<CartItem[]> = this.storeService.cart;
   totalAmount = computed(() => {
     let amount = 0;
 
@@ -51,49 +53,42 @@ export class CartPage {
       addOutline,
       removeOutline
     })
-
-    this.cart.set(this.productsService.getCart())
   }
 
-  select(item: CartItem) {
-    this.cart.update((e) => {
-      const itemIndex = e.indexOf(item);
-      if (itemIndex !== -1) {
-        e[itemIndex].checkout = !e[itemIndex].checkout;
-      }
-      return [...e];
-    })
+  select(productId: number) {
+    this.storeService.selectForCheckout(productId);
   }
-
-  delete(item: CartItem) {
-    this.cart.update((e) => {
-      // Filter out the item to be deleted
-      return e.filter(cartItem => cartItem !== item);
-    });
-  }
-
-  incrementQuant(item: CartItem) {
-    this.cart.update((e) => {
-      const itemIndex = e.indexOf(item);
-      if (itemIndex !== -1) {
-        e[itemIndex].quantity += 1;
-      }
-      return [...e];
-    })
-  }
-
-  decrementQuant(item: CartItem) {
-    this.cart.update((e) => {
-      const itemIndex = e.indexOf(item);
-      if (itemIndex !== -1) {
-        if (e[itemIndex].quantity - 1 == 0) {
-          return e.filter(cartItem => cartItem !== item);
-        }
-        e[itemIndex].quantity -= 1;
-      }
-      return [...e];
-    })
-  }
+  //
+  // delete(item: CartItem) {
+  //   this.cart.update((e) => {
+  //     // Filter out the item to be deleted
+  //     return e.filter(cartItem => cartItem !== item);
+  //   });
+  // }
+  //
+  // incrementQuant(item: CartItem) {
+  //   this.cart.update((e) => {
+  //     const itemIndex = e.indexOf(item);
+  //     if (itemIndex !== -1) {
+  //       e[itemIndex].quantity += 1;
+  //     }
+  //     return [...e];
+  //   })
+  // }
+  //
+  // decrementQuant(item: CartItem) {
+  //   this.cart.update((e) => {
+  //     const itemIndex = e.indexOf(item);
+  //     if (itemIndex !== -1) {
+  //       if (e[itemIndex].quantity - 1 == 0) {
+  //         return e.filter(cartItem => cartItem !== item);
+  //       }
+  //       e[itemIndex].quantity -= 1;
+  //     }
+  //     return [...e];
+  //   })
+  // }
+  //
 
   getProduct(cart: CartItem) {
     return this.productsService.getProduct(cart.productId)()

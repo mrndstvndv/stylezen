@@ -17,7 +17,7 @@
     <div *ngFor="let item of cart()" class="flex shadow-lg p-4 border rounded-xl gap-2 bg-[--background]">
 
       <!-- Check -->
-      <div class="flex items-center bg-white" (click)="select(item)">
+      <div class="flex items-center bg-white" (click)="select(item.productId)">
         <ion-icon *ngIf="item.checkout == true" name="checkmark-circle"
           class="text-red-500 size-7 shadow-lg rounded-full border border-transparent"></ion-icon>
         <ion-icon *ngIf="item.checkout == false" name="checkmark-circle"
@@ -36,7 +36,7 @@
           <h2 class="font-bold text-[--muted-foreground] max-w-[50vw]">
             {{getProduct(item)?.title}}
           </h2>
-          <ion-icon (click)="delete(item)" name="trash-outline" class="text-red-500 size-6 flex-shrink-0"></ion-icon>
+          <ion-icon (click)="{}" name="trash-outline" class="text-red-500 size-6 flex-shrink-0"></ion-icon>
         </div>
 
         <!-- Color -->
@@ -58,12 +58,12 @@
 
           <!-- quantity -->
           <div class="shadow-sm flex p-1 gap-2 rounded-md items-center">
-            <ion-icon name="remove-outline" (click)="decrementQuant(item)"
+            <ion-icon name="remove-outline" (click)="{}"
               class="text-[--background] bg-[--foreground] rounded-md size-5"></ion-icon>
             <div class="bg-[--border] text-[--foreground] px-4 rounded-md flex items-center justify-center">
                 {{item.quantity}}
             </div>
-            <ion-icon name="add-outline" (click)="incrementQuant(item)"
+            <ion-icon name="add-outline" (click)="{}"
               class="text-[--background] bg-[--foreground] rounded-md size-5"></ion-icon>
           </div>
         </div>

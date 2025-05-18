@@ -57,6 +57,14 @@ export class StoreService {
     }
   }
 
+  favorites = computed<number[]>(() => {
+    const userProfile = this.userProfileSignal();
+    if (!userProfile) {
+      return [];
+    }
+    return userProfile.favorites || [];
+  });
+
   async addToFavorites(productId: number): Promise<void> {
     const userId = this.auth.user()?.uid;
     if (!userId) {
@@ -89,11 +97,48 @@ export class StoreService {
     }
   }
 
-  favorites = computed<number[]>(() => {
+  cart = computed(() => {
     const userProfile = this.userProfileSignal();
     if (!userProfile) {
       return [];
     }
-    return userProfile.favorites || [];
-  });
+    return userProfile.cart || [];
+  })
+
+  async addToCart(productId: number, quantity: number, color: string, size: string): Promise<void> {
+    const userId = this.auth.user()?.uid;
+    if (!userId) {
+      console.error('User not authenticated');
+      return;
+    }
+
+    const userProfile = this.userProfileSignal();
+    if (userProfile) {
+      const updatedCart = [...(userProfile.cart || []), { productId, quantity, color, size, checkout: false }];
+      await this.updateUserProfile(userId, { cart: updatedCart });
+    } else {
+      console.error('User profile not found');
+    }
+  }
+
+  async selectForCheckout(productId: number): Promise<void> {
+    const userId = this.auth.user()?.uid;
+    if (!userId) {
+      console.error('User not authenticated');
+      return;
+    }
+
+    const userProfile = this.userProfileSignal();
+    if (userProfile) {
+      const updatedCart = (userProfile.cart || []).map(item => {
+        if (item.productId === productId) {
+          return { ...item, checkout: item.checkout ? false : true };
+        }
+        return item;
+      });
+      await this.updateUserProfile(userId, { cart: updatedCart });
+    } else {
+      console.error('User profile not found');
+    }
+  }
 }
