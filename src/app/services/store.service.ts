@@ -141,4 +141,65 @@ export class StoreService {
       console.error('User profile not found');
     }
   }
+
+  async removeFromCart(productId: number): Promise<void> {
+    const userId = this.auth.user()?.uid;
+    if (!userId) {
+      console.error('User not authenticated');
+      return;
+    }
+
+    const userProfile = this.userProfileSignal();
+    if (userProfile) {
+      const updatedCart = (userProfile.cart || []).filter(item => item.productId !== productId);
+      await this.updateUserProfile(userId, { cart: updatedCart });
+    } else {
+      console.error('User profile not found');
+    }
+  }
+
+  async incrementQuant(productId: number): Promise<void> {
+    const userId = this.auth.user()?.uid;
+    if (!userId) {
+      console.error('User not authenticated');
+      return;
+    }
+
+    const userProfile = this.userProfileSignal();
+    if (userProfile) {
+      const updatedCart = (userProfile.cart || []).map(item => {
+        if (item.productId === productId) {
+          return { ...item, quantity: item.quantity + 1 };
+        }
+        return item;
+      });
+      await this.updateUserProfile(userId, { cart: updatedCart });
+    } else {
+      console.error('User profile not found');
+    }
+  }
+
+  async decrementQuant(productId: number): Promise<void> {
+    const userId = this.auth.user()?.uid;
+    if (!userId) {
+      console.error('User not authenticated');
+      return;
+    }
+
+    const userProfile = this.userProfileSignal();
+    if (userProfile) {
+      const updatedCart = (userProfile.cart || [])
+        .map(item => {
+          if (item.productId === productId) {
+            return { ...item, quantity: item.quantity - 1 };
+          }
+          return item;
+        })
+        .filter(item => item.quantity > 0); // Remove items with quantity 0
+
+      await this.updateUserProfile(userId, { cart: updatedCart });
+    } else {
+      console.error('User profile not found');
+    }
+  }
 }

@@ -1,7 +1,7 @@
 import { Component, computed, inject, Signal, signal, WritableSignal } from "@angular/core";
 import { IonIcon } from "@ionic/angular/standalone";
 import { addIcons } from "ionicons";
-import { add, addOutline, checkmarkCircle, chevronBackOutline, removeOutline, trashBinOutline, trashOutline } from "ionicons/icons";
+import { add, addOutline, car, checkmarkCircle, chevronBackOutline, removeOutline, trashBinOutline, trashOutline } from "ionicons/icons";
 import { ProductsService } from "../services/products.service";
 import { CartItem } from "src/libs/types";
 import { CommonModule } from "@angular/common";
@@ -58,37 +58,19 @@ export class CartPage {
   select(productId: number) {
     this.storeService.selectForCheckout(productId);
   }
-  //
-  // delete(item: CartItem) {
-  //   this.cart.update((e) => {
-  //     // Filter out the item to be deleted
-  //     return e.filter(cartItem => cartItem !== item);
-  //   });
-  // }
-  //
-  // incrementQuant(item: CartItem) {
-  //   this.cart.update((e) => {
-  //     const itemIndex = e.indexOf(item);
-  //     if (itemIndex !== -1) {
-  //       e[itemIndex].quantity += 1;
-  //     }
-  //     return [...e];
-  //   })
-  // }
-  //
-  // decrementQuant(item: CartItem) {
-  //   this.cart.update((e) => {
-  //     const itemIndex = e.indexOf(item);
-  //     if (itemIndex !== -1) {
-  //       if (e[itemIndex].quantity - 1 == 0) {
-  //         return e.filter(cartItem => cartItem !== item);
-  //       }
-  //       e[itemIndex].quantity -= 1;
-  //     }
-  //     return [...e];
-  //   })
-  // }
-  //
+
+  delete(productId: number) {
+    this.storeService.removeFromCart(productId);
+  }
+
+  incrementQuant(productId: number) {
+    this.storeService.incrementQuant(productId);
+  }
+
+  decrementQuant(productId: number) {
+    this.storeService.decrementQuant(productId);
+  }
+
 
   getProduct(cart: CartItem) {
     return this.productsService.getProduct(cart.productId)()
