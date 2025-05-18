@@ -1,9 +1,8 @@
 import { Injectable, inject, signal, effect, computed, Signal } from '@angular/core';
 import { Firestore, doc, getDoc, updateDoc } from '@angular/fire/firestore';
 import { Observable, from, of } from 'rxjs';
-import { map, catchError, switchMap } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { AuthService } from './auth.service';
-import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { User } from 'src/libs/types';
 
 @Injectable({

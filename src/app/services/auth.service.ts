@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { toSignal } from "@angular/core/rxjs-interop"
 import { TwitterAuthProvider } from 'firebase/auth';
 import { Firestore, doc, setDoc } from '@angular/fire/firestore';
+import { getDoc } from 'firebase/firestore/lite';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,28 @@ export class AuthService {
   private firestore: Firestore = inject(Firestore);
   public user: Signal<User | undefined | null> = toSignal(user(this.auth));
 
-  private handleUserLogin(response: UserCredential) {
+  private async handleUserLogin(response: UserCredential) {
     if (response.user) {
+      try {
+        console.log('User logged in:', response.user);
+
+        const userRef = doc(this.firestore, 'users', response.user.uid);
+        const userSnap = await getDoc(userRef);
+
+        console.log('userSnap:', userSnap.exists());
+
+        if (!userSnap.exists()) {
+          // Create the user document only if it doesn't exist
+          console.log('Creating user document in Firestore');
+          await setDoc(userRef, {
+            fullName: response.user.displayName,
+            email: response.user.email,
+          });
+        }
+      } catch (error) {
+        console.error('Error writing document: ', error);
+      }
+
       this.router.navigate(['/home'])
     } else {
       console.error('Login failed')
