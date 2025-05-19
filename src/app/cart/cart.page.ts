@@ -77,7 +77,9 @@ export class CartPage {
   }
 
   navigateToCheckOut() {
-    this.router.navigate(['/checkout', this.totalAmount()])
+    this.storeService.buyItems(this.cart().filter(item => item.checkout == true));
+
+    this.router.navigate(['/checkout'])
   }
 
   navigateBack() {

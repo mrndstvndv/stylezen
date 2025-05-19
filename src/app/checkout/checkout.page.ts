@@ -1,9 +1,11 @@
 import { CommonModule } from "@angular/common";
-import { Component, signal } from "@angular/core";
+import { Component, computed, signal } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { IonIcon } from "@ionic/angular/standalone";
 import { addIcons } from "ionicons";
-import { chevronBackOutline, locationOutline } from "ionicons/icons";
+import { cashOutline, chevronBackOutline, locationOutline } from "ionicons/icons";
+import { StoreService } from "../services/store.service";
+import { ProductsService } from "../services/products.service";
 
 @Component({
   selector: 'app-checkout',
@@ -20,22 +22,49 @@ import { chevronBackOutline, locationOutline } from "ionicons/icons";
   `]
 })
 export class CheckoutPage {
-    amount = signal(0);
-    selectedMethod = signal('Cash on Delivery');
+  paymentMethods = [
+    {
+      name: 'Cash on Delivery',
+      icon: 'cash-outline',
+    },
+    {
+      name: 'GCash',
+      icon: 'gcash',
+    },
+    {
+      name: 'Paypal',
+      icon: 'paypal',
+    }
+  ];
+  selectedMethod = signal('Cash on Delivery');
+
+  totalAmount = computed(() => {
+    let amount = 0;
+
+    this.items().forEach(item => {
+      const prod = this.products.getProductById(item.productId);
+
+      if (item.checkout == true) {
+        amount += prod!!.price * item.quantity;
+      }
+    })
+
+    return amount;
+  })
+
+  items = this.store.itemsToBuy;
 
   constructor(
-    private route: ActivatedRoute,
+    private store: StoreService,
+    private products: ProductsService,
   ) {
     addIcons({
       chevronBackOutline,
-      locationOutline
+      locationOutline,
+      cashOutline,
+      'gcash': 'assets/icon/gcash.svg',
+      'paypal': 'assets/icon/paypal.svg'
     })
-  }
-
-  ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.amount.set(Number(params['amount']));
-    });
   }
 
   navigateBack() {

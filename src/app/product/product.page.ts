@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { Component, signal } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { IonIcon } from "@ionic/angular/standalone";
 import { addIcons } from "ionicons";
 import { cartOutline, chevronBackOutline, shareSocialOutline, star } from "ionicons/icons";
@@ -33,6 +33,7 @@ export class ProductPage {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private productsService: ProductsService,
     private storeService: StoreService
   ) {
@@ -102,5 +103,17 @@ export class ProductPage {
     await this.storeService.addToCart(this.product.id, 1, this.selectedColor(), this.selectedSize())
 
     this.addingToCart.set(false);
+  }
+
+  buyNow() {
+    this.storeService.buyItems([{
+      productId: this.product!!.id,
+      quantity: this.quantity(),
+      color: this.selectedColor(),
+      size: this.selectedSize(),
+      checkout: true
+    }])
+
+    this.router.navigate(['/checkout']);
   }
 }

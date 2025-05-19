@@ -3,7 +3,7 @@ import { Firestore, doc, getDoc, updateDoc } from '@angular/fire/firestore';
 import { Observable, from, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { AuthService } from './auth.service';
-import { User } from 'src/libs/types';
+import { CartItem, User } from 'src/libs/types';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +17,8 @@ export class StoreService {
 
   // Expose the signal as readonly
   readonly userProfile = this.userProfileSignal.asReadonly();
+
+  readonly itemsToBuy = signal<CartItem[]>([]);
 
   constructor() {
     // Setup effect to automatically fetch profile when user changes
@@ -201,5 +203,9 @@ export class StoreService {
     } else {
       console.error('User profile not found');
     }
+  }
+
+  buyItems(cartItems: CartItem[]) {
+    this.itemsToBuy.set(cartItems);
   }
 }

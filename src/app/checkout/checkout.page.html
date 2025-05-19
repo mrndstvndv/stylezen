@@ -1,4 +1,4 @@
-<body class="bg-[--background]">
+<body class="bg-[--background] overflow-auto h-full">
 
   <!-- Header -->
   <div
@@ -18,7 +18,7 @@
     <div class="mt-4">
       <h2 class="text-xl text-gray-500 font-semibold mb-4">Shipping to</h2>
 
-      <div class="bg-white rounded-2xl shadow-md p-4 flex items-center relative">
+      <div class="bg-white rounded-2xl shadow-md p-4 flex items-center relative border border-gray-400/30">
         <div class="bg-gray-100 rounded-xl w-16 h-16 flex items-center justify-center mr-4">
           <div class="bg-white rounded-full p-2">
             <ion-icon name="location-outline" class="text-gray-500 text-2xl"></ion-icon>
@@ -41,16 +41,20 @@
       <h2 class="text-xl text-gray-500 font-semibold mb-3">Payment Methods</h2>
 
       <!-- Payment Options -->
-      <div class="flex flex-col mb-6 p-4 shadow-md rounded-xl gap-2">
+      <div class="flex flex-col mb-6 p-4 shadow-md rounded-xl gap-2 select-none border border-gray-400/30">
+        Place
+        <!-- <div class="flex items-center rounded-lg p-2" [ngClass]="selectedMethod() === payment? 'border border-[--primary]':'border border-transparent'" *ngFor="let payment of ['Cash on Delivery', {name: 'Gcash', icon: ''}, 'Paypal', 'Mastercard']" (click)="selectPayment(payment)"> -->
 
-        <div class="flex items-center rounded-lg p-2" [ngClass]="selectedMethod() === payment? 'border border-[--primary]':'border border-transparent'" *ngFor="let payment of ['Cash on Delivery', 'Gcash', 'Paypal', 'Mastercard']" (click)="selectPayment(payment)">
+        <div class="flex items-center rounded-lg p-2"
+          [ngClass]="selectedMethod() === payment.name? 'border border-[--primary]':'border border-transparent'"
+          *ngFor="let payment of paymentMethods" (click)="selectPayment(payment.name)">
 
           <!-- Avatar -->
-          <div class="size-10 bg-gray-100 rounded-full mr-3">
-
+          <div class="size-10 mr-1 flex items-center justify-center">
+            <ion-icon name="{{payment.icon}}" class="text-[--primary] text-2xl"></ion-icon>
           </div>
 
-          <h3 class="text-lg text-[--foreground]">{{payment}}</h3>
+          <h3 class="text-lg text-[--foreground]">{{payment.name}}</h3>
 
         </div>
 
@@ -58,7 +62,18 @@
 
     </div>
 
-
   </main>
+
+  <div class="fixed bottom-0 w-full z-10 bg-white rounded-t-2xl p-4 border flex flex-col gap-4">
+
+    <div class="flex justify-between text-[var(--muted-foreground)]">
+      <p class="text-2xl font-bold">Total Amount</p>
+      <p class="font-bold text-2xl text-[--foreground]">PHP {{totalAmount()}}</p>
+    </div>
+
+    <button (click)="{}"
+      class="bg-[--primary] shadow-[0_0_10px_rgba(251,146,60,0.8)] text-2xl font-semibold rounded-xl py-2 mx-10">Confirm
+      Order</button>
+  </div>
 
 </body>
