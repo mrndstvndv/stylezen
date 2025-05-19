@@ -3,8 +3,7 @@ import { Auth, user, GoogleAuthProvider, User, signInWithPopup, UserCredential, 
 import { Router } from '@angular/router';
 import { toSignal } from "@angular/core/rxjs-interop"
 import { TwitterAuthProvider } from 'firebase/auth';
-import { Firestore, doc, setDoc } from '@angular/fire/firestore';
-import { getDoc } from 'firebase/firestore/lite';
+import { Firestore, doc, setDoc, getDoc } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
