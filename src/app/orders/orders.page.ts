@@ -1,10 +1,11 @@
-import { Component, signal } from "@angular/core";
+import { Component, computed } from "@angular/core";
 import { IonIcon } from "@ionic/angular/standalone";
 import { addIcons } from "ionicons";
 import { chevronBackOutline } from "ionicons/icons";
 import { ProductsService } from "../services/products.service";
 import { CommonModule } from "@angular/common";
 import { Order } from "src/libs/types";
+import { StoreService } from "../services/store.service";
 
 @Component({
   selector: 'app-orders',
@@ -13,16 +14,22 @@ import { Order } from "src/libs/types";
   imports: [IonIcon, CommonModule]
 })
 export class OrdersPage {
-  orders = signal(this.productsService.getOrders());
+  orders = computed(() => {
+    const userProfile = this.store.userProfile();
+    return userProfile?.orders || [];
+  });
 
-  constructor(private productsService: ProductsService) {
+  constructor(
+    private productsService: ProductsService,
+    private store: StoreService
+  ) {
     addIcons({
       chevronBackOutline
     })
   }
 
-  getProduct(cart: Order) {
-    return this.productsService.getProduct(cart.productId)()
+  getProduct(order: Order) {
+    return this.productsService.getProduct(order.productId)()
   }
 
   navigateBack() {

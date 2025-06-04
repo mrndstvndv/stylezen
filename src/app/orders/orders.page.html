@@ -18,7 +18,7 @@
 
       <!-- Image -->
       <div class="w-[125px] border-[6px] border-[--background] shadow-lg rounded-xl">
-        <img src="{{getProduct(item)?.image}}" alt="{{getProduct(item)?.title}}" class="rounded-xl h-full">
+        <img [src]="getProduct(item)?.image" [alt]="getProduct(item)?.title" class="rounded-xl h-full">
       </div>
 
       <div class="flex-1 flex flex-col">
@@ -34,7 +34,7 @@
         <!-- Color -->
         <div class="flex items-center text-[var(--muted-foreground)]">
           <div>Color: </div>
-          <div class="size-1 rounded-full p-2 ml-1 flex-shrink-0" style="background-color: {{item.color}};">
+          <div class="size-1 rounded-full p-2 ml-1 flex-shrink-0" [style.background-color]="item.color">
           </div>
         </div>
 
@@ -42,18 +42,25 @@
           Size: {{item.size}}
         </div>
 
+        <div class="flex items-center text-[var(--muted-foreground)]">
+          Quantity: {{item.quantity}}
+        </div>
+
         <div class="mt-2 flex justify-between flex-1 items-end">
           <div class="font-bold text-[var(--muted-foreground)]">
-            PHP {{getProduct(item)?.price}}
+            PHP {{(getProduct(item)?.price || 0) * item.quantity}}
           </div>
 
-          <!-- quantity -->
-          <div
-            class="flex items-center justify-center px-4 pb-1 gap-2 rounded-lg font-semibold bg-[--primary] text-[--background] hover:cursor-pointer">
+          <!-- Cancel button -->
+          <div class="flex items-center justify-center px-4 pb-1 gap-2 rounded-lg font-semibold bg-red-500 text-white hover:cursor-pointer">
             <div>
               Cancel
             </div>
           </div>
+        </div>
+
+        <div class="text-sm text-[var(--muted-foreground)] mt-1">
+          Ordered on: {{item.orderDate | date:'mediumDate'}}
         </div>
 
       </div>
@@ -61,7 +68,6 @@
     </div>
 
     <div class="h-32">
-
     </div>
 
   </main>
