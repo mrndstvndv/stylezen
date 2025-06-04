@@ -74,4 +74,15 @@ export class CheckoutPage {
   selectPayment(method: string): void {
     this.selectedMethod.set(method);
   }
+
+  async confirmOrder() {
+    try {
+      await this.store.createOrder(this.items());
+      // Navigate back after successful order
+      this.navigateBack();
+    } catch (error) {
+      console.error('Error creating order:', error);
+      // Here you might want to show an error message to the user
+    }
+  }
 }

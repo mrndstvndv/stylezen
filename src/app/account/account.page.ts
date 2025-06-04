@@ -1,4 +1,4 @@
-import { Component, computed, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { Component, computed, ViewChild, ElementRef, ChangeDetectorRef, signal } from '@angular/core';
 import { IonContent, IonIcon, IonItem, IonLabel, IonCard, IonAvatar, IonList } from '@ionic/angular/standalone';
 import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { chevronBackOutline, createOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { StoreService } from '../services/store.service';
+import { ProductsService } from '../services/products.service';
 
 @Component({
   selector: 'app-account',
@@ -21,9 +22,10 @@ export class AccountPage {
   user = computed(() => this.auth.user()?.displayName || this.store.userProfile()?.fullName || "Username");
   email = computed(() => this.auth.user()?.email);
   phone = computed(() => this.auth.user()?.phoneNumber);
+  orders = signal(this.productsService.getOrders());
   isDialogVisible = false;
 
-  constructor(private auth: AuthService, private store: StoreService, private router: Router, private cdr: ChangeDetectorRef) {
+  constructor(private auth: AuthService, private store: StoreService, private router: Router, private cdr: ChangeDetectorRef, private productsService: ProductsService) {
     addIcons({
       chevronBackOutline,
       createOutline

@@ -208,4 +208,38 @@ export class StoreService {
   buyItems(cartItems: CartItem[]) {
     this.itemsToBuy.set(cartItems);
   }
+
+  async createOrder(items: CartItem[]): Promise<void> {
+    const userId = this.auth.user()?.uid;
+    if (!userId) {
+      console.error('User not authenticated');
+      return;
+    }
+
+    const userProfile = this.userProfileSignal();
+    if (userProfile) {
+      const orderItems = items.map(item => ({
+        ...item,
+        status: 'packed' as const,
+        orderDate: new Date().toISOString()
+      }));
+
+      const updatedOrders = [...(userProfile.orders || []), ...orderItems];
+      
+      // Remove ordered items from cart
+      const updatedCart = (userProfile.cart || []).filter(
+        cartItem => !items.some(orderItem => orderItem.productId === cartItem.productId)
+      );
+
+      await this.updateUserProfile(userId, { 
+        orders: updatedOrders,
+        cart: updatedCart 
+      });
+
+      // Clear items to buy after successful order
+      this.itemsToBuy.set([]);
+    } else {
+      console.error('User profile not found');
+    }
+  }
 }

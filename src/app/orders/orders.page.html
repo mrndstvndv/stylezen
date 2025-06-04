@@ -10,7 +10,7 @@
 
     <h1
       class="text-2xl text-[--muted-foreground] font-bold absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
-      My Cart</h1>
+      Orders</h1>
   </div>
 
   <main class="flex flex-col gap-4 px-2 flex-1 mt-16">
@@ -28,8 +28,7 @@
           <h2 class="font-bold text-[--muted-foreground] max-w-[50vw]">
             {{getProduct(item)?.title}}
           </h2>
-          <p class="text-[--muted-foreground] text-sm font-semibold">{{item.shipping? "Shipping" : "Being processed by
-            seller"}}</p>
+          <p class="text-[--muted-foreground] text-sm font-semibold">{{item.status.charAt(0).toUpperCase() + item.status.slice(1)}}</p>
         </div>
 
         <!-- Color -->
@@ -44,7 +43,6 @@
         </div>
 
         <div class="mt-2 flex justify-between flex-1 items-end">
-          <!-- Price -->
           <div class="font-bold text-[var(--muted-foreground)]">
             PHP {{getProduct(item)?.price}}
           </div>
@@ -53,7 +51,6 @@
           <div
             class="flex items-center justify-center px-4 pb-1 gap-2 rounded-lg font-semibold bg-[--primary] text-[--background] hover:cursor-pointer">
             <div>
-
               Cancel
             </div>
           </div>

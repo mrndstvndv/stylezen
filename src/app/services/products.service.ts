@@ -22,9 +22,7 @@ export class ProductsService {
   ];
 
   orders: Order[] = [
-    { productId: 3, quantity: 3, color: "#ddccba", size: "S", shipping: true },
-    { productId: 4, quantity: 1, color: "#4a392f", size: "M", shipping: true },
-    { productId: 5, quantity: 2, color: "#1d2c3f", size: "XL", shipping: true },
+    { productId: 3, quantity: 3, color: "#ddccba", size: "S", status: 'shipping', orderDate: new Date().toISOString() },
   ];
 
   constructor() {

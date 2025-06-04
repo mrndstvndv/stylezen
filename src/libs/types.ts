@@ -27,16 +27,18 @@ export interface CartItem {
 }
 
 export interface Order {
-  productId: number
-  size: string
-  shipping: boolean
-  quantity: number
-  color: string
+  productId: number;
+  size: string;
+  quantity: number;
+  color: string;
+  status: 'packed' | 'shipping' | 'delivered';
+  orderDate: string;
 }
 
 export interface User {
-  fullName: string,
-  email: string,
-  favorites: number[]
-  cart: CartItem[]
+  fullName: string;
+  email: string;
+  favorites: number[];
+  cart: CartItem[];
+  orders?: Order[];
 }
