@@ -18,12 +18,16 @@ import { ProductsService } from '../services/products.service';
 export class AccountPage {
   @ViewChild('logoutDialog') logoutDialog!: ElementRef<HTMLDialogElement>;
 
-  profileImage = computed(() => this.auth.user()?.photoURL);
-  user = computed(() => this.auth.user()?.displayName || this.store.userProfile()?.fullName || "Username");
-  email = computed(() => this.auth.user()?.email);
-  phone = computed(() => this.auth.user()?.phoneNumber);
-  orders = signal(this.productsService.getOrders());
   isDialogVisible = false;
+  user = signal(this.auth.user()?.displayName || 'User');
+  email = signal(this.auth.user()?.email || '');
+  phone = signal('');
+  profileImage = signal(this.auth.user()?.photoURL || null);
+
+  orders = computed(() => {
+    const userProfile = this.store.userProfile();
+    return userProfile?.orders || [];
+  });
 
   constructor(private auth: AuthService, private store: StoreService, private router: Router, private cdr: ChangeDetectorRef, private productsService: ProductsService) {
     addIcons({
@@ -51,6 +55,7 @@ export class AccountPage {
     console.log('User logged out');
     this.isDialogVisible = false;
     this.auth.logout();
+    this.router.navigate(['/login']);
   }
 
   navigateBack() {
