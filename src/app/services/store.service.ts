@@ -242,4 +242,23 @@ export class StoreService {
       console.error('User profile not found');
     }
   }
+
+  async cancelOrder(orderDate: string): Promise<void> {
+    const userId = this.auth.user()?.uid;
+    if (!userId) {
+      console.error('User not authenticated');
+      return;
+    }
+
+    const userProfile = this.userProfileSignal();
+    if (userProfile) {
+      const updatedOrders = (userProfile.orders || []).filter(
+        order => order.orderDate !== orderDate
+      );
+
+      await this.updateUserProfile(userId, { orders: updatedOrders });
+    } else {
+      console.error('User profile not found');
+    }
+  }
 }

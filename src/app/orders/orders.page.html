@@ -52,7 +52,8 @@
           </div>
 
           <!-- Cancel button -->
-          <div class="flex items-center justify-center px-4 pb-1 gap-2 rounded-lg font-semibold bg-red-500 text-white hover:cursor-pointer">
+          <div (click)="openCancelDialog(item.orderDate)"
+            class="flex items-center justify-center px-4 pb-1 gap-2 rounded-lg font-semibold bg-red-500 text-white hover:cursor-pointer">
             <div>
               Cancel
             </div>
@@ -71,5 +72,15 @@
     </div>
 
   </main>
+
+  <!-- Confirmation Dialog -->
+  @if (showConfirmDialog()) {
+    <app-confirm-dialog
+      title="Cancel Order"
+      message="Are you sure you want to cancel this order? This action cannot be undone."
+      [onConfirm]="confirmCancel"
+      [onCancel]="closeDialog">
+    </app-confirm-dialog>
+  }
 
 </div>
